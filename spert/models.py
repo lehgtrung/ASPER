@@ -1,4 +1,6 @@
 import torch
+import random
+import numpy as np
 from torch import nn as nn
 from transformers import BertConfig
 from transformers import BertModel
@@ -6,6 +8,10 @@ from transformers import BertPreTrainedModel
 
 from spert import sampling
 from spert import util
+
+torch.manual_seed(0)
+random.seed(0)
+np.random.seed(0)
 
 
 def get_token(h: torch.tensor, x: torch.tensor, token: int):
