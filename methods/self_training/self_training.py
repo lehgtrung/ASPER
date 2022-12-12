@@ -79,8 +79,6 @@ def self_training(labeled_path,
         #           logger=logger)
 
         os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
-        os.makedirs(os.path.dirname(train_log_path.format(-1)), exist_ok=True)
-        os.makedirs(os.path.dirname(eval_log_path.format(-1)), exist_ok=True)
 
         # Step 5: Retrain on labeled and pseudo-labeled data
         logger.info(f'Round #{iteration}: Retrain on selected pseudo labels')
