@@ -54,7 +54,7 @@ def self_training(labeled_path,
                               stdout=subprocess.PIPE)
     nmap_lines = nmap_out.stdout.splitlines()
     for line in nmap_lines:
-        logger.info(line)
+        logger.raw_info(line)
     exit()
 
     iteration = 0
