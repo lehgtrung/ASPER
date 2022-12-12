@@ -102,8 +102,14 @@ def self_training(labeled_path,
                                'tokenizer_path': os.path.join(labeled_model_path.format(iteration), 'final_model')
                            })
         script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
-        subprocess.run(script, shell=True, check=True)
-
+        nmap_out = subprocess.run(script,
+                                  shell=True,
+                                  check=True,
+                                  universal_newlines=True,
+                                  stdout=subprocess.PIPE)
+        nmap_lines = nmap_out.stdout.splitlines()
+        for line in nmap_lines:
+            logger.info(line)
         iteration += 1
 
 
