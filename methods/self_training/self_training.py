@@ -22,8 +22,6 @@ def self_training(labeled_path,
                   labeled_model_path,
                   logger,
                   max_iter):
-    os.makedirs(os.path.dirname(train_log_path.format(-1)), exist_ok=True)
-    os.makedirs(os.path.dirname(eval_log_path.format(-1)), exist_ok=True)
     if not model_exists(os.path.join(labeled_model_path.format(-1), 'final_model')):
         os.makedirs(os.path.dirname(labeled_model_path.format(-1)), exist_ok=True)
         modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
