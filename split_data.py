@@ -21,7 +21,7 @@ def split_data_for_ssl(in_path, out_path, portion):
             labeled.append(row)
         else:
             _row = {
-                'tokens': row['token']
+                'tokens': row['tokens']
             }
             unlabeled.append(_row)
             unlabeled_with_labels.append(row)
