@@ -46,7 +46,6 @@ def self_training(labeled_path,
                            'tokenizer_path': os.path.join(labeled_model_path.format(-1), 'final_model')
                        })
     script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
-    # subprocess.run(script, shell=True, check=True)
     nmap_out = subprocess.run(script,
                               shell=True,
                               check=True,
@@ -54,7 +53,6 @@ def self_training(labeled_path,
                               stdout=subprocess.PIPE)
     nmap_lines = nmap_out.stdout.splitlines()
     filter_evaluation_log(nmap_lines, logger)
-    exit()
 
     iteration = 0
     while True:
@@ -80,13 +78,24 @@ def self_training(labeled_path,
                       out_path=selection_path)
 
         # Compute F1 on selection
-        # logger.info(f'Round #{iteration}: F1 on selection')
-        # selected_indices = list(range(check_size(unlabeled_path)))
-        # report_f1(path=prediction_path,
-        #           selected_indices=selected_indices,
-        #           unlabeled_path=unlabeled_path,
-        #           logger=logger)
+        logger.info(f'Round #{iteration}: F1 on selection')
+        modify_config_file(DEFAULT_EVAL_CONFIG_PATH,
+                           TEMP_EVAL_CONFIG_PATH,
+                           {
+                               'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
+                               'log_path': eval_log_path.format(iteration + 0.5),
+                               'tokenizer_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model')
+                           })
+        script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
+        nmap_out = subprocess.run(script,
+                                  shell=True,
+                                  check=True,
+                                  universal_newlines=True,
+                                  stdout=subprocess.PIPE)
+        nmap_lines = nmap_out.stdout.splitlines()
+        filter_evaluation_log(nmap_lines, logger)
 
+        # Create folder for models
         os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
 
         # Step 5: Retrain on labeled and pseudo-labeled data
@@ -117,8 +126,7 @@ def self_training(labeled_path,
                                   universal_newlines=True,
                                   stdout=subprocess.PIPE)
         nmap_lines = nmap_out.stdout.splitlines()
-        for line in nmap_lines:
-            logger.info(line)
+        filter_evaluation_log(nmap_lines, logger)
         iteration += 1
 
 

@@ -39,10 +39,3 @@ def modify_config_file(config_path, new_config_path, new_configs):
 def check_size(path):
     with open(path, 'r') as f:
         return len(json.load(f))
-
-
-def report_f1(path,
-              selected_indices,
-              unlabeled_path,
-              logger):
-    ...
