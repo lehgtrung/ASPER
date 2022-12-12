@@ -43,7 +43,7 @@ def self_training(labeled_path,
                        {
                            'model_path': os.path.join(labeled_model_path.format(-1), 'final_model'),
                            'log_path': eval_log_path.format(-1),
-                           'tokenizer_path': labeled_model_path.format(-1)
+                           'tokenizer_path': os.path.join(labeled_model_path.format(-1), 'final_model')
                        })
     iteration = 0
     while True:
@@ -97,7 +97,7 @@ def self_training(labeled_path,
                            {
                                'model_path': os.path.join(labeled_model_path.format(iteration), 'final_model'),
                                'log_path': eval_log_path.format(iteration),
-                               'tokenizer_path': labeled_model_path.format(-1)
+                               'tokenizer_path': os.path.join(labeled_model_path.format(iteration), 'final_model')
                            })
         script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
         subprocess.run(script, shell=True, check=True)
