@@ -45,6 +45,8 @@ def self_training(labeled_path,
                            'log_path': eval_log_path.format(-1),
                            'tokenizer_path': os.path.join(labeled_model_path.format(-1), 'final_model')
                        })
+    print('eval log path: ', eval_log_path.format(-1))
+    exit()
     iteration = 0
     while True:
         if iteration >= max_iter:

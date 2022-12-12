@@ -37,7 +37,7 @@ if __name__ == '__main__':
         iter='{}'
     )
     LOG_PATH = f'./data/methods/{method}/{dataset}_{percent}/fold_{fold}/logs.txt'
-    TRAIN_LOG_PATH = './data/methods/{method}/{dataset}_{percent}/fold_{fold}/train_log/{iter}'
+    TRAIN_LOG_PATH = './data/methods/{method}/{dataset}_{percent}/fold_{fold}/train_log/{iter}/'
     TRAIN_LOG_PATH = TRAIN_LOG_PATH.format(
         method=method,
         dataset=dataset,
@@ -46,7 +46,7 @@ if __name__ == '__main__':
         iter='{}'
     )
     os.makedirs(os.path.dirname(TRAIN_LOG_PATH), exist_ok=True)
-    EVAL_LOG_PATH = './data/methods/{method}/{dataset}_{percent}/fold_{fold}/eval_log/{iter}'
+    EVAL_LOG_PATH = './data/methods/{method}/{dataset}_{percent}/fold_{fold}/eval_log/{iter}/'
     EVAL_LOG_PATH = EVAL_LOG_PATH.format(
         method=method,
         dataset=dataset,
