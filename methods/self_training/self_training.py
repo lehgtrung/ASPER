@@ -22,7 +22,7 @@ def self_training(labeled_path,
                   labeled_model_path,
                   logger,
                   max_iter):
-    if not model_exists(labeled_model_path.format(-1)):
+    if not model_exists(os.path.join(labeled_model_path.format(-1), 'final_model')):
         os.makedirs(os.path.dirname(labeled_model_path.format(-1)), exist_ok=True)
         modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
                            TEMP_TRAIN_CONFIG_PATH,
@@ -41,7 +41,7 @@ def self_training(labeled_path,
     modify_config_file(DEFAULT_EVAL_CONFIG_PATH,
                        TEMP_EVAL_CONFIG_PATH,
                        {
-                           'model_path': labeled_model_path.format(-1),
+                           'model_path': os.path.join(labeled_model_path.format(-1), 'final_model'),
                            'log_path': eval_log_path.format(-1),
                            'tokenizer_path': labeled_model_path.format(-1)
                        })
@@ -54,7 +54,7 @@ def self_training(labeled_path,
         modify_config_file(DEFAULT_PREDICT_CONFIG_PATH,
                            TEMP_PREDICT_CONFIG_PATH,
                            {
-                               'model_path': labeled_model_path.format(iteration-1),
+                               'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
                                'dataset_path': unlabeled_path,
                                'predictions_path': prediction_path
                            })
@@ -95,7 +95,7 @@ def self_training(labeled_path,
         modify_config_file(DEFAULT_EVAL_CONFIG_PATH,
                            TEMP_EVAL_CONFIG_PATH,
                            {
-                               'model_path': labeled_model_path.format(iteration),
+                               'model_path': os.path.join(labeled_model_path.format(iteration), 'final_model'),
                                'log_path': eval_log_path.format(iteration),
                                'tokenizer_path': labeled_model_path.format(-1)
                            })
