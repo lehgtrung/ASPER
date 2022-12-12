@@ -102,6 +102,8 @@ def self_training(labeled_path,
         script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
         subprocess.run(script, shell=True, check=True)
 
+        iteration += 1
+
 
 
 
