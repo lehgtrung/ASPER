@@ -45,7 +45,6 @@ if __name__ == '__main__':
         fold=fold,
         iter='{}'
     )
-    os.makedirs(os.path.dirname(TRAIN_LOG_PATH), exist_ok=True)
     EVAL_LOG_PATH = './data/methods/{method}/{dataset}_{percent}/fold_{fold}/eval_log/{iter}/'
     EVAL_LOG_PATH = EVAL_LOG_PATH.format(
         method=method,
@@ -54,7 +53,6 @@ if __name__ == '__main__':
         fold=fold,
         iter='{}'
     )
-    os.makedirs(os.path.dirname(EVAL_LOG_PATH), exist_ok=True)
 
     os.makedirs(f'./data/methods/{method}/{dataset}_{percent}/fold_{fold}/models', exist_ok=True)
 
