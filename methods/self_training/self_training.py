@@ -45,8 +45,8 @@ def self_training(labeled_path,
                            'log_path': eval_log_path.format(-1),
                            'tokenizer_path': os.path.join(labeled_model_path.format(-1), 'final_model')
                        })
-    print('eval log path: ', eval_log_path.format(-1))
-    exit()
+    script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
+    subprocess.run(script, shell=True, check=True)
     iteration = 0
     while True:
         if iteration >= max_iter:
