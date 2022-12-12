@@ -18,6 +18,15 @@ def model_exists(path):
     return False
 
 
+def filter_evaluation_log(lines, logger):
+    flag = False
+    for line in lines:
+        if line.startswith('Evaluation'):
+            flag = True
+        if flag:
+            logger.raw_info(line)
+
+
 def modify_config_file(config_path, new_config_path, new_configs):
     config = configparser.ConfigParser()
     config.read(config_path)
