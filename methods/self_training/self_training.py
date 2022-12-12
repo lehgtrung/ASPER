@@ -22,6 +22,8 @@ def self_training(labeled_path,
                   labeled_model_path,
                   logger,
                   max_iter):
+    os.makedirs(os.path.dirname(train_log_path.format(-1)), exist_ok=True)
+    os.makedirs(os.path.dirname(eval_log_path.format(-1)), exist_ok=True)
     if not model_exists(os.path.join(labeled_model_path.format(-1), 'final_model')):
         os.makedirs(os.path.dirname(labeled_model_path.format(-1)), exist_ok=True)
         modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
@@ -77,6 +79,8 @@ def self_training(labeled_path,
         #           logger=logger)
 
         os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)
+        os.makedirs(os.path.dirname(train_log_path.format(-1)), exist_ok=True)
+        os.makedirs(os.path.dirname(eval_log_path.format(-1)), exist_ok=True)
 
         # Step 5: Retrain on labeled and pseudo-labeled data
         logger.info(f'Round #{iteration}: Retrain on selected pseudo labels')
@@ -87,7 +91,7 @@ def self_training(labeled_path,
                                'save_path': labeled_model_path.format(iteration),
                                'log_path': train_log_path.format(iteration)
                            })
-        script = TRAIN_SCRIPT.format(config_path=DEFAULT_TRAIN_CONFIG_PATH + '.tmp')
+        script = TRAIN_SCRIPT.format(config_path=TEMP_TRAIN_CONFIG_PATH)
         subprocess.run(script, shell=True, check=True)
 
         # Step 6: Evaluate on test data
