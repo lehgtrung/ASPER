@@ -15,15 +15,22 @@ def split_data_for_ssl(in_path, out_path, portion):
     indices = indices[:m]
     labeled = []
     unlabeled = []
+    unlabeled_with_labels = []
     for i, row in enumerate(data):
         if i in indices:
             labeled.append(row)
         else:
-            unlabeled.append(row)
+            _row = {
+                'tokens': row['token']
+            }
+            unlabeled.append(_row)
+            unlabeled_with_labels.append(row)
     with open(out_path.format('labeled.json'), 'w') as f:
         json.dump(labeled, f)
     with open(out_path.format('unlabeled.json'), 'w') as f:
         json.dump(unlabeled, f)
+    with open(out_path.format('unlabeled_w_labels.json'), 'w') as f:
+        json.dump(unlabeled_with_labels, f)
     with open(out_path.format('indices.json'), 'w') as f:
         json.dump(indices, f)
 

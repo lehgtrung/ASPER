@@ -15,6 +15,7 @@ PREDICT_SCRIPT = 'python ./spert.py predict --config {config_path}'
 
 def self_training(labeled_path,
                   unlabeled_path,
+                  unlabeled_with_labels_path,
                   train_log_path,
                   eval_log_path,
                   prediction_path,
@@ -84,7 +85,8 @@ def self_training(labeled_path,
                            {
                                'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
                                'log_path': eval_log_path.format(iteration + 0.5),
-                               'tokenizer_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model')
+                               'tokenizer_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
+                               'dataset_path': unlabeled_with_labels_path
                            })
         script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
         nmap_out = subprocess.run(script,

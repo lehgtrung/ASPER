@@ -26,6 +26,7 @@ if __name__ == '__main__':
 
     LABELED_PATH = f'./data/core_{dataset}/{dataset}_{percent}/fold_{fold}/labeled.json'
     UNLABELED_PATH = f'./data/core_{dataset}/{dataset}_{percent}/fold_{fold}/unlabeled.json'
+    UNLABELED_WITH_LABELS_PATH = f'./data/core_{dataset}/{dataset}_{percent}/fold_{fold}/unlabeled_w_labels.json'
     PREDICTION_PATH = f'./data/methods/{method}/{dataset}_{percent}/fold_{fold}/prediction.json'
     SELECTION_PATH = f'./data/methods/{method}/{dataset}_{percent}/fold_{fold}/selection.json'
     LABELED_MODEL_PATH = './data/methods/{method}/{dataset}_{percent}/fold_{fold}/models/iter_{iter}/'
@@ -60,6 +61,7 @@ if __name__ == '__main__':
 
     self_training(labeled_path=LABELED_PATH,
                   unlabeled_path=UNLABELED_PATH,
+                  unlabeled_with_labels_path=UNLABELED_WITH_LABELS_PATH,
                   train_log_path=TRAIN_LOG_PATH,
                   eval_log_path=EVAL_LOG_PATH,
                   prediction_path=PREDICTION_PATH,
