@@ -106,6 +106,7 @@ def tri_training(labeled_path,
         # Otherwise, find agreements between models
         for i in range(2):
             for j in range(i+1, 3):
+                logger.info(f'Round #{iteration}: Select agreement between model {i} and {j}')
                 select_agreement(
                     in_path1=prediction_paths[i].format(iteration),
                     in_path2=prediction_paths[j].format(iteration),
@@ -114,11 +115,13 @@ def tri_training(labeled_path,
 
         # Transfer
         for i in range(3):
+            logger.info(f'Round #{iteration}: Transfer agreement to selection on model {i}')
             transfer_data(in_path1=labeled_path,
                           in_path2=agreement_paths[i].format(iteration),
                           out_path=selection_paths[i].format(iteration))
 
         for i in range(3):
+            logger.info(f'Round #{iteration}: Retrain on model {i}')
             modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
                                TEMP_TRAIN_CONFIG_PATH,
                                {
