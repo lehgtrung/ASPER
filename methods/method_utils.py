@@ -106,7 +106,10 @@ def select_pseudo_labels_by_confidence(input_path, output_path, z):
             probs.append(ent['prob'])
         for rel in row['relations']:
             probs.append(rel['prob'])
-        min_prob = min(probs)
+        if len(probs) > 0:
+            min_prob = min(probs)
+        else:
+            min_prob = 0
         min_probs.append(min_prob)
     top_z = int(len(data) * (1 - z))
     indices = list(np.asarray(min_probs).argsort()[-top_z:])
