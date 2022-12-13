@@ -2,6 +2,7 @@ import json
 import os
 import configparser
 import copy
+import numpy as np
 
 
 def transfer_data(in_path1, in_path2, out_path):
@@ -93,4 +94,26 @@ def select_agreement(in_path1, in_path2,
             agreement_indices.append(i)
     with open(out_path, 'w') as f:
         json.dump(agreements, f)
+
+
+def select_pseudo_labels_by_confidence(input_path, output_path, z):
+    with open(input_path, 'r') as f:
+        data = json.load(f)
+    min_probs = []
+    for i, row in enumerate(data):
+        probs = []
+        for ent in row['entities']:
+            probs.append(ent['prob'])
+        for rel in row['relations']:
+            probs.append(rel['prob'])
+        min_prob = min(probs)
+        min_probs.append(min_prob)
+    top_z = int(len(data) * (1 - z))
+    indices = list(np.asarray(min_probs).argsort()[-top_z:])
+    new_data = []
+    for i, row in enumerate(data):
+        if i in indices:
+            new_data.append(row)
+    with open(output_path, 'w') as f:
+        json.dump(new_data, f)
 
