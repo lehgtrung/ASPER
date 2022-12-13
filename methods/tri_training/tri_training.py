@@ -79,7 +79,7 @@ def tri_training(labeled_path,
     while True:
         os.makedirs(os.path.dirname(prediction_paths[0].format(iteration)), exist_ok=True)
         os.makedirs(os.path.dirname(labeled_model_paths[0].format(iteration)), exist_ok=True)
-        if iteration == max_iter:
+        if iteration >= max_iter:
             break
 
         # Make prediction for each model
@@ -128,6 +128,8 @@ def tri_training(labeled_path,
                                })
             script = TRAIN_SCRIPT.format(config_path=TEMP_TRAIN_CONFIG_PATH)
             subprocess.run(script, shell=True, check=True)
+
+        iteration += 1
 
 
 
