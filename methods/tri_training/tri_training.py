@@ -49,13 +49,6 @@ def tri_training(labeled_path,
         selection_paths.append(add_suffix_to_path(selection_path, suffix=i, split_by='.'))
         train_log_paths.append(add_suffix_to_path(train_log_path, suffix=i, split_by=''))
         agreement_paths.append(add_suffix_to_path(agreement_path, suffix=i, split_by='.'))
-    print(labeled_paths)
-    print(labeled_model_paths)
-    print(prediction_paths)
-    print(selection_paths)
-    print(train_log_paths)
-    print(agreement_paths)
-    exit()
 
     # Train 3 models
     if not model_exists(os.path.join(labeled_model_paths[0].format(-1), 'final_model')):
