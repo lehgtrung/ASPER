@@ -160,6 +160,11 @@ def _adjust_rel(rel: Tuple):
     return adjusted_rel
 
 
+def index_except_key(arr, what, key='prob'):
+    arr = [{k: v for k, v in dct.items() if k != key} for dct in arr]
+    return arr.index(what)
+
+
 def store_predictions(documents, pred_entities, pred_relations, store_path):
     predictions = []
 
@@ -174,7 +179,12 @@ def store_predictions(documents, pred_entities, pred_relations, store_path):
             entity_span = entity[:2]
             span_tokens = util.get_span_tokens(tokens, entity_span)
             entity_type = entity[2].identifier
-            converted_entity = dict(type=entity_type, start=span_tokens[0].index, end=span_tokens[-1].index + 1)
+
+            # Trung: add probability at the end
+            converted_entity = dict(type=entity_type,
+                                    start=span_tokens[0].index,
+                                    end=span_tokens[-1].index + 1,
+                                    prob=entity[3])
             converted_entities.append(converted_entity)
         converted_entities = sorted(converted_entities, key=lambda e: e['start'])
 
@@ -193,10 +203,14 @@ def store_predictions(documents, pred_entities, pred_relations, store_path):
             converted_tail = dict(type=tail_type, start=tail_span_tokens[0].index,
                                   end=tail_span_tokens[-1].index + 1)
 
-            head_idx = converted_entities.index(converted_head)
-            tail_idx = converted_entities.index(converted_tail)
+            head_idx = index_except_key(converted_entities, converted_head)
+            tail_idx = index_except_key(converted_entities, converted_tail)
 
-            converted_relation = dict(type=relation_type, head=head_idx, tail=tail_idx)
+            # Trung: add probability at the end
+            converted_relation = dict(type=relation_type,
+                                      head=head_idx,
+                                      tail=tail_idx,
+                                      prob=relation[3])
             converted_relations.append(converted_relation)
         converted_relations = sorted(converted_relations, key=lambda r: r['head'])
 
