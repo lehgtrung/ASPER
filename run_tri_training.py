@@ -82,7 +82,7 @@ if __name__ == '__main__':
                  labeled_model_path=LABELED_MODEL_PATH,
                  logger=logger,
                  start_iter=0,
-                 max_iter=3)
+                 max_iter=15)
 
 
 
