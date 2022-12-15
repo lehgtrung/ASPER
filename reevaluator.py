@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import List, Tuple, Dict
 from sklearn.metrics import precision_recall_fscore_support as prfs
@@ -42,10 +43,15 @@ class ReEvaluator:
 
         assert len(gt) == len(pred)
         for i in range(len(gt)):
+            # Assume gt is in dictionary format and pred is in tuple format
             gt_entities.append([self._convert_to_tuple(gt[i], e) for e in gt[i]['entities']])
             gt_relations.append([self._convert_to_tuple(gt[i], e) for e in gt[i]['relations']])
-            pred_entities.append([self._convert_to_tuple(pred[i], e) for e in pred[i]['entities']])
-            pred_relations.append([self._convert_to_tuple(pred[i], e) for e in pred[i]['relations']])
+            # pred_entities.append([self._convert_to_tuple(pred[i], e) for e in pred[i]['entities']])
+            # pred_relations.append([self._convert_to_tuple(pred[i], e) for e in pred[i]['relations']])
+            # gt_entities.append(gt[i]['entities'])
+            # gt_relations.append(gt[i]['relations'])
+            pred_entities.append(pred[i]['entities'])
+            pred_relations.append(pred[i]['relations'])
         return gt_entities, gt_relations, pred_entities, pred_relations
 
     def _convert_by_setting(self, gt, pred, include_entity_types):
@@ -183,8 +189,10 @@ class ReEvaluator:
 
 
 if __name__ == '__main__':
-    gt_path = 'data/datasets/conll04/conll04_test.json'
-    pred_path = 'data/predictions.json'
-    evaluator = ReEvaluator(gt_path, pred_path)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--gt_path', type=str)
+    parser.add_argument('--pred_path', type=str)
+    args = parser.parse_args()
+    evaluator = ReEvaluator(args.gt_path, args.pred_path)
     evaluator.compute_scores()
 

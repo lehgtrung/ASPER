@@ -1,8 +1,8 @@
 import json
 import os
 import configparser
-import copy
 import numpy as np
+from collections import Counter
 
 
 def transfer_data(in_path1, in_path2, out_path):
@@ -119,4 +119,55 @@ def select_pseudo_labels_by_confidence(input_path, output_path, z):
             new_data.append(row)
     with open(output_path, 'w') as f:
         json.dump(new_data, f)
+
+
+def calc_symbol_freq(symbols, n, threshold=0.5):
+    counter = Counter(map(tuple, symbols))
+    final_symbols = []
+    for symbol in symbols:
+        if counter[tuple(symbol)]/n >= threshold:
+            final_symbols.append(symbol)
+    return final_symbols
+
+
+def convert_to_tuple(doc, dct):
+    if dct['type'] in ['Loc', 'Peop', 'Org', 'Other']:
+        return (dct['start'],
+                dct['end'],
+                dct['type'])
+    return (doc['entities'][dct['head']]['start'],
+            doc['entities'][dct['head']]['end'],
+            doc['entities'][dct['head']]['type'],
+            doc['entities'][dct['tail']]['start'],
+            doc['entities'][dct['tail']]['end'],
+            doc['entities'][dct['tail']]['type'],
+            dct['type'])
+
+
+def collect_symbols(preds, i, field):
+    collection = []
+    for pred in preds:
+        collection.extend([convert_to_tuple(pred[i], e) for e in pred[i][field]])
+    return collection
+
+
+def aggregate_on_symbols(model_paths):
+    preds = []
+    outputs = []
+    n = len(model_paths)
+    for path in model_paths:
+        with open(path, 'r') as f:
+            preds.append(json.load(f))
+    for i in range(len(preds[0])):
+        tokens = preds[0][i]['tokens']
+        symbols = collect_symbols(preds, i, 'entities')
+        entities = calc_symbol_freq(symbols, n)
+        symbols = collect_symbols(preds, i, 'relations')
+        relations = calc_symbol_freq(symbols, n)
+        outputs.append({
+            'tokens': tokens,
+            'entities': [tuple(e) for e in entities],
+            'relations': [tuple(r) for r in relations]
+        })
+    return outputs
 
