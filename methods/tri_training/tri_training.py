@@ -110,6 +110,7 @@ def tri_training(labeled_path,
         script = PREDICT_SCRIPT.format(config_path=TEMP_PREDICT_CONFIG_PATH)
         logger.info(f'Round #{-1}: Predict on test data on model {i}')
         subprocess.run(script, shell=True, check=True)
+    logger.info(f'Round {-1}: Evaluate the aggregated model')
     evaluate_tri_training(DEFAULT_TEST_PATH,
                           test_prediction_paths[0],
                           test_prediction_paths[1],
@@ -187,6 +188,7 @@ def tri_training(labeled_path,
             script = PREDICT_SCRIPT.format(config_path=TEMP_PREDICT_CONFIG_PATH)
             logger.info(f'Round #{iteration}: Predict on test data on model {i}')
             subprocess.run(script, shell=True, check=True)
+        logger.info(f'Round {iteration}: Evaluate the aggregated model')
         evaluate_tri_training(DEFAULT_TEST_PATH,
                               test_prediction_paths[0],
                               test_prediction_paths[1],
