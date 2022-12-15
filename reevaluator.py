@@ -1,113 +1,68 @@
 import os
-import os
-import warnings
 from typing import List, Tuple, Dict
-
-import torch
 from sklearn.metrics import precision_recall_fscore_support as prfs
-from transformers import BertTokenizer
-
-from spert import prediction
-from spert.entities import Document, Dataset, EntityType
-from spert.input_reader import BaseInputReader
-from spert.opt import jinja2
+import json
 
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 
 class ReEvaluator:
-    def __init__(self, dataset: Dataset, input_reader: BaseInputReader, text_encoder: BertTokenizer,
-                 rel_filter_threshold: float, no_overlapping: bool,
-                 predictions_path: str, examples_path: str, example_count: int):
-        self._text_encoder = text_encoder
-        self._input_reader = input_reader
-        self._dataset = dataset
-        self._rel_filter_threshold = rel_filter_threshold
-        self._no_overlapping = no_overlapping
+    def __init__(self, gt_path, pred_path):
+        self.gt_entities = []
+        self.gt_relations = []
+        self.pred_entities = []
+        self.pred_relations = []
+        self.ent_short_types = ['Org', 'Loc', 'Peop', 'Other']
 
-        self._predictions_path = predictions_path
-        self._examples_path = examples_path
+        self.gt_entities, self.gt_relations, \
+            self.pred_entities, self.pred_relations = self._read_gt_and_pred(gt_path, pred_path)
 
-        self._example_count = example_count
+    def _convert_to_tuple(self, doc, dct):
+        if dct['type'] in self.ent_short_types:
+            return (dct['start'],
+                    dct['end'],
+                    dct['type'])
+        return (doc['entities'][dct['head']]['start'],
+                doc['entities'][dct['head']]['end'],
+                doc['entities'][dct['head']]['type'],
+                doc['entities'][dct['tail']]['start'],
+                doc['entities'][dct['tail']]['end'],
+                doc['entities'][dct['tail']]['type'],
+                dct['type'])
 
-        # relations
-        self._gt_relations = []  # ground truth
-        self._pred_relations = []  # prediction
+    def _read_gt_and_pred(self, gt_path, pred_path):
+        with open(gt_path, 'r') as f:
+            gt = json.load(f)
+        with open(pred_path, 'r') as f:
+            pred = json.load(f)
+        gt_entities = []
+        gt_relations = []
+        pred_entities = []
+        pred_relations = []
 
-        # entities
-        self._gt_entities = []  # ground truth
-        self._pred_entities = []  # prediction
-
-        self._pseudo_entity_type = EntityType('Entity', 1, 'Entity', 'Entity')  # for span only evaluation
-
-        self._convert_gt(self._dataset.documents)
-
-    def compute_scores(self):
-        print("Evaluation")
-
-        print("")
-        print("--- Entities (named entity recognition (NER)) ---")
-        print("An entity is considered correct if the entity type and span is predicted correctly")
-        print("")
-        gt, pred = self._convert_by_setting(self._gt_entities, self._pred_entities, include_entity_types=True)
-        ner_eval = self._score(gt, pred, print_results=True)
-
-        print("")
-        print("--- Relations ---")
-        print("")
-        print("Without named entity classification (NEC)")
-        print("A relation is considered correct if the relation type and the spans of the two "
-              "related entities are predicted correctly (entity type is not considered)")
-        print("")
-        gt, pred = self._convert_by_setting(self._gt_relations, self._pred_relations, include_entity_types=False)
-        rel_eval = self._score(gt, pred, print_results=True)
-
-        print("")
-        print("With named entity classification (NEC)")
-        print("A relation is considered correct if the relation type and the two "
-              "related entities are predicted correctly (in span and entity type)")
-        print("")
-        gt, pred = self._convert_by_setting(self._gt_relations, self._pred_relations, include_entity_types=True)
-        rel_nec_eval = self._score(gt, pred, print_results=True)
-
-        return ner_eval, rel_eval, rel_nec_eval
-
-    def _convert_gt(self, docs: List[Document]):
-        for doc in docs:
-            gt_relations = doc.relations
-            gt_entities = doc.entities
-
-            # convert ground truth relations and entities for precision/recall/f1 evaluation
-            sample_gt_entities = [entity.as_tuple() for entity in gt_entities]
-            sample_gt_relations = [rel.as_tuple() for rel in gt_relations]
-
-            if self._no_overlapping:
-                sample_gt_entities, sample_gt_relations = prediction.remove_overlapping(sample_gt_entities,
-                                                                                        sample_gt_relations)
-
-            self._gt_entities.append(sample_gt_entities)
-            self._gt_relations.append(sample_gt_relations)
-
-    def _convert_by_setting(self, gt: List[List[Tuple]], pred: List[List[Tuple]],
-                            include_entity_types: bool = True, include_score: bool = False):
         assert len(gt) == len(pred)
+        for i in range(len(gt)):
+            gt_entities.append([self._convert_to_tuple(gt[i], e) for e in gt[i]['entities']])
+            gt_relations.append([self._convert_to_tuple(gt[i], e) for e in gt[i]['relations']])
+            pred_entities.append([self._convert_to_tuple(pred[i], e) for e in pred[i]['entities']])
+            pred_relations.append([self._convert_to_tuple(pred[i], e) for e in pred[i]['relations']])
+        return gt_entities, gt_relations, pred_entities, pred_relations
 
-        # either include or remove entity types based on setting
+    def _convert_by_setting(self, gt, pred, include_entity_types):
         def convert(t):
             if not include_entity_types:
                 # remove entity type and score for evaluation
-                if type(t[0]) == int:  # entity
-                    c = [t[0], t[1], self._pseudo_entity_type]
+                if len(t) == 3:  # entity
+                    c = [t[0], t[1], 'Entity']
                 else:  # relation
-                    c = [(t[0][0], t[0][1], self._pseudo_entity_type),
-                         (t[1][0], t[1][1], self._pseudo_entity_type), t[2]]
+                    c = [(t[0], t[1], 'Entity'),
+                         (t[3], t[4], 'Entity'), t[6]]
             else:
-                c = list(t[:3])
-
-            if include_score and len(t) > 3:
-                # include prediction scores
-                c.append(t[3])
-
+                if len(t) == 3:
+                    c = [t[0], t[1], t[2]]
+                else:
+                    c = [(t[0], t[1], t[2]),
+                         (t[3], t[4], t[5]), t[6]]
             return tuple(c)
 
         converted_gt, converted_pred = [], []
@@ -117,6 +72,36 @@ class ReEvaluator:
             converted_pred.append([convert(t) for t in sample_pred])
 
         return converted_gt, converted_pred
+
+    def compute_scores(self):
+        print("Evaluation")
+
+        print("")
+        print("--- Entities (named entity recognition (NER)) ---")
+        print("An entity is considered correct if the entity type and span is predicted correctly")
+        print("")
+        gt, pred = self._convert_by_setting(self.gt_entities, self.pred_entities, include_entity_types=True)
+        ner_eval = self._score(gt, pred, print_results=True)
+
+        print("")
+        print("--- Relations ---")
+        print("")
+        print("Without named entity classification (NEC)")
+        print("A relation is considered correct if the relation type and the spans of the two "
+              "related entities are predicted correctly (entity type is not considered)")
+        print("")
+        gt, pred = self._convert_by_setting(self.gt_relations, self.pred_relations, include_entity_types=False)
+        rel_eval = self._score(gt, pred, print_results=True)
+
+        print("")
+        print("With named entity classification (NEC)")
+        print("A relation is considered correct if the relation type and the two "
+              "related entities are predicted correctly (in span and entity type)")
+        print("")
+        gt, pred = self._convert_by_setting(self.gt_relations, self.pred_relations, include_entity_types=True)
+        rel_nec_eval = self._score(gt, pred, print_results=True)
+
+        return ner_eval, rel_eval, rel_nec_eval
 
     def _score(self, gt: List[List[Tuple]], pred: List[List[Tuple]], print_results: bool = False):
         assert len(gt) == len(pred)
@@ -133,14 +118,14 @@ class ReEvaluator:
             for s in union:
                 if s in sample_gt:
                     t = s[2]
-                    gt_flat.append(t.index)
+                    gt_flat.append(t)
                     types.add(t)
                 else:
                     gt_flat.append(0)
 
                 if s in sample_pred:
                     t = s[2]
-                    pred_flat.append(t.index)
+                    pred_flat.append(t)
                     types.add(t)
                 else:
                     pred_flat.append(0)
@@ -149,7 +134,7 @@ class ReEvaluator:
         return metrics
 
     def _compute_metrics(self, gt_all, pred_all, types, print_results: bool = False):
-        labels = [t.index for t in types]
+        labels = [t for t in types]
         per_type = prfs(gt_all, pred_all, labels=labels, average=None, zero_division=0)
         micro = prfs(gt_all, pred_all, labels=labels, average='micro', zero_division=0)[:-1]
         macro = prfs(gt_all, pred_all, labels=labels, average='macro', zero_division=0)[:-1]
@@ -174,7 +159,7 @@ class ReEvaluator:
             metrics_per_type.append(metrics)
 
         for m, t in zip(metrics_per_type, types):
-            results.append(row_fmt % self._get_row(m, t.short_name))
+            results.append(row_fmt % self._get_row(m, t))
             results.append('\n')
 
         results.append('\n')
@@ -195,4 +180,11 @@ class ReEvaluator:
             row.append("%.2f" % (data[i] * 100))
         row.append(data[3])
         return tuple(row)
+
+
+if __name__ == '__main__':
+    gt_path = 'data/datasets/conll04/conll04_test.json'
+    pred_path = 'data/predictions.json'
+    evaluator = ReEvaluator(gt_path, pred_path)
+    evaluator.compute_scores()
 
