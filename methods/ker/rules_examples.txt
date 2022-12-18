@@ -31,3 +31,6 @@ smaller(L1,L2) :- Located_In(L1,L2).
 smaller(L1,L3) :- smaller(L1,L2), smaller(L2,L3).
 bigger(L1,L2) :- smaller(L2,L1).
 :- bigger(L1,L2), Located_In(L1,L2).
+
+4. Property owner must be one of the types org/peop/loc
+1{Peop(X), Org(X), Loc(X)}1 :- Prop_Owner(X).

@@ -12,10 +12,9 @@ def is_proper_name(s):
 def search_forward(tokens, idx, include):
     if include:
         start = idx
-        j = start + 1
     else:
         start = idx + 1
-        j = start
+    j = idx + 1
     while j < len(tokens):
         if is_proper_name(tokens[j]):
             j += 1
@@ -25,9 +24,12 @@ def search_forward(tokens, idx, include):
     return start, end
 
 
-def search_backward(tokens, idx):
-    end = idx
-    j = end - 1
+def search_backward(tokens, idx, include):
+    if include:
+        end = idx + 1
+    else:
+        end = idx
+    j = idx - 1
     while j > 0:
         if is_proper_name(tokens[j]):
             j -= 1
@@ -39,144 +41,111 @@ def search_backward(tokens, idx):
 
 def match_people_with_title(tokens):
     titles = ['Mr.', 'Mrs.', 'Ms.', 'Miss.', 'President', 'Officer', 'Dr.', 'Professor', 'Sen.']
-    stop = [',', '.']
-    people = []
+    result = []
     i = 0
     while i < len(tokens):
-        start = end = None
+        end = i
         if tokens[i] in titles:
-            start = i
-            j = i + 1
-            while j < len(tokens):
-                if tokens[j] not in stop and is_proper_name(tokens[j]):
-                    j += 1
-                else:
-                    break
-            end = i = j
-        if start and end and (end - start > 1):
-            # people.append(f'Peop("{start}+{end}", "1")')
-            people.append(f'Peop("{tokens[start: end]}", "1")')
-        i += 1
-    return people
+            start, end = search_forward(tokens, i, True)
+            if end - start > 1:
+                # result.append(f'Peop("{start}+{end}")')
+                result.append(f'Peop("{tokens[start: end]}")')
+        i = end + 1
+    return result
 
 
 def match_people_property(tokens):
     marker = ["'s"]
     i = 0
-    prop_owners = []
+    result = []
     while i < len(tokens):
-        start = end = None
+        end = i
         if tokens[i] in marker:
-            j = i - 1
-            end = i
-            while is_proper_name(tokens[j]) and j > 0:
-                j -= 1
-            start = j + 1
-            i = end
-        if (start and end) and (end - start > 1):
-            if tokens[i+1] == 'Party':
-                end = i + 2
-                # prop_owners.append(f'Org("{start}+{end}", "1")')
-                prop_owners.append(f'Org("{tokens[start: end]}", "1")')
-            else:
-                prop_owners.append(f'Prop_Owner("{tokens[start: end]}", "1")')
-                # prop_owners.append(f'Prop_Owner("{start}+{end}", "1")')
-        i += 1
-    return prop_owners
+            start, end = search_backward(tokens, i, False)
+            if end - start > 1:
+                if tokens[i+1] == 'Party':
+                    end = i + 2
+                    # result.append(f'Org("{start}+{end}")')
+                    result.append(f'Org("{tokens[start: end]}")')
+                else:
+                    result.append(f'Prop_Owner("{tokens[start: end]}")')
+                    # result.append(f'Prop_Owner("{start}+{end}")')
+        i = end + 1
+    return result
 
 
 def match_killing_of_people(tokens):
     i = 0
-    people = []
+    result = []
     markers = ['murder', 'killer', 'killing', 'assassin', 'assassination', 'death']
-    while i < len(tokens) - 1:
-        start = end = None
+    while i < len(tokens) - 2:
+        end = i
         if tokens[i] in markers and tokens[i+1] == 'of':
-            j = i + 2
-            start = j
-            while j < len(tokens):
-                if is_proper_name(tokens[j]):
-                    j += 1
-                else:
-                    break
-            end = i = j
-        if start and end and (end - start > 1):
-            # people.append(f'Peop("{start}+{end}", "1")')
-            people.append(f'Peop("{tokens[start: end]}", "1")')
-        i += 1
-    return people
+            start, end = search_forward(tokens, i+1, False)
+            if end - start > 1:
+                # result.append(f'Peop("{start}+{end}")')
+                result.append(f'Peop("{tokens[start: end]}")')
+        i = end + 1
+    return result
 
 
 def match_people_killer(tokens):
     i = 0
-    people = []
+    result = []
     markers = ['killer', 'murderer', 'assassin']
     while i < len(tokens) - 1:
-        start = end = None
+        end = i
         if tokens[i] == "'s" and tokens[i+1] in markers:
-            j = i - 1
-            end = i
-            while is_proper_name(tokens[j]) and j > 0:
-                j -= 1
-            start = j + 1
-            i = end
-        if (start and end) and (end - start > 1):
-            # people.append(f'Peop("{start}+{end}", "1")')
-            people.append(f'Peop("{tokens[start: end]}", "1")')
-        i += 1
-    return people
+            start, end = search_backward(tokens, i, True)
+            if end - start > 1:
+                # result.append(f'Peop("{start}+{end}")')
+                result.append(f'Peop("{tokens[start: end]}")')
+        i = end + 1
+    return result
 
 
 def match_company_name(tokens):
     i = 0
-    companies = []
+    result = []
     markers = ['Inc.', 'Co.']
     while i < len(tokens) - 1:
-        start = end = None
+        end = i
         if tokens[i] in markers:
-            j = i - 1
-            end = i + 1
-            while is_proper_name(tokens[j]) and j > 0:
-                j -= 1
-            start = j + 1
-            i = end
-        if (start and end) and (end - start > 1):
-            companies.append(f'Org("{tokens[start: end]}", "1")')
-            # companies.append(f'Org("{start}+{end}", "1")')
-        i += 1
-    return companies
+            start, end = search_backward(tokens, i, True)
+            if end - start > 1:
+                result.append(f'Org("{tokens[start: end]}")')
+                # result.append(f'Org("{start}+{end}")')
+        i = end + 1
+    return result
 
 
 def match_leader(tokens):
     i = 1
-    people = []
+    result = []
     markers = ['leader', 'president', 'secretary', 'chairman',
                'director', 'governor', 'dean', 'head', 'chief']
     while i < len(tokens) - 2:
-        start = end = None
+        end = i
         if (tokens[i] in markers and
                 tokens[i + 1] == 'of' and
                 tokens[i+2] == 'the' and
                 tokens[i-1] == ','):
-            j = i + 3
-            start = j
-            while j < len(tokens):
-                if is_proper_name(tokens[j]):
-                    j += 1
-                else:
-                    break
-            end = i = j
-        if start and end and (end - start > 1):
-            # people.append(f'Peop("{start}+{end}", "1")')
-            people.append(f'Org("{tokens[start: end]}", "1")')
-        i += 1
-    return people
+            start_f, end_f = search_forward(tokens, i+2, False)
+            start_b, end_b = search_backward(tokens, i-1, False)
+            if end_f - start_f > 1:
+                if end_b - start_b > 1:
+                    # people.append(f'leader("{start_b}+{end_b}", "{start_f}+{end_f}")')
+                    result.append(f'leader("{tokens[start_b: end_b]}", "{tokens[start_f: end_f]}")')
+                # result.append(f'Org("{start_f}+{end_f}")')
+                result.append(f'Org("{tokens[start_f: end_f]}")')
+        i = end + 1
+    return result
 
 
 if __name__ == '__main__':
     with open('../../data/datasets/conll04/conll04_train.json', 'r') as f:
         data = json.load(f)
-    # print(data[900]['tokens'])
+    # print(data[25]['tokens'])
     # exit()
     c = 0
     for i, row in enumerate(data):
