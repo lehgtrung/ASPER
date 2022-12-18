@@ -1,0 +1,33 @@
+
+1. "Mr. <Peop> ," Mr. Lucas Pande Tavaya, <Peop> will be spanned over capitalized words
+2. "Mr. <Peop> ."
+3. "Mrs. <Peop> ,"
+4. "Mrs. <Peop> ."
+5. "President/Officer <Peop>"
+6. "<Peop/Loc/Org> 's"
+7. "<Loc> (<Org>)"
+8. "<Loc1>, <Loc2> ./," Example: "the American Diabetes Association in Alexandria , Va."
+9. "<Org> spokesman <Peop>" Example: "FAA spokesman Fred Farrar said Tuesday""
+10. "murder/killer/assassin of <Peop>" Example: "tragic '' murder of Marine Lt. William Higgins"
+11. "<Peop> 's murder/killer/assassin"
+12. "<Org> Inc./Co." => company
+13. "the assassination/murder/killing/death of <Peop>"
+14. "president/leader/secretary of the <Org>"
+
+
+Assumptions:
+1. If a person is killed or dead, he/she could not kill anyone else.
+:- dead(X), kill(X,_).
+dead(X) :- kill(_,X).
+
+2. If a person is leader/owner/CEO, he/she works for that company.
+peop(X) :- lead(X,O).
+org(O) :- lead(X,O).
+Work_For(X,O) :- lead(X,O).
+
+3. If a loc1 located in loc2 and loc2 located in loc3 means loc1 < loc3
+and there cannot be loc3 located in loc1.
+smaller(L1,L2) :- Located_In(L1,L2).
+smaller(L1,L3) :- smaller(L1,L2), smaller(L2,L3).
+bigger(L1,L2) :- smaller(L2,L1).
+:- bigger(L1,L2), Located_In(L1,L2).
