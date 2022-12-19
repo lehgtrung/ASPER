@@ -61,8 +61,8 @@ def restore_relation(atom, entities):
         'end': match[1].split('+')[1],
     }
     tail_ent = {
-        'start': match[1].split('+')[0],
-        'end': match[1].split('+')[1],
+        'start': match[2].split('+')[0],
+        'end': match[2].split('+')[1],
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
     return {
