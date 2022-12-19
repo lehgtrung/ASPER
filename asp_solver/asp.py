@@ -49,7 +49,7 @@ def remove_ok(atom):
     return re.findall(ok_pattern, atom)[0]
 
 
-def convert_atoms_to_doc(atoms, tokens, orig_id):
+def convert_atoms_to_doc(atoms, tokens):
     entities = []
     relations = []
     for atom in atoms:
@@ -62,8 +62,7 @@ def convert_atoms_to_doc(atoms, tokens, orig_id):
     return {
         'tokens': tokens,
         'entities': entities,
-        'relations': relations,
-        'orig_id': orig_id
+        'relations': relations
     }
 
 
@@ -113,8 +112,7 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     result = solve(command)
     # Convert result to
     doc = convert_atoms_to_doc(atoms=result,
-                               tokens=unlabeled[i]['tokens'],
-                               orig_id=unlabeled[i]['orig_id'])
+                               tokens=unlabeled[i]['tokens'])
     return doc
 
 
