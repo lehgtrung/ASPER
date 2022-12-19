@@ -79,7 +79,8 @@ def convert_atoms_to_doc(atoms, tokens):
     relations = []
     print('atoms: ', atoms)
     for atom in atoms:
-        atom = remove_ok(atom)
+        print(atom)
+        atom = remove_ok(str(atom))
         if match_form(atom, 'entity'):
             entities.append(restore_entity(atom))
     for atom in atoms:
