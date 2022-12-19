@@ -122,7 +122,7 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
     with open(unlabeled_path, 'r') as f:
         unlabeled = json.load(f)
     new_pred = []
-    for i, doc in unlabeled:
+    for i, doc in enumerate(unlabeled):
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
         doc = solve_single_doc(unlabeled, auto_path, atom_path)
