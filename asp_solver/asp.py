@@ -45,6 +45,7 @@ def match_form(atom, form):
 
 def restore_entity(atom):
     match = re.findall(entity_pattern, atom)
+    print(match)
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'entity'),
         'start': match[1].split('+')[0],
