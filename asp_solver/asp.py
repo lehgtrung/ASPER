@@ -110,6 +110,8 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     i = int(os.path.basename(auto_path).split('.')[0])
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
+    print(' '.join(command))
+    exit()
     result = solve(command)
     # Convert result to
     doc = convert_atoms_to_doc(atoms=result,
