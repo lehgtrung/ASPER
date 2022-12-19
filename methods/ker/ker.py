@@ -90,7 +90,7 @@ def ker(labeled_path,
         solve_all_docs(unlabeled_path=unlabeled_path,
                        atom_meta_path=atom_meta_path,
                        auto_meta_path=auto_meta_path,
-                       selection_path=selection_path)
+                       selection_path=prediction_path)
 
         # Unify labeled and selected pseudo labeled data
         logger.info(f'Round #{iteration}: Unify labels and pseudo labels')
