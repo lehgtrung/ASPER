@@ -17,6 +17,11 @@ if __name__ == '__main__':
                         required=True,
                         type=int,
                         action='store')
+    parser.add_argument('--max_iter',
+                        required=False,
+                        default=1,
+                        type=int,
+                        action='store')
     args = parser.parse_args()
 
     dataset = args.dataset
@@ -89,7 +94,7 @@ if __name__ == '__main__':
         selection_path=SELECTION_PATH,
         labeled_model_path=LABELED_MODEL_PATH,
         logger=logger,
-        max_iter=1)
+        max_iter=args.max_iter)
 
 
 
