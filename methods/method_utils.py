@@ -3,6 +3,7 @@ import os
 import configparser
 import numpy as np
 from collections import Counter
+from asp_solver.asp import *
 
 
 def transfer_data(in_path1, in_path2, out_path):
@@ -170,4 +171,18 @@ def aggregate_on_symbols(model_paths):
             'relations': [tuple(r) for r in relations]
         })
     return outputs
+
+
+def write_down_a_list(path, lst):
+    with open(path, 'w') as f:
+        f.writelines(map(lambda x: x + '\n', lst))
+
+
+def write_pred_to_files(prediction_path, meta_path):
+    with open(prediction_path, 'r') as f:
+        pred = json.load(f)
+    for i, doc in enumerate(pred):
+        path = meta_path.format(i)
+        atoms = convert_to_atoms(doc)
+        write_down_a_list(path, atoms)
 

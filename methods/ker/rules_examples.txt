@@ -17,7 +17,9 @@
 
 Assumptions:
 1. If a person is killed or dead, he/she could not kill anyone else.
+Peop(X) :- dead(X).
 :- dead(X), kill(X,_).
+kill(_,X) :- dead(X).
 dead(X) :- kill(_,X).
 
 2. If a person is leader/owner/CEO, he/she works for that company.

@@ -1,0 +1,20 @@
+%atom(loc("Port+Ather"), "0.8").
+%atom(loc("Texas"), "0.9").
+%atom(loc("Gaveston"), "0.7").
+
+%atom(locatedIn("Port+Ather","Gaveston"), "0.7").
+%atom(locatedIn("Gaveston","Texas"), "0.7").
+
+atom(loc("Port+Ather"), "1.0").
+atom(loc("Texas"), "1.0").
+atom(loc("Gaveston"), "1.0").
+atom(locatedIn("Port+Ather", "Gaveston"), "1.0").
+atom(locatedIn("Gaveston", "Texas"), "1.0").
+atom(locatedIn("Port+Ather", "Texas"), "1.0").
+atom(org("CDT"), "0.7").
+atom(locatedIn("CDT", "Texas"), "0.8").
+
+
+%atom(loc("Port+Ather"), "1.0").
+%atom(loc("Texas"), "1.0").
+%atom(loc("Gaveston"), "1.0").
