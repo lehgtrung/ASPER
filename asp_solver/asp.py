@@ -54,7 +54,7 @@ def restore_entity(atom):
 
 
 def restore_relation(atom, entities):
-    match = re.findall(entity_pattern, atom)
+    match = re.findall(relation_pattern, atom)
     match = match[0]
     head_ent = {
         'start': match[1].split('+')[0],
