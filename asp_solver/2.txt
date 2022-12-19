@@ -5,16 +5,22 @@
 %atom(locatedIn("Port+Ather","Gaveston"), "0.7").
 %atom(locatedIn("Gaveston","Texas"), "0.7").
 
-atom(loc("Port+Ather"), "1.0").
-atom(loc("Texas"), "1.0").
-atom(loc("Gaveston"), "1.0").
-atom(locatedIn("Port+Ather", "Gaveston"), "1.0").
-atom(locatedIn("Gaveston", "Texas"), "1.0").
-atom(locatedIn("Port+Ather", "Texas"), "1.0").
-atom(org("CDT"), "0.7").
-atom(locatedIn("CDT", "Texas"), "0.8").
+%atom(loc("Port+Ather"), "1.0").
+%atom(loc("Texas"), "1.0").
+%atom(loc("Gaveston"), "1.0").
+%atom(locatedIn("Port+Ather", "Gaveston"), "1.0").
+%atom(locatedIn("Gaveston", "Texas"), "1.0").
+%atom(locatedIn("Port+Ather", "Texas"), "1.0").
+%atom(org("CDT"), "0.7").
+%atom(locatedIn("CDT", "Texas"), "0.8").
 
 
 %atom(loc("Port+Ather"), "1.0").
 %atom(loc("Texas"), "1.0").
 %atom(loc("Gaveston"), "1.0").
+
+atom(other("22+26"),"0.9656161665916443").
+atom(other("27+31"),"0.9436653256416321").
+atom(peop("38+40"),"0.9947279095649719").
+atom(org("46+49"),"0.9814613461494446").
+atom(workFor("38+40","46+49"),"0.9993770718574524").

@@ -11,6 +11,27 @@ relation_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)","([0-9]+\+[0-9]+)"\)')
 ok_pattern = re.compile(r'ok\(\w+\).')
 
 
+def convert_doc_type_to_asp_type(atype, form):
+    if form == 'entity':
+        return atype.lower()
+    else:
+        return atype.split('_')[0].lower() + atype.split('_')[1]
+
+
+def convert_asp_type_to_doc_type(atype, form):
+    dct = {
+        'workFor': 'Work_For',
+        'orgbasedIn': 'OrgBased_In',
+        'liveIn': 'Live_In',
+        'locatedIn': 'Located_In',
+        'kill': 'Kill'
+    }
+    if form == 'entity':
+        return atype.capitalize()
+    else:
+        return dct[atype]
+
+
 def match_form(atom, form):
     if form == 'entity':
         return bool(re.search(entity_pattern, atom))
@@ -21,7 +42,7 @@ def match_form(atom, form):
 def restore_entity(atom):
     match = re.findall(entity_pattern, atom)
     return {
-        'type': match[0],
+        'type': convert_asp_type_to_doc_type(match[0], 'entity'),
         'start': match[1].split('+')[0],
         'end': match[1].split('+')[1],
     }
@@ -39,7 +60,7 @@ def restore_relation(atom, entities):
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
     return {
-        'type': match[0],
+        'type': convert_asp_type_to_doc_type(match[0], 'relation'),
         'head': entities_wo_type.index(head_ent),
         'tail': entities_wo_type.index(tail_ent)
     }
@@ -72,18 +93,20 @@ def convert_to_atoms(pred):
     entities = pred['entities']
     relations = pred['relations']
     for ent in entities:
-        c = 'atom({}("{}"),"{}").'.format(ent['type'],
+        etype = convert_doc_type_to_asp_type(ent['type'], 'entity')
+        c = 'atom({}("{}"),"{}").'.format(etype,
                                           '{}+{}'.format(ent['start'], ent['end']),
                                           ent['prob'])
         atoms.append(c)
     for rel in relations:
+        rtype = convert_doc_type_to_asp_type(rel['type'], 'relation')
         head = entities[rel['head']]
         head_start, head_end = head['start'], head['end']
         head = f'{head_start}+{head_end}'
         tail = entities[rel['tail']]
         tail_start, tail_end = tail['start'], tail['end']
         tail = f'{tail_start}+{tail_end}'
-        c = 'atom({}("{}","{}"),"{}").'.format(rel['type'],
+        c = 'atom({}("{}","{}"),"{}").'.format(rtype,
                                                head,
                                                tail,
                                                rel['prob'])
@@ -110,8 +133,6 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     i = int(os.path.basename(auto_path).split('.')[0])
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
-    print(' '.join(command))
-    exit()
     result = solve(command)
     # Convert result to
     doc = convert_atoms_to_doc(atoms=result,
