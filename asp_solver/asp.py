@@ -45,7 +45,7 @@ def match_form(atom, form):
 
 def restore_entity(atom):
     match = re.findall(entity_pattern, atom)
-    print(match)
+    match = match[0]
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'entity'),
         'start': match[1].split('+')[0],
@@ -55,6 +55,7 @@ def restore_entity(atom):
 
 def restore_relation(atom, entities):
     match = re.findall(entity_pattern, atom)
+    match = match[0]
     head_ent = {
         'start': match[1].split('+')[0],
         'end': match[1].split('+')[1],
@@ -138,6 +139,7 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
     result = solve(command)[0]
+    result = [e.replace(' ', '') for e in result]
     # Convert result to
     doc = convert_atoms_to_doc(atoms=result,
                                tokens=unlabeled[i]['tokens'])
