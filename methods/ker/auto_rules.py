@@ -142,7 +142,7 @@ def match_leader(tokens):
     return result
 
 
-def extract_auto_rules(input_path, output_path):
+def extract_auto_rules(input_path, output_path, empty):
     with open(input_path, 'r') as f:
         data = json.load(f)
     count = 0
@@ -158,8 +158,11 @@ def extract_auto_rules(input_path, output_path):
         matches = list(set(matches))
         if matches:
             count += 1
-        with open(output_path.format(i), 'w') as f:
-            f.writelines(map(lambda x: x + '\n', matches))
+        if empty:
+            open(output_path.format(i), 'w')
+        else:
+            with open(output_path.format(i), 'w') as f:
+                f.writelines(map(lambda x: x + '\n', matches))
     return count
 
 
