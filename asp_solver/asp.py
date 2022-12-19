@@ -15,7 +15,11 @@ def convert_doc_type_to_asp_type(atype, form):
     if form == 'entity':
         return atype.lower()
     else:
-        return atype.split('_')[0].lower() + atype.split('_')[1]
+        split = atype.split('_')
+        if len(split) > 1:
+            return atype.split('_')[0].lower() + atype.split('_')[1]
+        else:
+            return atype.split('_')[0].lower()
 
 
 def convert_asp_type_to_doc_type(atype, form):
