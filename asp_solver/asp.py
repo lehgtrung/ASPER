@@ -48,8 +48,8 @@ def restore_entity(atom):
     match = match[0]
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'entity'),
-        'start': match[1].split('+')[0],
-        'end': match[1].split('+')[1],
+        'start': int(match[1].split('+')[0]),
+        'end': int(match[1].split('+')[1]),
     }
 
 
@@ -57,12 +57,12 @@ def restore_relation(atom, entities):
     match = re.findall(relation_pattern, atom)
     match = match[0]
     head_ent = {
-        'start': match[1].split('+')[0],
-        'end': match[1].split('+')[1],
+        'start': int(match[1].split('+')[0]),
+        'end': int(match[1].split('+')[1]),
     }
     tail_ent = {
-        'start': match[2].split('+')[0],
-        'end': match[2].split('+')[1],
+        'start': int(match[2].split('+')[0]),
+        'end': int(match[2].split('+')[1]),
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
     return {
