@@ -8,7 +8,7 @@ COMMAND = 'clingo --opt-mode=optN asp_solver/p6.lp asp_solver/compute.lp {auto_p
           '--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
 entity_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)"\)')
 relation_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)","([0-9]+\+[0-9]+)"\)')
-ok_pattern = re.compile(r'ok\(\w+\).')
+ok_pattern = re.compile(r'^ok\((.*?)\)\.')
 
 
 def convert_doc_type_to_asp_type(atype, form):
