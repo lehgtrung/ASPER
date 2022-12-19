@@ -77,10 +77,8 @@ def remove_ok(atom):
 def convert_atoms_to_doc(atoms, tokens):
     entities = []
     relations = []
-    print('atoms: ', atoms)
     for atom in atoms:
-        print(atom)
-        atom = remove_ok(str(atom))
+        atom = remove_ok(atom)
         if match_form(atom, 'entity'):
             entities.append(restore_entity(atom))
     for atom in atoms:
@@ -138,7 +136,7 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     i = int(os.path.basename(auto_path).split('.')[0])
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
-    result = solve(command)
+    result = solve(command)[0]
     # Convert result to
     doc = convert_atoms_to_doc(atoms=result,
                                tokens=unlabeled[i]['tokens'])
