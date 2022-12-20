@@ -30,7 +30,7 @@ def ker(labeled_path,
 
     # Create auto rules
     logger.info('Extracting auto rules')
-    count = extract_auto_rules(unlabeled_path, auto_meta_path, True)
+    count = extract_auto_rules(unlabeled_path, auto_meta_path, empty=False)
     logger.info(f'There are {count} sentences affected from auto rules')
 
     if not model_exists(os.path.join(labeled_model_path.format(-1), 'final_model')):
