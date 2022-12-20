@@ -76,6 +76,7 @@ def main(prg):
     #  max_as is the answer set with the maximal probability (max_val)
 
     # print("\n\n Optimal answer set:",  max_as, max_val)
+    print(max_as)
 
     return
 

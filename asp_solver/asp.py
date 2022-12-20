@@ -1,3 +1,4 @@
+import ast
 import os
 import subprocess
 import re
@@ -8,7 +9,8 @@ COMMAND = 'clingo --opt-mode=optN asp_solver/p6.lp asp_solver/compute.lp {auto_p
           '--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
 entity_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)"\)')
 relation_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)","([0-9]+\+[0-9]+)"\)')
-ok_pattern = re.compile(r'^ok\((.*?)\)\.')
+# ok_pattern = re.compile(r'^ok\((.*?)\)\.')
+ok_pattern = re.compile(r'^ok\((.*?)\)')
 
 
 def convert_doc_type_to_asp_type(atype, form):
@@ -126,7 +128,8 @@ def solve(command):
                                stderr=subprocess.PIPE,
                                stdout=subprocess.PIPE)
     output, error = process.communicate()
-    result = [e.split() for e in output.decode().split('\n')[:-2]]
+    # result = [e.split() for e in output.decode().split('\n')[:-2]]
+    result = ast.literal_eval(output.decode().split('\n')[-2])
     return result
 
 
@@ -138,11 +141,7 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     i = int(os.path.basename(auto_path).split('.')[0])
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
-
-    print(atom_path)
-    print(unlabeled[i])
-
-    result = solve(command)[0]
+    result = solve(command)
     result = [e.replace(' ', '') for e in result]
     # Convert result to
     doc = convert_atoms_to_doc(atoms=result,

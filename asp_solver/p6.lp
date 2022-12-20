@@ -191,11 +191,11 @@ rule(liveIn(X,P1), locatedIn(P1,P2), liveIn(X,P2)):-
 
 
 %% Trung: infer types for relations after they are selected
-%% locatedIn/orgBasedIn/liveIn/workFor/kill
+%% locatedIn/orgbasedIn/liveIn/workFor/kill
 ok(loc(P1)) :- ok(locatedIn(P1,P2)).
 ok(loc(P2)) :- ok(locatedIn(P1,P2)).
-ok(org(O)) :- ok(orgBasedIn(O,P)).
-ok(loc(P)) :- ok(orgBasedIn(O,P)).
+ok(org(O)) :- ok(orgbasedIn(O,P)).
+ok(loc(P)) :- ok(orgbasedIn(O,P)).
 ok(peop(X)) :- ok(liveIn(X,P)).
 ok(loc(P)) :- ok(liveIn(X,P)).
 ok(peop(X)) :- ok(workFor(X,O)).
