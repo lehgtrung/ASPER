@@ -139,7 +139,6 @@ def solve(command):
 
 
 def solve_single_doc(unlabeled, auto_path, atom_path):
-    print(atom_path)
     command = COMMAND.format(
         auto_path=auto_path,
         atom_path=atom_path
