@@ -48,8 +48,7 @@ def match_people_with_title(tokens):
         if tokens[i] in titles:
             start, end = search_forward(tokens, i, True)
             if end - start > 1:
-                result.append(f'Peop("{start}+{end}").')
-                # result.append(f'Peop("{tokens[start: end]}")')
+                result.append(f'ok(peop("{start}+{end}")).')
         i = end + 1
     return result
 
@@ -65,10 +64,8 @@ def match_people_property(tokens):
             if end - start > 1:
                 if tokens[i+1] == 'Party':
                     end = i + 2
-                    result.append(f'Org("{start}+{end}").')
-                    # result.append(f'Org("{tokens[start: end]}")')
+                    result.append(f'ok(org("{start}+{end}")).')
                 else:
-                    # result.append(f'Prop_Owner("{tokens[start: end]}")')
                     result.append(f'Prop_Owner("{start}+{end}").')
         i = end + 1
     return result
@@ -83,8 +80,7 @@ def match_killing_of_people(tokens):
         if tokens[i] in markers and tokens[i+1] == 'of':
             start, end = search_forward(tokens, i+1, False)
             if end - start > 1:
-                result.append(f'dead("{start}+{end}").')
-                # result.append(f'dead("{tokens[start: end]}")')
+                result.append(f'ok(peop("{start}+{end}")).')
         i = end + 1
     return result
 
@@ -98,8 +94,7 @@ def match_people_killer(tokens):
         if tokens[i] == "'s" and tokens[i+1] in markers:
             start, end = search_backward(tokens, i, True)
             if end - start > 1:
-                result.append(f'dead("{start}+{end}").')
-                # result.append(f'dead("{tokens[start: end]}")')
+                result.append(f'ok(peop("{start}+{end}")).')
         i = end + 1
     return result
 
@@ -114,7 +109,7 @@ def match_company_name(tokens):
             start, end = search_backward(tokens, i, True)
             if end - start > 1:
                 # result.append(f'Org("{tokens[start: end]}")')
-                result.append(f'Org("{start}+{end}").')
+                result.append(f'ok(org("{start}+{end}")).')
         i = end + 1
     return result
 
@@ -134,10 +129,8 @@ def match_leader(tokens):
             start_b, end_b = search_backward(tokens, i-1, False)
             if end_f - start_f > 1:
                 if end_b - start_b > 1:
-                    result.append(f'leader("{start_b}+{end_b}", "{start_f}+{end_f}").')
-                    # result.append(f'leader("{tokens[start_b: end_b]}", "{tokens[start_f: end_f]}")')
-                result.append(f'Org("{start_f}+{end_f}").')
-                # result.append(f'Org("{tokens[start_f: end_f]}")')
+                    result.append(f'ok(workFor("{start_b}+{end_b}", "{start_f}+{end_f}")).')
+                result.append(f'ok(org("{start_f}+{end_f}")).')
         i = end + 1
     return result
 
@@ -149,7 +142,7 @@ def extract_auto_rules(input_path, output_path, empty):
     for i, row in enumerate(data):
         matches = (
             match_people_with_title(row['tokens']) +
-            match_people_property(row['tokens']) +
+            # match_people_property(row['tokens']) +
             match_killing_of_people(row['tokens']) +
             match_people_killer(row['tokens']) +
             match_company_name(row['tokens']) +

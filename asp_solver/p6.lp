@@ -171,11 +171,11 @@ rule(locatedIn(P1,P2), locatedIn(P2,P3), locatedIn(P1, P3)):-
 rule(liveIn(X,P1), locatedIn(P1,P2), liveIn(X,P2)):-
 	atom(liveIn(X,P1)), atom(locatedIn(P1,P2)), P1!=P2.
 
-rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
-	atom(workFor(X,O)), atom(orgbasedIn(O,P)).
+%rule(workFor(X,O), orgbasedIn(O,P),liveIn(X,P)):-
+%	atom(workFor(X,O)), atom(orgbasedIn(O,P)).
 
-rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):-
-	atom(liveIn(X,P)), atom(workFor(X,O)).
+%rule(liveIn(X,P), workFor(X,O), orgbasedIn(O,P)):-
+%	atom(liveIn(X,P)), atom(workFor(X,O)).
 
 
 
