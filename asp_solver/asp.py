@@ -10,7 +10,7 @@ COMMAND = 'clingo --opt-mode=optN asp_solver/p6.lp asp_solver/compute.lp {auto_p
 entity_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)"\)')
 relation_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)","([0-9]+\+[0-9]+)"\)')
 # ok_pattern = re.compile(r'^ok\((.*?)\)\.')
-ok_pattern = re.compile(r'^ok\((.*?)\)')
+ok_pattern = re.compile(r'^ok\((.*?)\)$')
 
 
 def convert_doc_type_to_asp_type(atype, form):
@@ -67,10 +67,10 @@ def restore_relation(atom, entities):
         'end': int(match[2].split('+')[1]),
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
-    print(head_ent)
-    print(tail_ent)
-    print('entities: ', entities)
-    print('entities_wo_type: ', entities_wo_type)
+    # print(head_ent)
+    # print(tail_ent)
+    # print('entities: ', entities)
+    # print('entities_wo_type: ', entities_wo_type)
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'relation'),
         'head': entities_wo_type.index(head_ent),
@@ -87,7 +87,7 @@ def convert_atoms_to_doc(atoms, tokens):
     relations = []
     for atom in atoms:
         atom = remove_ok(atom)
-        print(atom)
+        # print(atom)
         if match_form(atom, 'entity'):
             entities.append(restore_entity(atom))
     for atom in atoms:
