@@ -148,6 +148,7 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     assert i == j
     result = solve(command)
     result = [e.replace(' ', '') for e in result]
+    print('result: ', result)
     # Convert result to
     doc = convert_atoms_to_doc(atoms=result,
                                tokens=unlabeled[i]['tokens'])
