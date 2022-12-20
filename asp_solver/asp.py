@@ -64,10 +64,7 @@ def restore_relation(atom, entities):
         'start': int(match[2].split('+')[0]),
         'end': int(match[2].split('+')[1]),
     }
-    print(head_ent)
-    print(tail_ent)
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
-    print(entities_wo_type)
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'relation'),
         'head': entities_wo_type.index(head_ent),
@@ -141,6 +138,10 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     i = int(os.path.basename(auto_path).split('.')[0])
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
+
+    print(atom_path)
+    print(unlabeled[i])
+
     result = solve(command)[0]
     result = [e.replace(' ', '') for e in result]
     # Convert result to
