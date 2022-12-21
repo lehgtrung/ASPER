@@ -204,3 +204,14 @@ ok(peop(X)) :- ok(kill(X,Y)).
 ok(peop(Y)) :- ok(kill(X,Y)).
 
 
+%% More rules
+%1{Peop(X); Org(X); Loc(X)}1 :- atom(propOwner(X)).
+
+%% Dead people can not kill
+%peop(X) :- dead(X).
+%:- dead(X), kill(X,_).
+
+%% Reason about location's size
+%smaller(L1,L2) :- atom(locatedIn(L1,L2)).
+%smaller(L1,L3) :- smaller(L1,L2), smaller(L2,L3).
+%:- atom(locatedIn(L1,L2)), smaller(L1,L2).

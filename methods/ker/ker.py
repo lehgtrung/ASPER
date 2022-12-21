@@ -99,23 +99,23 @@ def ker(labeled_path,
                       out_path=selection_path)
 
         # Compute F1 on selection
-        logger.info(f'Round #{iteration}: F1 on selection')
-        modify_config_file(DEFAULT_EVAL_CONFIG_PATH,
-                           TEMP_EVAL_CONFIG_PATH,
-                           {
-                               'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
-                               'log_path': eval_log_path.format(iteration + 0.5),
-                               'tokenizer_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
-                               'dataset_path': unlabeled_with_labels_path
-                           })
-        script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
-        nmap_out = subprocess.run(script,
-                                  shell=True,
-                                  check=True,
-                                  universal_newlines=True,
-                                  stdout=subprocess.PIPE)
-        nmap_lines = nmap_out.stdout.splitlines()
-        filter_evaluation_log(nmap_lines, logger)
+        # logger.info(f'Round #{iteration}: F1 on selection')
+        # modify_config_file(DEFAULT_EVAL_CONFIG_PATH,
+        #                    TEMP_EVAL_CONFIG_PATH,
+        #                    {
+        #                        'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
+        #                        'log_path': eval_log_path.format(iteration + 0.5),
+        #                        'tokenizer_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
+        #                        'dataset_path': unlabeled_with_labels_path
+        #                    })
+        # script = EVAL_SCRIPT.format(config_path=TEMP_EVAL_CONFIG_PATH)
+        # nmap_out = subprocess.run(script,
+        #                           shell=True,
+        #                           check=True,
+        #                           universal_newlines=True,
+        #                           stdout=subprocess.PIPE)
+        # nmap_lines = nmap_out.stdout.splitlines()
+        # filter_evaluation_log(nmap_lines, logger)
 
         # Create folder for models
         os.makedirs(os.path.dirname(labeled_model_path.format(iteration)), exist_ok=True)

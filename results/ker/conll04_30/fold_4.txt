@@ -1,0 +1,684 @@
+12/20/2022 06:24:41
+Extracting auto rules
+
+12/20/2022 06:24:41
+There are 75 sentences affected from auto rules
+
+12/20/2022 06:24:41
+Labeled model exists, skip training ...
+
+12/20/2022 06:24:41
+Evaluate on test data
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Loc        90.05        86.89        88.44          427
+                Peop        91.69        92.83        92.26          321
+                 Org        76.28        82.83        79.42          198
+               Other        71.07        64.66        67.72          133
+
+               micro        85.65        85.17        85.41         1079
+               macro        82.27        81.80        81.96         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Work        54.76        60.53        57.50           76
+                Kill        88.10        78.72        83.15           47
+               LocIn        60.00        51.06        55.17           94
+               OrgBI        65.85        51.43        57.75          105
+                Live        79.71        55.00        65.09          100
+
+               micro        67.23        56.87        61.62          422
+               macro        69.68        59.35        63.73          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Work        54.76        60.53        57.50           76
+                Kill        88.10        78.72        83.15           47
+               LocIn        60.00        51.06        55.17           94
+               OrgBI        65.85        51.43        57.75          105
+                Live        79.71        55.00        65.09          100
+
+               micro        67.23        56.87        61.62          422
+               macro        69.68        59.35        63.73          422
+2022-12-20 06:25:05,247 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/-1/
+12/20/2022 06:25:05
+Round #0: Predict on unlabeled data
+
+12/20/2022 06:25:51
+Round #0: Write prediction into files
+
+12/20/2022 06:25:52
+Round #0: Solve using ASP
+
+12/20/2022 06:26:22
+Round #0: Unify labels and pseudo labels
+
+12/20/2022 06:26:22
+Round #0: F1 on selection
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        92.32        91.83        92.07          759
+                 Loc        87.27        88.69        87.98          858
+               Other        71.92        65.42        68.52          321
+                 Org        70.90        82.78        76.38          418
+
+               micro        83.67        85.48        84.57         2356
+               macro        80.60        82.18        81.24         2356
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+               OrgBI        59.51        53.01        56.07          183
+                Kill        82.46        76.42        79.32          123
+               LocIn        59.14        70.06        64.14          157
+                Work        66.87        64.16        65.49          173
+                Live        72.73        48.98        58.54          245
+
+               micro        67.00        60.39        63.52          881
+               macro        68.14        62.53        64.71          881
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+               OrgBI        59.51        53.01        56.07          183
+                Kill        82.46        76.42        79.32          123
+               LocIn        58.60        69.43        63.56          157
+                Work        64.46        61.85        63.13          173
+                Live        72.73        48.98        58.54          245
+
+               micro        66.37        59.82        62.93          881
+               macro        67.55        61.94        64.12          881
+2022-12-20 06:27:09,642 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/0.5/
+12/20/2022 06:27:10
+Round #0: Retrain on selected pseudo labels
+
+12/20/2022 06:49:22
+Round #0: Evaluate on test data
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Org        72.29        84.34        77.86          198
+                Peop        88.99        93.15        91.02          321
+                 Loc        90.93        86.89        88.86          427
+               Other        69.35        64.66        66.93          133
+
+               micro        83.99        85.54        84.76         1079
+               macro        80.39        82.26        81.17         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+               OrgBI        61.11        52.38        56.41          105
+               LocIn        65.33        52.13        57.99           94
+                Work        63.51        61.84        62.67           76
+                Live        77.61        52.00        62.28          100
+                Kill        82.50        70.21        75.86           47
+
+               micro        68.21        55.92        61.46          422
+               macro        70.01        57.71        63.04          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+               OrgBI        61.11        52.38        56.41          105
+               LocIn        65.33        52.13        57.99           94
+                Work        62.16        60.53        61.33           76
+                Live        77.61        52.00        62.28          100
+                Kill        82.50        70.21        75.86           47
+
+               micro        67.92        55.69        61.20          422
+               macro        69.74        57.45        62.77          422
+2022-12-20 06:49:59,581 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/0/
+12/20/2022 06:50:00
+Round #1: Predict on unlabeled data
+
+12/20/2022 06:50:56
+Round #1: Write prediction into files
+
+12/20/2022 06:50:57
+Round #1: Solve using ASP
+
+12/20/2022 06:51:25
+Round #1: Unify labels and pseudo labels
+
+12/20/2022 06:51:25
+Round #1: F1 on selection
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Loc        87.70        88.93        88.31          858
+                Peop        88.90        91.83        90.34          759
+               Other        72.41        65.42        68.74          321
+                 Org        69.26        83.01        75.52          418
+
+               micro        82.49        85.61        84.02         2356
+               macro        79.57        82.30        80.73         2356
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+               OrgBI        59.88        54.64        57.14          183
+                Work        65.06        62.43        63.72          173
+                Kill        82.46        76.42        79.32          123
+               LocIn        57.45        68.79        62.61          157
+                Live        72.29        48.98        58.39          245
+
+               micro        66.17        60.16        63.02          881
+               macro        67.43        62.25        64.24          881
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+               OrgBI        59.88        54.64        57.14          183
+                Work        65.06        62.43        63.72          173
+                Kill        82.46        76.42        79.32          123
+               LocIn        57.45        68.79        62.61          157
+                Live        72.29        48.98        58.39          245
+
+               micro        66.17        60.16        63.02          881
+               macro        67.43        62.25        64.24          881
+2022-12-20 06:52:21,781 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/1.5/
+12/20/2022 06:52:22
+Round #1: Retrain on selected pseudo labels
+
+12/20/2022 07:14:55
+Round #1: Evaluate on test data
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Org        72.37        83.33        77.46          198
+                Peop        88.46        93.15        90.74          321
+               Other        65.87        62.41        64.09          133
+                 Loc        90.49        86.89        88.65          427
+
+               micro        83.30        85.08        84.18         1079
+               macro        79.30        81.44        80.24         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Kill        87.80        76.60        81.82           47
+               LocIn        68.06        52.13        59.04           94
+                Work        63.38        59.21        61.22           76
+               OrgBI        65.48        52.38        58.20          105
+                Live        80.88        55.00        65.48          100
+
+               micro        71.43        56.87        63.32          422
+               macro        73.12        59.06        65.15          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Kill        87.80        76.60        81.82           47
+               LocIn        68.06        52.13        59.04           94
+                Work        61.97        57.89        59.86           76
+               OrgBI        65.48        52.38        58.20          105
+                Live        80.88        55.00        65.48          100
+
+               micro        71.13        56.64        63.06          422
+               macro        72.84        58.80        64.88          422
+2022-12-20 07:15:34,913 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/1/
+12/20/2022 07:15:35
+Round #2: Predict on unlabeled data
+
+12/20/2022 07:16:13
+Round #2: Write prediction into files
+
+12/20/2022 07:16:14
+Round #2: Solve using ASP
+
+12/20/2022 07:16:42
+Round #2: Unify labels and pseudo labels
+
+12/20/2022 07:16:42
+Round #2: F1 on selection
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        72.16        65.42        68.63          321
+                 Org        69.12        83.01        75.43          418
+                Peop        88.90        91.83        90.34          759
+                 Loc        87.60        88.93        88.26          858
+
+               micro        82.39        85.61        83.97         2356
+               macro        79.45        82.30        80.67         2356
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+               LocIn        55.38        68.79        61.36          157
+               OrgBI        59.17        54.64        56.82          183
+                Live        72.29        48.98        58.39          245
+                Work        65.06        62.43        63.72          173
+                Kill        82.46        76.42        79.32          123
+
+               micro        65.43        60.16        62.68          881
+               macro        66.87        62.25        63.92          881
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+               LocIn        55.38        68.79        61.36          157
+               OrgBI        59.17        54.64        56.82          183
+                Live        72.29        48.98        58.39          245
+                Work        65.06        62.43        63.72          173
+                Kill        82.46        76.42        79.32          123
+
+               micro        65.43        60.16        62.68          881
+               macro        66.87        62.25        63.92          881
+2022-12-20 07:17:39,668 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/2.5/
+12/20/2022 07:17:40
+Round #2: Retrain on selected pseudo labels
+
+12/20/2022 07:39:44
+Round #2: Evaluate on test data
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Org        71.24        81.31        75.94          198
+               Other        71.55        62.41        66.67          133
+                 Loc        90.56        87.59        89.05          427
+                Peop        87.91        92.83        90.30          321
+
+               micro        83.73        84.89        84.31         1079
+               macro        80.31        81.04        80.49         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Work        61.64        59.21        60.40           76
+               LocIn        59.52        53.19        56.18           94
+               OrgBI        57.83        45.71        51.06          105
+                Kill        82.93        72.34        77.27           47
+                Live        85.94        55.00        67.07          100
+
+               micro        67.25        54.98        60.50          422
+               macro        69.57        57.09        62.40          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Work        60.27        57.89        59.06           76
+               LocIn        59.52        53.19        56.18           94
+               OrgBI        57.83        45.71        51.06          105
+                Kill        82.93        72.34        77.27           47
+                Live        85.94        55.00        67.07          100
+
+               micro        66.96        54.74        60.23          422
+               macro        69.30        56.83        62.13          422
+2022-12-20 07:40:20,503 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/2/
+12/20/2022 07:40:21
+Round #3: Predict on unlabeled data
+
+12/20/2022 07:41:14
+Round #3: Write prediction into files
+
+12/20/2022 07:41:15
+Round #3: Solve using ASP
+
+12/20/2022 07:41:44
+Round #3: Unify labels and pseudo labels
+
+12/20/2022 07:41:44
+Round #3: F1 on selection
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        88.90        91.83        90.34          759
+                 Loc        87.60        88.93        88.26          858
+                 Org        69.26        83.01        75.52          418
+               Other        72.16        65.42        68.63          321
+
+               micro        82.43        85.61        83.99         2356
+               macro        79.48        82.30        80.69         2356
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Kill        82.46        76.42        79.32          123
+               OrgBI        59.17        54.64        56.82          183
+                Live        72.29        48.98        58.39          245
+                Work        65.06        62.43        63.72          173
+               LocIn        51.18        68.79        58.70          157
+
+               micro        64.16        60.16        62.10          881
+               macro        66.03        62.25        63.39          881
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Kill        82.46        76.42        79.32          123
+               OrgBI        59.17        54.64        56.82          183
+                Live        72.29        48.98        58.39          245
+                Work        65.06        62.43        63.72          173
+               LocIn        51.18        68.79        58.70          157
+
+               micro        64.16        60.16        62.10          881
+               macro        66.03        62.25        63.39          881
+2022-12-20 07:42:38,944 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/3.5/
+12/20/2022 07:42:39
+Round #3: Retrain on selected pseudo labels
+
+12/20/2022 08:04:13
+Round #3: Evaluate on test data
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        89.49        92.83        91.13          321
+               Other        65.87        62.41        64.09          133
+                 Org        70.89        84.85        77.24          198
+                 Loc        90.44        86.42        88.38          427
+
+               micro        83.15        85.08        84.10         1079
+               macro        79.17        81.63        80.21         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Work        64.86        63.16        64.00           76
+               OrgBI        60.00        48.57        53.68          105
+                Live        82.09        55.00        65.87          100
+                Kill        87.18        72.34        79.07           47
+               LocIn        65.28        50.00        56.63           94
+
+               micro        69.73        55.69        61.92          422
+               macro        71.88        57.81        63.85          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Work        63.51        61.84        62.67           76
+               OrgBI        60.00        48.57        53.68          105
+                Live        82.09        55.00        65.87          100
+                Kill        87.18        72.34        79.07           47
+               LocIn        65.28        50.00        56.63           94
+
+               micro        69.44        55.45        61.66          422
+               macro        71.61        57.55        63.58          422
+2022-12-20 08:04:53,188 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/3/
+12/20/2022 08:04:53
+Round #4: Predict on unlabeled data
+
+12/20/2022 08:05:50
+Round #4: Write prediction into files
+
+12/20/2022 08:05:51
+Round #4: Solve using ASP
+
+12/20/2022 08:06:20
+Round #4: Unify labels and pseudo labels
+
+12/20/2022 08:06:20
+Round #4: F1 on selection
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        88.90        91.83        90.34          759
+                 Org        69.12        83.01        75.43          418
+                 Loc        87.50        88.93        88.21          858
+               Other        72.01        65.73        68.73          321
+
+               micro        82.33        85.65        83.96         2356
+               macro        79.39        82.38        80.68         2356
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Work        65.06        62.43        63.72          173
+                Live        71.86        48.98        58.25          245
+               OrgBI        59.17        54.64        56.82          183
+               LocIn        48.21        68.79        56.69          157
+                Kill        82.46        76.42        79.32          123
+
+               micro        63.10        60.16        61.59          881
+               macro        65.35        62.25        62.96          881
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Work        65.06        62.43        63.72          173
+                Live        71.86        48.98        58.25          245
+               OrgBI        59.17        54.64        56.82          183
+               LocIn        48.21        68.79        56.69          157
+                Kill        82.46        76.42        79.32          123
+
+               micro        63.10        60.16        61.59          881
+               macro        65.35        62.25        62.96          881
+2022-12-20 08:07:15,481 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/4.5/
+12/20/2022 08:07:16
+Round #4: Retrain on selected pseudo labels
+
+12/20/2022 08:27:17
+Round #4: Evaluate on test data
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        68.99        66.92        67.94          133
+                Peop        89.64        94.39        91.96          321
+                 Loc        90.42        86.18        88.25          427
+                 Org        73.52        81.31        77.22          198
+
+               micro        84.26        85.36        84.81         1079
+               macro        80.64        82.20        81.34         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Live        83.58        56.00        67.07          100
+                Kill        89.47        72.34        80.00           47
+                Work        61.11        57.89        59.46           76
+               OrgBI        59.30        48.57        53.40          105
+               LocIn        61.33        48.94        54.44           94
+
+               micro        68.34        54.74        60.79          422
+               macro        70.96        56.75        62.87          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Live        83.58        56.00        67.07          100
+                Kill        89.47        72.34        80.00           47
+                Work        61.11        57.89        59.46           76
+               OrgBI        59.30        48.57        53.40          105
+               LocIn        61.33        48.94        54.44           94
+
+               micro        68.34        54.74        60.79          422
+               macro        70.96        56.75        62.87          422
+2022-12-20 08:27:49,893 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/4/
+12/20/2022 08:27:50
+Round #5: Predict on unlabeled data
+
+12/20/2022 08:28:43
+Round #5: Write prediction into files
+
+12/20/2022 08:28:43
+Round #5: Solve using ASP
+
+12/20/2022 08:29:16
+Round #5: Unify labels and pseudo labels
+
+12/20/2022 08:29:16
+Round #5: F1 on selection
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Loc        87.30        88.93        88.11          858
+                 Org        68.85        83.01        75.27          418
+               Other        72.01        65.73        68.73          321
+                Peop        88.92        91.96        90.41          759
+
+               micro        82.21        85.70        83.92         2356
+               macro        79.27        82.41        80.63         2356
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Kill        82.46        76.42        79.32          123
+               OrgBI        59.17        54.64        56.82          183
+                Work        64.67        62.43        63.53          173
+                Live        71.86        48.98        58.25          245
+               LocIn        45.00        68.79        54.41          157
+
+               micro        61.84        60.16        60.99          881
+               macro        64.63        62.25        62.47          881
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Kill        82.46        76.42        79.32          123
+               OrgBI        59.17        54.64        56.82          183
+                Work        64.67        62.43        63.53          173
+                Live        71.86        48.98        58.25          245
+               LocIn        45.00        68.79        54.41          157
+
+               micro        61.84        60.16        60.99          881
+               macro        64.63        62.25        62.47          881
+2022-12-20 08:29:59,445 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/5.5/
+12/20/2022 08:30:00
+Round #5: Retrain on selected pseudo labels
+
+12/20/2022 08:47:21
+Round #5: Evaluate on test data
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        68.80        64.66        66.67          133
+                Peop        89.32        93.77        91.49          321
+                 Loc        89.50        87.82        88.65          427
+                 Org        73.87        82.83        78.10          198
+
+               micro        83.95        85.82        84.88         1079
+               macro        80.37        82.27        81.23         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+               LocIn        62.67        50.00        55.62           94
+               OrgBI        60.00        48.57        53.68          105
+                Live        80.60        54.00        64.67          100
+                Kill        87.18        72.34        79.07           47
+                Work        60.81        59.21        60.00           76
+
+               micro        67.94        54.74        60.63          422
+               macro        70.25        56.82        62.61          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+               LocIn        62.67        50.00        55.62           94
+               OrgBI        60.00        48.57        53.68          105
+                Live        80.60        54.00        64.67          100
+                Kill        87.18        72.34        79.07           47
+                Work        59.46        57.89        58.67           76
+
+               micro        67.65        54.50        60.37          422
+               macro        69.98        56.56        62.34          422
+2022-12-20 08:47:50,556 [MainThread  ] [INFO ]  Logged in: ./data/methods/ker/conll04_30/fold_4/eval_log/5/

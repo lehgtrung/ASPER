@@ -1,0 +1,1089 @@
+12/18/2022 08:30:48
+Boostrap #0 size: 92
+
+12/18/2022 08:30:48
+Boostrap #1 size: 92
+
+12/18/2022 08:30:48
+Boostrap #2 size: 92
+
+12/18/2022 08:42:47
+Round #-1: Predict on test data on model 0
+
+12/18/2022 08:43:16
+Round #-1: Predict on test data on model 1
+
+12/18/2022 08:43:45
+Round #-1: Predict on test data on model 2
+
+12/18/2022 08:44:18
+Round -1: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        72.94        46.62        56.88          133
+                 Org        73.04        42.42        53.67          198
+                Peop        81.61        88.47        84.90          321
+                 Loc        78.04        78.22        78.13          427
+
+               micro        78.28        70.81        74.36         1079
+               macro        76.41        63.93        68.40         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+         OrgBased_In        32.76        18.10        23.31          105
+            Work_For        50.00        28.95        36.67           76
+          Located_In        56.00        29.79        38.89           94
+             Live_In        71.43        30.00        42.25          100
+                Kill        76.32        61.70        68.24           47
+
+               micro        55.17        30.33        39.14          422
+               macro        57.30        33.71        41.87          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+         OrgBased_In        32.76        18.10        23.31          105
+            Work_For        50.00        28.95        36.67           76
+          Located_In        56.00        29.79        38.89           94
+             Live_In        71.43        30.00        42.25          100
+                Kill        76.32        61.70        68.24           47
+
+               micro        55.17        30.33        39.14          422
+               macro        57.30        33.71        41.87          422
+12/18/2022 08:44:19
+Round #0: Predict on unlabeled data
+
+12/18/2022 08:44:55
+Round #0: Predict on unlabeled data
+
+12/18/2022 08:45:36
+Round #0: Predict on unlabeled data
+
+12/18/2022 08:46:37
+Round #0: Global agreement between 3 models: 0.11325301204819277
+
+12/18/2022 08:46:37
+Round #0: Select agreement between model 0 and 1
+
+12/18/2022 08:46:37
+Round #0: Select agreement between model 0 and 2
+
+12/18/2022 08:46:37
+Round #0: Select agreement between model 1 and 2
+
+12/18/2022 08:46:37
+Round #0: Transfer agreement to selection on model 0
+
+12/18/2022 08:46:37
+Round #0: Transfer agreement to selection on model 1
+
+12/18/2022 08:46:37
+Round #0: Transfer agreement to selection on model 2
+
+12/18/2022 08:46:37
+Round #0: Retrain on model 0
+
+12/18/2022 08:54:22
+Round #0: Retrain on model 1
+
+12/18/2022 09:00:38
+Round #0: Retrain on model 2
+
+12/18/2022 09:07:13
+Round #0: Predict on test data on model 0
+
+12/18/2022 09:07:46
+Round #0: Predict on test data on model 1
+
+12/18/2022 09:08:08
+Round #0: Predict on test data on model 2
+
+12/18/2022 09:08:41
+Round 0: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        89.58        93.77        91.63          321
+                 Org        77.70        58.08        66.47          198
+               Other        69.70        51.88        59.48          133
+                 Loc        83.02        83.61        83.31          427
+
+               micro        83.12        78.04        80.50         1079
+               macro        80.00        71.83        75.22         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+            Work_For        63.64        27.63        38.53           76
+         OrgBased_In        36.11        24.76        29.38          105
+          Located_In        63.16        38.30        47.68           94
+                Kill        78.38        61.70        69.05           47
+             Live_In        65.67        44.00        52.69          100
+
+               micro        58.65        36.97        45.35          422
+               macro        61.39        39.28        47.47          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+            Work_For        63.64        27.63        38.53           76
+         OrgBased_In        36.11        24.76        29.38          105
+          Located_In        63.16        38.30        47.68           94
+                Kill        78.38        61.70        69.05           47
+             Live_In        65.67        44.00        52.69          100
+
+               micro        58.65        36.97        45.35          422
+               macro        61.39        39.28        47.47          422
+12/18/2022 09:08:42
+Round #1: Predict on unlabeled data
+
+12/18/2022 09:09:41
+Round #1: Predict on unlabeled data
+
+12/18/2022 09:10:41
+Round #1: Predict on unlabeled data
+
+12/18/2022 09:11:41
+Round #1: Global agreement between 3 models: 0.28313253012048195
+
+12/18/2022 09:11:41
+Round #1: Select agreement between model 0 and 1
+
+12/18/2022 09:11:41
+Round #1: Select agreement between model 0 and 2
+
+12/18/2022 09:11:41
+Round #1: Select agreement between model 1 and 2
+
+12/18/2022 09:11:41
+Round #1: Transfer agreement to selection on model 0
+
+12/18/2022 09:11:41
+Round #1: Transfer agreement to selection on model 1
+
+12/18/2022 09:11:41
+Round #1: Transfer agreement to selection on model 2
+
+12/18/2022 09:11:41
+Round #1: Retrain on model 0
+
+12/18/2022 09:21:20
+Round #1: Retrain on model 1
+
+12/18/2022 09:31:14
+Round #1: Retrain on model 2
+
+12/18/2022 09:41:56
+Round #1: Predict on test data on model 0
+
+12/18/2022 09:42:26
+Round #1: Predict on test data on model 1
+
+12/18/2022 09:42:52
+Round #1: Predict on test data on model 2
+
+12/18/2022 09:43:23
+Round 1: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        71.13        51.88        60.00          133
+                 Loc        82.95        84.31        83.62          427
+                 Org        80.27        59.60        68.41          198
+                Peop        90.61        93.15        91.86          321
+
+               micro        83.93        78.41        81.07         1079
+               macro        81.24        72.23        75.97         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+             Live_In        71.93        41.00        52.23          100
+            Work_For        72.97        35.53        47.79           76
+                Kill        77.50        65.96        71.26           47
+          Located_In        64.52        42.55        51.28           94
+         OrgBased_In        66.67        24.76        36.11          105
+
+               micro        70.21        39.10        50.23          422
+               macro        70.72        41.96        51.73          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+             Live_In        71.93        41.00        52.23          100
+            Work_For        72.97        35.53        47.79           76
+                Kill        77.50        65.96        71.26           47
+          Located_In        64.52        42.55        51.28           94
+         OrgBased_In        66.67        24.76        36.11          105
+
+               micro        70.21        39.10        50.23          422
+               macro        70.72        41.96        51.73          422
+12/18/2022 09:43:24
+Round #2: Predict on unlabeled data
+
+12/18/2022 09:44:24
+Round #2: Predict on unlabeled data
+
+12/18/2022 09:45:22
+Round #2: Predict on unlabeled data
+
+12/18/2022 09:46:17
+Round #2: Global agreement between 3 models: 0.4578313253012048
+
+12/18/2022 09:46:17
+Round #2: Select agreement between model 0 and 1
+
+12/18/2022 09:46:17
+Round #2: Select agreement between model 0 and 2
+
+12/18/2022 09:46:17
+Round #2: Select agreement between model 1 and 2
+
+12/18/2022 09:46:17
+Round #2: Transfer agreement to selection on model 0
+
+12/18/2022 09:46:17
+Round #2: Transfer agreement to selection on model 1
+
+12/18/2022 09:46:17
+Round #2: Transfer agreement to selection on model 2
+
+12/18/2022 09:46:17
+Round #2: Retrain on model 0
+
+12/18/2022 09:57:10
+Round #2: Retrain on model 1
+
+12/18/2022 10:09:29
+Round #2: Retrain on model 2
+
+12/18/2022 10:22:32
+Round #2: Predict on test data on model 0
+
+12/18/2022 10:23:02
+Round #2: Predict on test data on model 1
+
+12/18/2022 10:23:32
+Round #2: Predict on test data on model 2
+
+12/18/2022 10:24:03
+Round 2: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        90.80        92.21        91.50          321
+                 Org        83.97        66.16        74.01          198
+                 Loc        84.25        86.42        85.32          427
+               Other        67.33        51.13        58.12          133
+
+               micro        84.62        80.07        82.29         1079
+               macro        81.59        73.98        77.24         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Kill        72.73        68.09        70.33           47
+          Located_In        70.18        42.55        52.98           94
+             Live_In        75.44        43.00        54.78          100
+         OrgBased_In        86.21        23.81        37.31          105
+            Work_For        76.74        43.42        55.46           76
+
+               micro        75.22        41.00        53.07          422
+               macro        76.26        44.17        54.17          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Kill        72.73        68.09        70.33           47
+          Located_In        70.18        42.55        52.98           94
+             Live_In        75.44        43.00        54.78          100
+         OrgBased_In        86.21        23.81        37.31          105
+            Work_For        74.42        42.11        53.78           76
+
+               micro        74.78        40.76        52.76          422
+               macro        75.79        43.91        53.84          422
+12/18/2022 10:24:04
+Round #3: Predict on unlabeled data
+
+12/18/2022 10:25:06
+Round #3: Predict on unlabeled data
+
+12/18/2022 10:25:44
+Round #3: Predict on unlabeled data
+
+12/18/2022 10:26:48
+Round #3: Global agreement between 3 models: 0.6156626506024097
+
+12/18/2022 10:26:48
+Round #3: Select agreement between model 0 and 1
+
+12/18/2022 10:26:48
+Round #3: Select agreement between model 0 and 2
+
+12/18/2022 10:26:48
+Round #3: Select agreement between model 1 and 2
+
+12/18/2022 10:26:48
+Round #3: Transfer agreement to selection on model 0
+
+12/18/2022 10:26:48
+Round #3: Transfer agreement to selection on model 1
+
+12/18/2022 10:26:48
+Round #3: Transfer agreement to selection on model 2
+
+12/18/2022 10:26:48
+Round #3: Retrain on model 0
+
+12/18/2022 10:42:05
+Round #3: Retrain on model 1
+
+12/18/2022 10:54:23
+Round #3: Retrain on model 2
+
+12/18/2022 11:05:25
+Round #3: Predict on test data on model 0
+
+12/18/2022 11:05:51
+Round #3: Predict on test data on model 1
+
+12/18/2022 11:06:09
+Round #3: Predict on test data on model 2
+
+12/18/2022 11:06:25
+Round 3: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        69.00        51.88        59.23          133
+                Peop        91.77        93.77        92.76          321
+                 Loc        83.87        85.25        84.55          427
+                 Org        83.54        66.67        74.16          198
+
+               micro        84.90        80.26        82.52         1079
+               macro        82.05        74.39        77.67         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+             Live_In        77.19        44.00        56.05          100
+          Located_In        71.43        42.55        53.33           94
+                Kill        72.73        68.09        70.33           47
+         OrgBased_In        83.87        24.76        38.24          105
+            Work_For        78.05        42.11        54.70           76
+
+               micro        75.98        41.23        53.46          422
+               macro        76.65        44.30        54.53          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+             Live_In        77.19        44.00        56.05          100
+          Located_In        71.43        42.55        53.33           94
+                Kill        72.73        68.09        70.33           47
+         OrgBased_In        83.87        24.76        38.24          105
+            Work_For        75.61        40.79        52.99           76
+
+               micro        75.55        41.00        53.15          422
+               macro        76.17        44.04        54.19          422
+12/18/2022 11:06:26
+Round #4: Predict on unlabeled data
+
+12/18/2022 11:07:03
+Round #4: Predict on unlabeled data
+
+12/18/2022 11:07:40
+Round #4: Predict on unlabeled data
+
+12/18/2022 11:08:18
+Round #4: Global agreement between 3 models: 0.7096385542168675
+
+12/18/2022 11:08:18
+Round #4: Select agreement between model 0 and 1
+
+12/18/2022 11:08:18
+Round #4: Select agreement between model 0 and 2
+
+12/18/2022 11:08:18
+Round #4: Select agreement between model 1 and 2
+
+12/18/2022 11:08:18
+Round #4: Transfer agreement to selection on model 0
+
+12/18/2022 11:08:18
+Round #4: Transfer agreement to selection on model 1
+
+12/18/2022 11:08:18
+Round #4: Transfer agreement to selection on model 2
+
+12/18/2022 11:08:18
+Round #4: Retrain on model 0
+
+12/18/2022 11:20:18
+Round #4: Retrain on model 1
+
+12/18/2022 11:32:52
+Round #4: Retrain on model 2
+
+12/18/2022 11:41:53
+Round #4: Predict on test data on model 0
+
+12/18/2022 11:42:06
+Round #4: Predict on test data on model 1
+
+12/18/2022 11:42:23
+Round #4: Predict on test data on model 2
+
+12/18/2022 11:42:41
+Round 4: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Org        85.33        64.65        73.56          198
+                 Loc        83.64        86.18        84.89          427
+                Peop        92.02        93.46        92.74          321
+               Other        69.39        51.13        58.87          133
+
+               micro        85.21        80.07        82.56         1079
+               macro        82.60        73.85        77.52         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+            Work_For        76.19        42.11        54.24           76
+                Kill        74.42        68.09        71.11           47
+          Located_In        72.73        42.55        53.69           94
+         OrgBased_In        86.21        23.81        37.31          105
+             Live_In        75.86        44.00        55.70          100
+
+               micro        76.21        41.00        53.31          422
+               macro        77.08        44.11        54.41          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+            Work_For        73.81        40.79        52.54           76
+                Kill        74.42        68.09        71.11           47
+          Located_In        72.73        42.55        53.69           94
+         OrgBased_In        86.21        23.81        37.31          105
+             Live_In        75.86        44.00        55.70          100
+
+               micro        75.77        40.76        53.00          422
+               macro        76.60        43.85        54.07          422
+12/18/2022 11:42:42
+Round #5: Predict on unlabeled data
+
+12/18/2022 11:43:12
+Round #5: Predict on unlabeled data
+
+12/18/2022 11:43:38
+Round #5: Predict on unlabeled data
+
+12/18/2022 11:44:02
+Round #5: Global agreement between 3 models: 0.7771084337349398
+
+12/18/2022 11:44:02
+Round #5: Select agreement between model 0 and 1
+
+12/18/2022 11:44:02
+Round #5: Select agreement between model 0 and 2
+
+12/18/2022 11:44:02
+Round #5: Select agreement between model 1 and 2
+
+12/18/2022 11:44:02
+Round #5: Transfer agreement to selection on model 0
+
+12/18/2022 11:44:02
+Round #5: Transfer agreement to selection on model 1
+
+12/18/2022 11:44:03
+Round #5: Transfer agreement to selection on model 2
+
+12/18/2022 11:44:03
+Round #5: Retrain on model 0
+
+12/18/2022 11:53:18
+Round #5: Retrain on model 1
+
+12/18/2022 12:02:45
+Round #5: Retrain on model 2
+
+12/18/2022 12:12:17
+Round #5: Predict on test data on model 0
+
+12/18/2022 12:12:35
+Round #5: Predict on test data on model 1
+
+12/18/2022 12:12:49
+Round #5: Predict on test data on model 2
+
+12/18/2022 12:13:05
+Round 5: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        67.33        51.13        58.12          133
+                Peop        89.85        93.77        91.77          321
+                 Loc        84.05        86.42        85.22          427
+                 Org        84.56        63.64        72.62          198
+
+               micro        84.38        80.07        82.17         1079
+               macro        81.45        73.74        76.93         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+         OrgBased_In        86.21        23.81        37.31          105
+             Live_In        73.77        45.00        55.90          100
+                Kill        69.57        68.09        68.82           47
+            Work_For        70.00        36.84        48.28           76
+          Located_In        73.21        43.62        54.67           94
+
+               micro        73.71        40.52        52.29          422
+               macro        74.55        43.47        52.99          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+         OrgBased_In        86.21        23.81        37.31          105
+             Live_In        73.77        45.00        55.90          100
+                Kill        69.57        68.09        68.82           47
+            Work_For        65.00        34.21        44.83           76
+          Located_In        73.21        43.62        54.67           94
+
+               micro        72.84        40.05        51.68          422
+               macro        73.55        42.94        52.31          422
+12/18/2022 12:13:05
+Round #6: Predict on unlabeled data
+
+12/18/2022 12:13:20
+Round #6: Predict on unlabeled data
+
+12/18/2022 12:13:35
+Round #6: Predict on unlabeled data
+
+12/18/2022 12:13:50
+Round #6: Global agreement between 3 models: 0.7771084337349398
+
+12/18/2022 12:13:50
+Round #6: Select agreement between model 0 and 1
+
+12/18/2022 12:13:50
+Round #6: Select agreement between model 0 and 2
+
+12/18/2022 12:13:50
+Round #6: Select agreement between model 1 and 2
+
+12/18/2022 12:13:50
+Round #6: Transfer agreement to selection on model 0
+
+12/18/2022 12:13:50
+Round #6: Transfer agreement to selection on model 1
+
+12/18/2022 12:13:50
+Round #6: Transfer agreement to selection on model 2
+
+12/18/2022 12:13:50
+Round #6: Retrain on model 0
+
+12/18/2022 12:23:01
+Round #6: Retrain on model 1
+
+12/18/2022 12:32:38
+Round #6: Retrain on model 2
+
+12/18/2022 12:41:43
+Round #6: Predict on test data on model 0
+
+12/18/2022 12:42:00
+Round #6: Predict on test data on model 1
+
+12/18/2022 12:42:14
+Round #6: Predict on test data on model 2
+
+12/18/2022 12:42:32
+Round 6: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        90.61        93.15        91.86          321
+                 Org        84.25        62.12        71.51          198
+               Other        67.96        52.63        59.32          133
+                 Loc        83.64        86.18        84.89          427
+
+               micro        84.40        79.70        81.98         1079
+               macro        81.61        73.52        76.90         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+          Located_In        74.55        43.62        55.03           94
+                Kill        72.09        65.96        68.89           47
+         OrgBased_In        82.76        22.86        35.82          105
+            Work_For        66.67        36.84        47.46           76
+             Live_In        76.27        45.00        56.60          100
+
+               micro        74.12        40.05        52.00          422
+               macro        74.47        42.85        52.76          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+          Located_In        74.55        43.62        55.03           94
+                Kill        72.09        65.96        68.89           47
+         OrgBased_In        82.76        22.86        35.82          105
+            Work_For        61.90        34.21        44.07           76
+             Live_In        76.27        45.00        56.60          100
+
+               micro        73.25        39.57        51.38          422
+               macro        73.51        42.33        52.08          422
+12/18/2022 12:42:33
+Round #7: Predict on unlabeled data
+
+12/18/2022 12:43:01
+Round #7: Predict on unlabeled data
+
+12/18/2022 12:43:27
+Round #7: Predict on unlabeled data
+
+12/18/2022 12:43:51
+Round #7: Global agreement between 3 models: 0.8204819277108434
+
+12/18/2022 12:43:51
+Round #7: Select agreement between model 0 and 1
+
+12/18/2022 12:43:51
+Round #7: Select agreement between model 0 and 2
+
+12/18/2022 12:43:51
+Round #7: Select agreement between model 1 and 2
+
+12/18/2022 12:43:51
+Round #7: Transfer agreement to selection on model 0
+
+12/18/2022 12:43:51
+Round #7: Transfer agreement to selection on model 1
+
+12/18/2022 12:43:51
+Round #7: Transfer agreement to selection on model 2
+
+12/18/2022 12:43:51
+Round #7: Retrain on model 0
+
+12/18/2022 12:52:41
+Round #7: Retrain on model 1
+
+12/18/2022 13:02:09
+Round #7: Retrain on model 2
+
+12/18/2022 13:11:59
+Round #7: Predict on test data on model 0
+
+12/18/2022 13:12:13
+Round #7: Predict on test data on model 1
+
+12/18/2022 13:12:31
+Round #7: Predict on test data on model 2
+
+12/18/2022 13:12:48
+Round 7: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                 Org        85.33        64.65        73.56          198
+                Peop        92.38        94.39        93.37          321
+                 Loc        84.99        86.18        85.58          427
+               Other        66.02        51.13        57.63          133
+
+               micro        85.50        80.35        82.85         1079
+               macro        82.18        74.09        77.54         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+          Located_In        72.88        45.74        56.21           94
+             Live_In        75.86        44.00        55.70          100
+         OrgBased_In        85.19        21.90        34.85          105
+                Kill        72.09        65.96        68.89           47
+            Work_For        75.68        36.84        49.56           76
+
+               micro        75.45        40.05        52.32          422
+               macro        76.34        42.89        53.04          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+          Located_In        72.88        45.74        56.21           94
+             Live_In        75.86        44.00        55.70          100
+         OrgBased_In        85.19        21.90        34.85          105
+                Kill        72.09        65.96        68.89           47
+            Work_For        75.68        36.84        49.56           76
+
+               micro        75.45        40.05        52.32          422
+               macro        76.34        42.89        53.04          422
+12/18/2022 13:12:49
+Round #8: Predict on unlabeled data
+
+12/18/2022 13:13:17
+Round #8: Predict on unlabeled data
+
+12/18/2022 13:13:47
+Round #8: Predict on unlabeled data
+
+12/18/2022 13:14:14
+Round #8: Global agreement between 3 models: 0.8614457831325302
+
+12/18/2022 13:14:14
+Round #8: Select agreement between model 0 and 1
+
+12/18/2022 13:14:14
+Round #8: Select agreement between model 0 and 2
+
+12/18/2022 13:14:14
+Round #8: Select agreement between model 1 and 2
+
+12/18/2022 13:14:14
+Round #8: Transfer agreement to selection on model 0
+
+12/18/2022 13:14:14
+Round #8: Transfer agreement to selection on model 1
+
+12/18/2022 13:14:14
+Round #8: Transfer agreement to selection on model 2
+
+12/18/2022 13:14:14
+Round #8: Retrain on model 0
+
+12/18/2022 13:22:13
+Round #8: Retrain on model 1
+
+12/18/2022 13:29:29
+Round #8: Retrain on model 2
+
+12/18/2022 13:37:02
+Round #8: Predict on test data on model 0
+
+12/18/2022 13:37:15
+Round #8: Predict on test data on model 1
+
+12/18/2022 13:37:27
+Round #8: Predict on test data on model 2
+
+12/18/2022 13:37:40
+Round 8: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        91.72        93.15        92.43          321
+               Other        67.62        53.38        59.66          133
+                 Org        81.71        67.68        74.03          198
+                 Loc        84.40        86.18        85.28          427
+
+               micro        84.58        80.82        82.65         1079
+               macro        81.36        75.10        77.85         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+          Located_In        75.44        45.74        56.95           94
+            Work_For        80.49        43.42        56.41           76
+                Kill        68.09        68.09        68.09           47
+         OrgBased_In        82.76        22.86        35.82          105
+             Live_In        75.00        42.00        53.85          100
+
+               micro        75.65        41.23        53.37          422
+               macro        76.35        44.42        54.22          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+          Located_In        75.44        45.74        56.95           94
+            Work_For        80.49        43.42        56.41           76
+                Kill        68.09        68.09        68.09           47
+         OrgBased_In        82.76        22.86        35.82          105
+             Live_In        75.00        42.00        53.85          100
+
+               micro        75.65        41.23        53.37          422
+               macro        76.35        44.42        54.22          422
+12/18/2022 13:37:41
+Round #9: Predict on unlabeled data
+
+12/18/2022 13:37:58
+Round #9: Predict on unlabeled data
+
+12/18/2022 13:38:17
+Round #9: Predict on unlabeled data
+
+12/18/2022 13:38:35
+Round #9: Global agreement between 3 models: 0.8746987951807229
+
+12/18/2022 13:38:35
+Round #9: Select agreement between model 0 and 1
+
+12/18/2022 13:38:35
+Round #9: Select agreement between model 0 and 2
+
+12/18/2022 13:38:35
+Round #9: Select agreement between model 1 and 2
+
+12/18/2022 13:38:35
+Round #9: Transfer agreement to selection on model 0
+
+12/18/2022 13:38:35
+Round #9: Transfer agreement to selection on model 1
+
+12/18/2022 13:38:35
+Round #9: Transfer agreement to selection on model 2
+
+12/18/2022 13:38:35
+Round #9: Retrain on model 0
+
+12/18/2022 13:45:59
+Round #9: Retrain on model 1
+
+12/18/2022 13:53:14
+Round #9: Retrain on model 2
+
+12/18/2022 14:00:37
+Round #9: Predict on test data on model 0
+
+12/18/2022 14:00:50
+Round #9: Predict on test data on model 1
+
+12/18/2022 14:01:02
+Round #9: Predict on test data on model 2
+
+12/18/2022 14:01:14
+Round 9: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+                Peop        91.16        93.15        92.14          321
+                 Org        82.35        63.64        71.79          198
+               Other        66.35        51.88        58.23          133
+                 Loc        83.91        85.48        84.69          427
+
+               micro        84.22        79.61        81.85         1079
+               macro        80.94        73.54        76.71         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+             Live_In        75.00        42.00        53.85          100
+         OrgBased_In        85.71        22.86        36.09          105
+            Work_For        70.00        36.84        48.28           76
+          Located_In        70.91        41.49        52.35           94
+                Kill        70.45        65.96        68.13           47
+
+               micro        73.54        38.86        50.85          422
+               macro        74.42        41.83        51.74          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+             Live_In        75.00        42.00        53.85          100
+         OrgBased_In        85.71        22.86        36.09          105
+            Work_For        67.50        35.53        46.55           76
+          Located_In        70.91        41.49        52.35           94
+                Kill        70.45        65.96        68.13           47
+
+               micro        73.09        38.63        50.54          422
+               macro        73.92        41.57        51.39          422
+12/18/2022 14:01:15
+Round #10: Predict on unlabeled data
+
+12/18/2022 14:01:33
+Round #10: Predict on unlabeled data
+
+12/18/2022 14:01:51
+Round #10: Predict on unlabeled data
+
+12/18/2022 14:02:09
+Round #10: Global agreement between 3 models: 0.8951807228915662
+
+12/18/2022 14:02:09
+Round #10: Select agreement between model 0 and 1
+
+12/18/2022 14:02:09
+Round #10: Select agreement between model 0 and 2
+
+12/18/2022 14:02:09
+Round #10: Select agreement between model 1 and 2
+
+12/18/2022 14:02:09
+Round #10: Transfer agreement to selection on model 0
+
+12/18/2022 14:02:09
+Round #10: Transfer agreement to selection on model 1
+
+12/18/2022 14:02:09
+Round #10: Transfer agreement to selection on model 2
+
+12/18/2022 14:02:09
+Round #10: Retrain on model 0
+
+12/18/2022 14:09:34
+Round #10: Retrain on model 1
+
+12/18/2022 14:16:55
+Round #10: Retrain on model 2
+
+12/18/2022 14:23:56
+Round #10: Predict on test data on model 0
+
+12/18/2022 14:24:09
+Round #10: Predict on test data on model 1
+
+12/18/2022 14:24:21
+Round #10: Predict on test data on model 2
+
+12/18/2022 14:24:34
+Round 10: Evaluate the aggregated model
+
+Evaluation
+
+--- Entities (named entity recognition (NER)) ---
+An entity is considered correct if the entity type and span is predicted correctly
+
+                type    precision       recall     f1-score      support
+               Other        66.04        52.63        58.58          133
+                 Loc        84.40        86.18        85.28          427
+                Peop        90.94        93.77        92.33          321
+                 Org        79.87        60.10        68.59          198
+
+               micro        83.95        79.52        81.68         1079
+               macro        80.31        73.17        76.20         1079
+
+--- Relations ---
+
+Without named entity classification (NEC)
+A relation is considered correct if the relation type and the spans of the two related entities are predicted correctly (entity type is not considered)
+
+                type    precision       recall     f1-score      support
+                Kill        68.89        65.96        67.39           47
+          Located_In        75.47        42.55        54.42           94
+         OrgBased_In        80.00        22.86        35.56          105
+             Live_In        73.33        44.00        55.00          100
+            Work_For        61.36        35.53        45.00           76
+
+               micro        71.55        39.34        50.76          422
+               macro        71.81        42.18        51.47          422
+
+With named entity classification (NEC)
+A relation is considered correct if the relation type and the two related entities are predicted correctly (in span and entity type)
+
+                type    precision       recall     f1-score      support
+                Kill        68.89        65.96        67.39           47
+          Located_In        75.47        42.55        54.42           94
+         OrgBased_In        80.00        22.86        35.56          105
+             Live_In        73.33        44.00        55.00          100
+            Work_For        59.09        34.21        43.33           76
+
+               micro        71.12        39.10        50.46          422
+               macro        71.36        41.92        51.14          422
+12/18/2022 14:24:34
+Round #11: Predict on unlabeled data
+
+12/18/2022 14:24:53
+Round #11: Predict on unlabeled data
+
+12/18/2022 14:25:10
+Round #11: Predict on unlabeled data
+
+12/18/2022 14:25:29
+Round #11: Global agreement between 3 models: 0.908433734939759
+
+12/18/2022 14:25:29
+Round #11: Reach global agreement between 3 models
+

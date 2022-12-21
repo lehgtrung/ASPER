@@ -67,10 +67,6 @@ def restore_relation(atom, entities):
         'end': int(match[2].split('+')[1]),
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
-    # print(head_ent)
-    # print(tail_ent)
-    # print('entities: ', entities)
-    # print('entities_wo_type: ', entities_wo_type)
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'relation'),
         'head': entities_wo_type.index(head_ent),
@@ -87,7 +83,6 @@ def convert_atoms_to_doc(atoms, tokens):
     relations = []
     for atom in atoms:
         atom = remove_ok(atom)
-        # print(atom)
         if match_form(atom, 'entity'):
             entities.append(restore_entity(atom))
     for atom in atoms:
