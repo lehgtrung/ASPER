@@ -26,7 +26,6 @@ def ker(labeled_path,
         selection_path,
         labeled_model_path,
         logger,
-        start_iter,
         max_iter):
 
     # Create auto rules
@@ -66,7 +65,7 @@ def ker(labeled_path,
     nmap_lines = nmap_out.stdout.splitlines()
     filter_evaluation_log(nmap_lines, logger)
 
-    iteration = start_iter
+    iteration = 0
     while True:
         if iteration >= max_iter:
             break
