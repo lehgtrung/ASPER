@@ -11,6 +11,7 @@ entity_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)"\)')
 relation_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)","([0-9]+\+[0-9]+)"\)')
 # ok_pattern = re.compile(r'^ok\((.*?)\)\.')
 ok_pattern = re.compile(r'^ok\((.*?)\)$')
+syntactic_types = ['propOwner', 'dead']
 
 
 def convert_doc_type_to_asp_type(atype, form):
@@ -48,6 +49,8 @@ def match_form(atom, form):
 def restore_entity(atom):
     match = re.findall(entity_pattern, atom)
     match = match[0]
+    if match[0] in syntactic_types:
+        return None
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'entity'),
         'start': int(match[1].split('+')[0]),
@@ -58,6 +61,8 @@ def restore_entity(atom):
 def restore_relation(atom, entities):
     match = re.findall(relation_pattern, atom)
     match = match[0]
+    if match[0] in syntactic_types:
+        return None
     head_ent = {
         'start': int(match[1].split('+')[0]),
         'end': int(match[1].split('+')[1]),
@@ -84,10 +89,14 @@ def convert_atoms_to_doc(atoms, tokens):
     for atom in atoms:
         atom = remove_ok(atom)
         if match_form(atom, 'entity'):
-            entities.append(restore_entity(atom))
+            entity = restore_entity(atom)
+            if entity:
+                entities.append(entity)
     for atom in atoms:
         if match_form(atom, 'relation'):
-            relations.append(restore_relation(atom, entities))
+            relation = restore_relation(atom, entities)
+            if relation:
+                relations.append(relation)
     return {
         'tokens': tokens,
         'entities': entities,
@@ -141,30 +150,58 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     i = int(os.path.basename(auto_path).split('.')[0])
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
-    result = solve(command)
-    result = [e.replace(' ', '') for e in result]
+    atoms = solve(command)
+    atoms = [e.replace(' ', '') for e in atoms]
     # Convert result to
-    doc = convert_atoms_to_doc(atoms=result,
+    doc = convert_atoms_to_doc(atoms=atoms,
                                tokens=unlabeled[i]['tokens'])
-    return doc
+    return doc, atoms
 
 
 def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_path):
     with open(unlabeled_path, 'r') as f:
         unlabeled = json.load(f)
     new_pred = []
+    count_changes = []
     for i, doc in enumerate(unlabeled):
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
-        doc = solve_single_doc(unlabeled, auto_path, atom_path)
+        doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
         new_pred.append(doc)
+        if is_modified_by_asp(atom_path, ref_atoms=atoms):
+            count_changes += 1
     with open(selection_path, 'w') as f:
         json.dump(new_pred, f)
+    return count_changes
+
+
+def is_modified_by_asp(atom_path, ref_atoms):
+    with open(atom_path, 'r') as f:
+        lines = f.read()
+    lines = [e for e in lines.split('\n') if e and e != '\n' and not e.startswith('%')]
+    # convert every atom to ok and drop the probability
+    oks = [e.replace('atom', 'ok') for e in lines]
+    # oks = [remove_ok(e) for e in oks]
+    atoms = []
+    for atom in oks:
+        if match_form(atom, 'relation'):
+            match = re.findall(relation_pattern, atom)[0]
+            atoms.append(f'ok({match[0]}("{match[1]}","{match[2]}"))')
+        else:
+            match = re.findall(entity_pattern, atom)[0]
+            atoms.append(f'ok({match[0]}("{match[1]}"))')
+    print(atoms)
+    return set(atoms) == set(ref_atoms)
 
 
 # if __name__ == '__main__':
-#     command = 'clingo --opt-mode=optN p6.lp compute.lp 2.txt --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
+#     file_name = '2.txt'
+#     command = f'clingo --opt-mode=optN p6.lp compute.lp {file_name} --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
 #
-#     print(solve(command))
+#     # print(solve(command))
+#
+#     ref_atoms = solve(command)
+#     print(ref_atoms)
+#     print(is_modified(file_name, ref_atoms))
 
 

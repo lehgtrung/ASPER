@@ -202,16 +202,3 @@ ok(peop(X)) :- ok(workFor(X,O)).
 ok(org(O)) :- ok(workFor(X,O)).
 ok(peop(X)) :- ok(kill(X,Y)).
 ok(peop(Y)) :- ok(kill(X,Y)).
-
-
-%% More rules
-1{atom(peop(X),"1"); atom(org(X),"1"); atom(loc(X),"1")}1 :- atom(propOwner(X),"1").
-
-%% Dead people can not kill
-atom(peop(X),"1") :- atom(dead(X),"1").
-:- atom(dead(X)), atom(kill(X,_)).
-
-%% Reason about location's size
-smaller(L1,L2) :- atom(locatedIn(L1,L2)).
-smaller(L1,L3) :- smaller(L1,L2), smaller(L2,L3).
-:- atom(locatedIn(L2,L1)), smaller(L1,L2).
