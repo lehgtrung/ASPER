@@ -162,7 +162,7 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
     with open(unlabeled_path, 'r') as f:
         unlabeled = json.load(f)
     new_pred = []
-    count_changes = []
+    count_changes = 0
     for i, doc in enumerate(unlabeled):
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
@@ -190,7 +190,6 @@ def is_modified_by_asp(atom_path, ref_atoms):
         else:
             match = re.findall(entity_pattern, atom)[0]
             atoms.append(f'ok({match[0]}("{match[1]}"))')
-    print(atoms)
     return set(atoms) == set(ref_atoms)
 
 
