@@ -66,7 +66,7 @@ def ker(labeled_path,
     nmap_lines = nmap_out.stdout.splitlines()
     filter_evaluation_log(nmap_lines, logger)
 
-    iteration = 0
+    iteration = start_iter
     while True:
         if iteration >= max_iter:
             break
