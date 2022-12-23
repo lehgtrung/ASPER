@@ -169,9 +169,6 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
         new_pred.append(doc)
         if is_modified_by_asp(atom_path, ref_atoms=atoms):
-            print(atom_path)
-            print(atoms)
-            print('--------------------')
             count_changes += 1
     with open(selection_path, 'w') as f:
         json.dump(new_pred, f)
