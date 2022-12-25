@@ -40,8 +40,8 @@ def search_backward(tokens, idx, include):
 
 
 def match_people_with_title(tokens):
-    titles = ['Mr.', 'Mrs.', 'Ms.', 'Miss.', 'Rev.'
-              'President', 'Officer', 'Dr.', 'Professor', 'Sen.']
+    titles = ['Mr.', 'Mrs.', 'Ms.', 'Miss.', 'Rev.', 'chairman',
+              'President', 'President-elect', 'Officer', 'Dr.', 'Professor', 'Sen.']
     result = []
     i = 0
     while i < len(tokens):
