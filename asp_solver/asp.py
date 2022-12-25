@@ -186,21 +186,22 @@ def is_modified_by_asp(atom_path, ref_atoms):
     for atom in oks:
         if match_form(atom, 'entity'):
             match = re.findall(entity_pattern, atom)[0]
-            atoms.append(f'ok({match[0]}({match[1]},{match[2]})).')
+            atoms.append(f'ok({match[0]}({match[1]},{match[2]}))')
         else:
             match = re.findall(relation_pattern, atom)[0]
             atoms.append(f'ok({match[0]}({match[1]},{match[2]},{match[3]},{match[4]}))')
     return set(atoms) != set(ref_atoms)
 
 
-# if __name__ == '__main__':
-#     file_name = '1.txt'
-#     command = f'clingo --opt-mode=optN p6.lp compute.lp {file_name} --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
-#
-#     print(solve(command))
+if __name__ == '__main__':
+    file_name = '3.txt'
+    command = f'clingo --opt-mode=optN p6_index.lp compute.lp {file_name} ' \
+              f'--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
 
-    # ref_atoms = solve(command)
-    # print(ref_atoms)
-    # print(is_modified_by_asp(file_name, ref_atoms))
+    print(solve(command))
+
+    ref_atoms = solve(command)
+    print(ref_atoms)
+    print(is_modified_by_asp(file_name, ref_atoms))
 
 
