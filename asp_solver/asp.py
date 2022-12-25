@@ -5,10 +5,10 @@ import re
 import json
 
 
-COMMAND = 'clingo --opt-mode=optN asp_solver/p6.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
+COMMAND = 'clingo --opt-mode=optN asp_solver/p6_index.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
           '--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
-entity_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)"\)')
-relation_pattern = re.compile(r'(\w+)\("([0-9]+\+[0-9]+)","([0-9]+\+[0-9]+)"\)')
+entity_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+)\)')
+relation_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+),([0-9]+),([0-9]+)\)')
 # ok_pattern = re.compile(r'^ok\((.*?)\)\.')
 ok_pattern = re.compile(r'^ok\((.*?)\)$')
 syntactic_types = ['propOwner', 'dead']
@@ -53,8 +53,8 @@ def restore_entity(atom):
         return None
     return {
         'type': convert_asp_type_to_doc_type(match[0], 'entity'),
-        'start': int(match[1].split('+')[0]),
-        'end': int(match[1].split('+')[1]),
+        'start': int(match[1]),
+        'end': int(match[2]),
     }
 
 
@@ -64,12 +64,12 @@ def restore_relation(atom, entities):
     if match[0] in syntactic_types:
         return None
     head_ent = {
-        'start': int(match[1].split('+')[0]),
-        'end': int(match[1].split('+')[1]),
+        'start': int(match[1]),
+        'end': int(match[2]),
     }
     tail_ent = {
-        'start': int(match[2].split('+')[0]),
-        'end': int(match[2].split('+')[1]),
+        'start': int(match[3]),
+        'end': int(match[4]),
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
     return {
@@ -104,28 +104,25 @@ def convert_atoms_to_doc(atoms, tokens):
     }
 
 
-def convert_to_atoms(pred):
+def convert_doc_to_atoms(pred):
     atoms = []
     entities = pred['entities']
     relations = pred['relations']
     for ent in entities:
         etype = convert_doc_type_to_asp_type(ent['type'], 'entity')
-        c = 'atom({}("{}"),"{}").'.format(etype,
-                                          '{}+{}'.format(ent['start'], ent['end']),
-                                          ent['prob'])
+        start = ent['start']
+        end = ent['end']
+        prob = ent['prob']
+        c = f'atom({etype}({start},{end}),"{prob}").'
         atoms.append(c)
     for rel in relations:
         rtype = convert_doc_type_to_asp_type(rel['type'], 'relation')
         head = entities[rel['head']]
         head_start, head_end = head['start'], head['end']
-        head = f'{head_start}+{head_end}'
         tail = entities[rel['tail']]
         tail_start, tail_end = tail['start'], tail['end']
-        tail = f'{tail_start}+{tail_end}'
-        c = 'atom({}("{}","{}"),"{}").'.format(rtype,
-                                               head,
-                                               tail,
-                                               rel['prob'])
+        prob = rel['prob']
+        c = f'atom({rtype}({head_start},{head_end},{tail_start},{tail_end}),"{prob}").'
         atoms.append(c)
     return atoms
 
@@ -167,6 +164,8 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
+        if len(atoms) == 0:
+            raise ValueError(f'Empty atoms at #{i}')
         new_pred.append(doc)
         if is_modified_by_asp(atom_path, ref_atoms=atoms):
             count_changes += 1
@@ -197,10 +196,10 @@ def is_modified_by_asp(atom_path, ref_atoms):
 #     file_name = '1.txt'
 #     command = f'clingo --opt-mode=optN p6.lp compute.lp {file_name} --outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
 #
-#     # print(solve(command))
-#
-#     ref_atoms = solve(command)
-#     print(ref_atoms)
-#     print(is_modified_by_asp(file_name, ref_atoms))
+#     print(solve(command))
+
+    # ref_atoms = solve(command)
+    # print(ref_atoms)
+    # print(is_modified_by_asp(file_name, ref_atoms))
 
 

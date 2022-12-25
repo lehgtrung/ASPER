@@ -183,6 +183,6 @@ def write_pred_to_files(prediction_path, meta_path):
         pred = json.load(f)
     for i, doc in enumerate(pred):
         path = meta_path.format(i)
-        atoms = convert_to_atoms(doc)
+        atoms = convert_doc_to_atoms(doc)
         write_down_a_list(path, atoms)
 

@@ -46,6 +46,8 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
+asp_solver/prediction_conll04_10/
+asp_solver/prediction_conll04_30/
 
 # Translations
 *.mo
