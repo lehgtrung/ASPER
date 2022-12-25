@@ -232,6 +232,9 @@ bad(locatedIn(P1,P2,Q1,Q2)) :- atom(locatedIn(P1,P2,Q1,Q2)), bad(loc(Q1,Q2)).
 bad(orgbasedIn(P1,P2,Q1,Q2)) :- atom(orgbasedIn(P1,P2,Q1,Q2)), bad(org(P1,P2)).
 bad(orgbasedIn(P1,P2,Q1,Q2)) :- atom(orgbasedIn(P1,P2,Q1,Q2)), bad(loc(Q1,Q2)).
 
+bad(workFor(P1,P2,Q1,Q2)) :- atom(workFor(P1,P2,Q1,Q2)), bad(peop(P1,P2)).
+bad(workFor(P1,P2,Q1,Q2)) :- atom(workFor(P1,P2,Q1,Q2)), bad(org(Q1,Q2)).
+
 bad(kill(P1,P2,Q1,Q2)) :- atom(kill(P1,P2,Q1,Q2)), bad(peop(P1,P2)).
 bad(kill(P1,P2,Q1,Q2)) :- atom(kill(P1,P2,Q1,Q2)), bad(peop(Q1,Q2)).
 
