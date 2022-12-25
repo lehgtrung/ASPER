@@ -184,6 +184,7 @@ def is_modified_by_asp(atom_path, ref_atoms):
     # oks = [remove_ok(e) for e in oks]
     atoms = []
     for atom in oks:
+        print(atom)
         if match_form(atom, 'relation'):
             match = re.findall(entity_pattern, atom)[0]
             atoms.append(f'ok({match[0]}({match[1]},{match[2]})).')
