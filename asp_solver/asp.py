@@ -165,7 +165,8 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
         atom_path = atom_meta_path.format(i)
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
         if len(atoms) == 0:
-            raise ValueError(f'Empty atoms at #{i}')
+            # raise ValueError(f'Empty atoms at #{i}')
+            print(f'Empty atoms at #{i}')
         new_pred.append(doc)
         if is_modified_by_asp(atom_path, ref_atoms=atoms):
             count_changes += 1
