@@ -3,6 +3,7 @@ import os
 import subprocess
 import re
 import json
+import numpy as np
 
 
 COMMAND = 'clingo --opt-mode=optN asp_solver/p6_index.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
@@ -83,7 +84,7 @@ def remove_ok(atom):
     return re.findall(ok_pattern, atom)[0]
 
 
-def convert_atoms_to_doc(atoms, tokens):
+def convert_atoms_to_doc(atoms, prob, tokens):
     entities = []
     relations = []
     for atom in atoms:
@@ -100,7 +101,8 @@ def convert_atoms_to_doc(atoms, tokens):
     return {
         'tokens': tokens,
         'entities': entities,
-        'relations': relations
+        'relations': relations,
+        'prob': prob
     }
 
 
@@ -135,8 +137,9 @@ def solve(command):
                                stdout=subprocess.PIPE)
     output, error = process.communicate()
     # result = [e.split() for e in output.decode().split('\n')[:-2]]
-    result = ast.literal_eval(output.decode().split('\n')[-2])
-    return result
+    answerset = ast.literal_eval(output.decode().split('\n')[-3])
+    prob = float(output.decode().split('\n')[-2])
+    return answerset, prob
 
 
 def solve_single_doc(unlabeled, auto_path, atom_path):
@@ -147,10 +150,11 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     i = int(os.path.basename(auto_path).split('.')[0])
     j = int(os.path.basename(atom_path).split('.')[0])
     assert i == j
-    atoms = solve(command)
+    atoms, prob = solve(command)
     atoms = [e.replace(' ', '') for e in atoms]
     # Convert result to
     doc = convert_atoms_to_doc(atoms=atoms,
+                               prob=prob,
                                tokens=unlabeled[i]['tokens'])
     return doc, atoms
 
@@ -173,6 +177,25 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
     with open(selection_path, 'w') as f:
         json.dump(new_pred, f)
     return count_changes
+
+
+def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
+                                   auto_meta_path, selection_path, current_delta):
+    with open(unlabeled_path, 'r') as f:
+        unlabeled = json.load(f)
+    new_pred = []
+    docs = []
+    for i, doc in enumerate(unlabeled):
+        auto_path = auto_meta_path.format(i)
+        atom_path = atom_meta_path.format(i)
+        doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
+        docs.append(doc)
+    threshold = np.percentile([d['prob'] for d in docs], 1-current_delta)
+    for doc in docs:
+        if doc['prob'] > threshold:
+            new_pred.append(doc)
+    with open(selection_path, 'w') as f:
+        json.dump(new_pred, f)
 
 
 def is_modified_by_asp(atom_path, ref_atoms):
@@ -200,8 +223,8 @@ if __name__ == '__main__':
 
     print(solve(command))
 
-    ref_atoms = solve(command)
-    print(ref_atoms)
-    print(is_modified_by_asp(file_name, ref_atoms))
+    # ref_atoms = solve(command)
+    # print(ref_atoms)
+    # print(is_modified_by_asp(file_name, ref_atoms))
 
 

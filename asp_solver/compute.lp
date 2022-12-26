@@ -77,6 +77,7 @@ def main(prg):
 
     # print("\n\n Optimal answer set:",  max_as, max_val)
     print(max_as)
+    print(max_val)
 
     return
 

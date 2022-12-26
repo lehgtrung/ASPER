@@ -1,4 +1,5 @@
 from methods.ker.ker import ker
+from methods.ker.curriculum_ker import curriculum_ker
 import os
 import argparse
 from logger import Logger
@@ -83,18 +84,18 @@ if __name__ == '__main__':
 
     logger = Logger(path=LOG_PATH)
 
-    ker(labeled_path=LABELED_PATH,
-        unlabeled_path=UNLABELED_PATH,
-        unlabeled_with_labels_path=UNLABELED_WITH_LABELS_PATH,
-        train_log_path=TRAIN_LOG_PATH,
-        eval_log_path=EVAL_LOG_PATH,
-        prediction_path=PREDICTION_PATH,
-        atom_meta_path=ATOM_META_PATH,
-        auto_meta_path=AUTO_META_PATH,
-        selection_path=SELECTION_PATH,
-        labeled_model_path=LABELED_MODEL_PATH,
-        logger=logger,
-        max_iter=args.max_iter)
+    curriculum_ker(labeled_path=LABELED_PATH,
+                   unlabeled_path=UNLABELED_PATH,
+                   unlabeled_with_labels_path=UNLABELED_WITH_LABELS_PATH,
+                   train_log_path=TRAIN_LOG_PATH,
+                   eval_log_path=EVAL_LOG_PATH,
+                   prediction_path=PREDICTION_PATH,
+                   atom_meta_path=ATOM_META_PATH,
+                   auto_meta_path=AUTO_META_PATH,
+                   selection_path=SELECTION_PATH,
+                   labeled_model_path=LABELED_MODEL_PATH,
+                   logger=logger,
+                   max_iter=args.max_iter)
 
 
 
