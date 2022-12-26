@@ -180,7 +180,7 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
 
 
 def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
-                                   auto_meta_path, selection_path, current_delta):
+                                   auto_meta_path, selection_path, current_delta, logger):
     with open(unlabeled_path, 'r') as f:
         unlabeled = json.load(f)
     new_pred = []
@@ -196,6 +196,7 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
             new_pred.append(doc)
     with open(selection_path, 'w') as f:
         json.dump(new_pred, f)
+    logger.info(f'Number of selected sentences: {len(new_pred)}')
 
 
 def is_modified_by_asp(atom_path, ref_atoms):
