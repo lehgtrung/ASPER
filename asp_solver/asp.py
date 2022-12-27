@@ -190,7 +190,7 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
         atom_path = atom_meta_path.format(i)
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
         docs.append(doc)
-    threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
+    # threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
     for doc in docs:
         # if doc['prob'] > threshold:
         #     new_pred.append(doc)
@@ -198,7 +198,7 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
             new_pred.append(doc)
     with open(selection_path, 'w') as f:
         json.dump(new_pred, f)
-    logger.info(f'Threshold: {threshold}')
+    # logger.info(f'Threshold: {threshold}')
     logger.info(f'Number of selected sentences: {len(new_pred)}')
 
 
