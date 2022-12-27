@@ -192,10 +192,13 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
         docs.append(doc)
     threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
     for doc in docs:
-        if doc['prob'] > threshold:
+        # if doc['prob'] > threshold:
+        #     new_pred.append(doc)
+        if len(doc['relations']) > 0:
             new_pred.append(doc)
     with open(selection_path, 'w') as f:
         json.dump(new_pred, f)
+    logger.info(f'Threshold: {threshold}')
     logger.info(f'Number of selected sentences: {len(new_pred)}')
 
 

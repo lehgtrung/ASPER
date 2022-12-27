@@ -132,7 +132,7 @@ def curriculum_ker(labeled_path,
                                   stdout=subprocess.PIPE)
         nmap_lines = nmap_out.stdout.splitlines()
         filter_evaluation_log(nmap_lines, logger)
-        
+
         iteration += 1
         current_delta = current_delta - delta
 
