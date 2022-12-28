@@ -145,6 +145,7 @@ def solve(command):
     else:
         atoms = []
         prob = -1
+    print(atoms)
     return atoms, prob
 
 
@@ -227,7 +228,7 @@ def is_modified_by_asp(atom_path, ref_atoms):
 
 
 if __name__ == '__main__':
-    file_name = '3.txt'
+    file_name = '2.txt'
     command = f'clingo --opt-mode=optN p6_index.lp compute.lp {file_name} ' \
               f'--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
 
