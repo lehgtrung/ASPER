@@ -137,8 +137,9 @@ def solve(command):
                                stdout=subprocess.PIPE)
     output, error = process.communicate()
     # result = [e.split() for e in output.decode().split('\n')[:-2]]
-    answerset = ast.literal_eval(output.decode().split('\n')[-3])
-    prob = float(output.decode().split('\n')[-2])
+    answerset = ast.literal_eval(output.decode().split('\n')[-3])[0]
+    prob = ast.literal_eval(output.decode().split('\n')[-3])[2]
+    # prob = float(output.decode().split('\n')[-2])
     return answerset, prob
 
 
@@ -190,15 +191,15 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
         atom_path = atom_meta_path.format(i)
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
         docs.append(doc)
-    # threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
+    threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)  # 0.2 -> select top 20%
     for doc in docs:
-        # if doc['prob'] > threshold:
-        #     new_pred.append(doc)
-        if len(doc['relations']) > 0:
+        if doc['prob'] > threshold:
             new_pred.append(doc)
+        # if len(doc['relations']) > 0:
+        #     new_pred.append(doc)
     with open(selection_path, 'w') as f:
         json.dump(new_pred, f)
-    # logger.info(f'Threshold: {threshold}')
+    logger.info(f'Threshold: {threshold}')
     logger.info(f'Number of selected sentences: {len(new_pred)}')
 
 
