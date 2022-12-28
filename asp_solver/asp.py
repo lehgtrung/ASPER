@@ -137,7 +137,6 @@ def solve(command):
                                stdout=subprocess.PIPE)
     output, error = process.communicate()
     # result = [e.split() for e in output.decode().split('\n')[:-2]]
-    print(command)
     answerset = ast.literal_eval(output.decode().split('\n')[-2])
     if answerset:
         atoms = answerset[0]
@@ -145,7 +144,6 @@ def solve(command):
     else:
         atoms = []
         prob = -1
-    print(atoms)
     return atoms, prob
 
 
@@ -196,7 +194,6 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
-        print(doc)
         docs.append(doc)
     threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)  # 0.2 -> select top 20%
     for doc in docs:
