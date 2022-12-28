@@ -50,6 +50,10 @@ def process_model(m):
          if x.match("invprod", 1) :
                pr = pr * (1.0 - convert(str(x.arguments[0])))
 
+    # Trung, fix console problem
+    if pr <= 1e-2:
+        pr = 0
+
     avg_pr = avg_pr / no_atoms
 
     if max_val < pr :
@@ -79,7 +83,7 @@ def main(prg):
     global avg_val
 
     # debug = False
-    debug = True
+    debug = False
     max_val = -1
     listAll = []
     max_as = []
@@ -106,12 +110,12 @@ def main(prg):
     #  [ [list 1, prob of list 1], [ .. ], ...]
     #  max_as is the answer set with the maximal probability (max_val)
 
-    print("\n\n Probability product optimal answer set :",  max_as, max_val)
-    print("\n\n Best average probability answer set :",  avg_as, avg_val)
-    print("\n\n Minimal probability answer set :",  min_as, min_val)
+    #print("\n\n Probability product optimal answer set :",  max_as, max_val)
+    #print("\n\n Best average probability answer set :",  avg_as, avg_val)
+    #print("\n\n Minimal probability answer set :",  min_as, min_val)
 
     print(max_as)
-    print(max_val)
+    # print(max_val)
 
 
     return
