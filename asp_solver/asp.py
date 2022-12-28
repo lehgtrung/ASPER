@@ -140,7 +140,7 @@ def solve(command):
     answerset = ast.literal_eval(output.decode().split('\n')[-2])
     if answerset:
         atoms = answerset[0]
-        prob = answerset[2]
+        prob = answerset[3]
     else:
         atoms = []
         prob = -1
