@@ -137,6 +137,7 @@ def solve(command):
                                stdout=subprocess.PIPE)
     output, error = process.communicate()
     # result = [e.split() for e in output.decode().split('\n')[:-2]]
+    print(command)
     answerset = ast.literal_eval(output.decode().split('\n')[-2])
     if answerset:
         atoms = answerset[0]
