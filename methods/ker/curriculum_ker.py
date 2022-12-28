@@ -27,7 +27,7 @@ def curriculum_ker(labeled_path,
                    labeled_model_path,
                    logger,
                    max_iter,
-                   delta=0.2):
+                   delta=0.1):
 
     # Create auto rules
     logger.info('Extracting auto rules')
