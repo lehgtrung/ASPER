@@ -239,10 +239,10 @@ bad(kill(P1,P2,Q1,Q2)) :- atom(kill(P1,P2,Q1,Q2)), bad(peop(P1,P2)).
 bad(kill(P1,P2,Q1,Q2)) :- atom(kill(P1,P2,Q1,Q2)), bad(peop(Q1,Q2)).
 
 % Relation_exist constrain
-relation_exist :- ok(liveIn(P1,P2,Q1,Q2)).
-relation_exist :- ok(locatedIn(P1,P2,Q1,Q2)).
-relation_exist :- ok(orgbasedIn(P1,P2,Q1,Q2)).
-relation_exist :- ok(workFor(P1,P2,Q1,Q2)).
-relation_exist :- ok(kill(P1,P2,Q1,Q2)).
+relation_exist :- atom(liveIn(P1,P2,Q1,Q2)).
+relation_exist :- atom(locatedIn(P1,P2,Q1,Q2)).
+relation_exist :- atom(orgbasedIn(P1,P2,Q1,Q2)).
+relation_exist :- atom(workFor(P1,P2,Q1,Q2)).
+relation_exist :- atom(kill(P1,P2,Q1,Q2)).
 :- not relation_exist.
 
