@@ -137,10 +137,14 @@ def solve(command):
                                stdout=subprocess.PIPE)
     output, error = process.communicate()
     # result = [e.split() for e in output.decode().split('\n')[:-2]]
-    answerset = ast.literal_eval(output.decode().split('\n')[-3])[0]
-    prob = ast.literal_eval(output.decode().split('\n')[-3])[2]
-    # prob = float(output.decode().split('\n')[-2])
-    return answerset, prob
+    answerset = ast.literal_eval(output.decode().split('\n')[-3])
+    if answerset:
+        atoms = answerset[0]
+        prob = answerset[2]
+    else:
+        atoms = []
+        prob = -1
+    return atoms, prob
 
 
 def solve_single_doc(unlabeled, auto_path, atom_path):
