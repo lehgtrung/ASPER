@@ -175,6 +175,7 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
+        print(doc)
         if len(atoms) == 0:
             # raise ValueError(f'Empty atoms at #{i}')
             print(f'Empty atoms at #{i}')
