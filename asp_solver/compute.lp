@@ -10,10 +10,6 @@ global max_as
 global max_val
 global debug
 global listAll
-global min_val
-global min_as
-global avg_val
-global avg_as
 
 def convert(clingoStr) :
 
@@ -26,11 +22,7 @@ def process_model(m):
     global curr_as
     global listAll
     global max_val
-    global min_val
     global max_as
-    global min_as
-    global avg_as
-    global avg_val
 
     curr_as = m.symbols(atoms=True)
 
@@ -54,19 +46,15 @@ def process_model(m):
     if pr <= 1e-2:
         pr = 0
 
-    avg_pr = avg_pr / no_atoms
+    if no_atoms == 0:
+        avg_pr = 0
+        min_pr = 0
+    else:
+        avg_pr = avg_pr / no_atoms
 
     if max_val < pr :
          max_val = pr
          max_as.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
-
-    if min_val > min_pr :
-         min_val = min_pr
-         min_as =  [str(x) for x in m.symbols(atoms=True) if x.match("ok",1)]
-
-    if avg_val < avg_pr :
-         avg_val = avg_pr
-         avg_as =  [str(x) for x in m.symbols(atoms=True) if x.match("ok",1)]
 
     listAll.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
 
@@ -77,20 +65,12 @@ def main(prg):
     global debug
     global max_val
     global max_as
-    global min_val
-    global min_as
-    global avg_as
-    global avg_val
 
     # debug = False
     debug = False
     max_val = -1
     listAll = []
     max_as = []
-    min_val = 1.1
-    min_as = []
-    avg_val = -1
-    avg_as = []
 
     # set option
 
@@ -109,10 +89,6 @@ def main(prg):
     #  listAll is the list of all answer sets with corresponding probability
     #  [ [list 1, prob of list 1], [ .. ], ...]
     #  max_as is the answer set with the maximal probability (max_val)
-
-    #print("\n\n Probability product optimal answer set :",  max_as, max_val)
-    #print("\n\n Best average probability answer set :",  avg_as, avg_val)
-    #print("\n\n Minimal probability answer set :",  min_as, min_val)
 
     print(max_as)
     # print(max_val)
