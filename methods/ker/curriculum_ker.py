@@ -69,8 +69,8 @@ def curriculum_ker(labeled_path,
     iteration = 0
     current_delta = 1.0 - delta
     while iteration < max_iter:
-        if current_delta < 0:
-            break
+        # if current_delta < 0:
+        #     break
 
         logger.info(f'Round #{iteration}: Current delta: {current_delta}')
         # Predict on unlabeled data
