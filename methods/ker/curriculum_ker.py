@@ -108,9 +108,11 @@ def curriculum_ker(labeled_path,
 
         # Step 5: Retrain on labeled and pseudo-labeled data
         logger.info(f'Round #{iteration}: Retrain on selected pseudo labels')
+        # Fine tune instead of re-train, remove model_path if u dont want to
         modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
                            TEMP_TRAIN_CONFIG_PATH,
                            {
+                               'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
                                'train_path': selection_path,
                                'save_path': labeled_model_path.format(iteration),
                                'log_path': train_log_path.format(iteration)
