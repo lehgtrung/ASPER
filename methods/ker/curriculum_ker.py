@@ -112,7 +112,7 @@ def curriculum_ker(labeled_path,
         modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
                            TEMP_TRAIN_CONFIG_PATH,
                            {
-                               'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
+                               #'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
                                'train_path': selection_path,
                                'save_path': labeled_model_path.format(iteration),
                                'log_path': train_log_path.format(iteration)
