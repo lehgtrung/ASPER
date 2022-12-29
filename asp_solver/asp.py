@@ -197,7 +197,7 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
         docs.append(doc)
     # threshold = np.percentile([d['prob'] for d in docs if d['prob'] > 0], current_delta * 100)
     # threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
-    threshold = 0.8
+    threshold = 0.9
     for doc in docs:
         if doc['prob'] > threshold:
             new_pred.append(doc)
