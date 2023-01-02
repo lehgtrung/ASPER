@@ -27,6 +27,7 @@ def curriculum_ker(labeled_path,
                    labeled_model_path,
                    logger,
                    max_iter,
+                   with_curriculum,
                    delta=0.2):
 
     # Create auto rules
@@ -69,8 +70,8 @@ def curriculum_ker(labeled_path,
     iteration = 0
     current_delta = 1.0 - delta
     while iteration < max_iter:
-        # if current_delta < 0:
-        #     break
+        if current_delta < 0:
+            break
 
         logger.info(f'Round #{iteration}: Current delta: {current_delta}')
         # Predict on unlabeled data
@@ -95,6 +96,7 @@ def curriculum_ker(labeled_path,
                                        auto_meta_path=auto_meta_path,
                                        selection_path=prediction_path + '.tmp',
                                        current_delta=current_delta,
+                                       with_curriculum=with_curriculum,
                                        logger=logger)
 
         # Unify labeled and selected pseudo labeled data

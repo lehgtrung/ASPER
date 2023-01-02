@@ -185,7 +185,8 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
 
 
 def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
-                                   auto_meta_path, selection_path, current_delta, logger):
+                                   auto_meta_path, selection_path,
+                                   with_curriculum, current_delta, logger):
     with open(unlabeled_path, 'r') as f:
         unlabeled = json.load(f)
     new_pred = []
@@ -195,11 +196,14 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
         atom_path = atom_meta_path.format(i)
         doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
         docs.append(doc)
-    # threshold = np.percentile([d['prob'] for d in docs if d['prob'] > 0], current_delta * 100)
-    # threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
-    threshold = 0.9
+
+    if with_curriculum:
+        # threshold = np.percentile([d['prob'] for d in docs if d['prob'] > 0], current_delta * 100)
+        threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
+    else:
+        threshold = 0.9
     for doc in docs:
-        if doc['prob'] > threshold:
+        if doc['prob'] >= threshold:
             new_pred.append(doc)
         # if len(doc['relations']) > 0:
         #     new_pred.append(doc)

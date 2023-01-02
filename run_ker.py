@@ -23,12 +23,19 @@ if __name__ == '__main__':
                         default=1,
                         type=int,
                         action='store')
+    parser.add_argument('--with_curriculum',
+                        required=True,
+                        action='store_true')
     args = parser.parse_args()
 
     dataset = args.dataset
     fold = args.fold
     percent = args.percent
-    method = 'ker'
+
+    if args.with_curriculum:
+        method = 'ker_with_curriculum'
+    else:
+        method = 'ker'
 
     LABELED_PATH = f'./data/core_{dataset}/{dataset}_{percent}/fold_{fold}/labeled.json'
     UNLABELED_PATH = f'./data/core_{dataset}/{dataset}_{percent}/fold_{fold}/unlabeled.json'
@@ -83,6 +90,7 @@ if __name__ == '__main__':
     os.makedirs(f'./data/methods/{method}/{dataset}_{percent}/fold_{fold}/auto', exist_ok=True)
 
     logger = Logger(path=LOG_PATH)
+    WITH_CURRICULUM = args.with_curriculum
 
     curriculum_ker(labeled_path=LABELED_PATH,
                    unlabeled_path=UNLABELED_PATH,
@@ -95,6 +103,7 @@ if __name__ == '__main__':
                    selection_path=SELECTION_PATH,
                    labeled_model_path=LABELED_MODEL_PATH,
                    logger=logger,
+                   with_curriculum=WITH_CURRICULUM,
                    max_iter=args.max_iter)
 
 
