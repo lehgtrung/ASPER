@@ -24,7 +24,6 @@ if __name__ == '__main__':
                         type=int,
                         action='store')
     parser.add_argument('--with_curriculum',
-                        required=True,
                         action='store_true')
     args = parser.parse_args()
 
