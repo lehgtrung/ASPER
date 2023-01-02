@@ -46,8 +46,15 @@ def gen_data_folds(in_path, out_path, percent, num_folds):
 
 if __name__ == '__main__':
     num_folds = 5
-    percent = int(sys.argv[1])
-    gen_data_folds(in_path='./data/datasets/conll04/conll04_train.json',
-                   out_path='./data/core_conll04/conll04_{percent}/fold_{fold}',
+    dataset = sys.argv[1]
+    percent = int(sys.argv[2])
+    out_path = './data/core_{dataset}/{dataset}_{percent}/fold_{fold}'
+    out_path = out_path.format(
+        dataset=dataset,
+        percent='{percent}',
+        fold='{fold}'
+    )
+    gen_data_folds(in_path=f'./data/datasets/{dataset}/{dataset}_train.json',
+                   out_path=out_path,
                    percent=percent,
                    num_folds=num_folds)
