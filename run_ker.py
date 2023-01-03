@@ -91,7 +91,8 @@ if __name__ == '__main__':
     logger = Logger(path=LOG_PATH)
     WITH_CURRICULUM = args.with_curriculum
 
-    curriculum_ker(labeled_path=LABELED_PATH,
+    curriculum_ker(dataset=args.dataset,
+                   labeled_path=LABELED_PATH,
                    unlabeled_path=UNLABELED_PATH,
                    unlabeled_with_labels_path=UNLABELED_WITH_LABELS_PATH,
                    train_log_path=TRAIN_LOG_PATH,
