@@ -59,7 +59,8 @@ if __name__ == '__main__':
 
     logger = Logger(path=LOG_PATH)
 
-    self_training(labeled_path=LABELED_PATH,
+    self_training(dataset=args.dataset,
+                  labeled_path=LABELED_PATH,
                   unlabeled_path=UNLABELED_PATH,
                   unlabeled_with_labels_path=UNLABELED_WITH_LABELS_PATH,
                   train_log_path=TRAIN_LOG_PATH,

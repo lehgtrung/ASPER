@@ -2,19 +2,20 @@ import os
 import subprocess
 import numpy as np
 import json
+import time
 from methods.method_utils import *
 
-DEFAULT_TRAIN_CONFIG_PATH = 'configs/conll04/example_train.conf'
-TEMP_TRAIN_CONFIG_PATH = 'configs/conll04/example_train.conf.tmp'
-DEFAULT_EVAL_CONFIG_PATH = 'configs/conll04/example_eval.conf'
-TEMP_EVAL_CONFIG_PATH = 'configs/conll04/example_eval.conf.tmp'
-DEFAULT_PREDICT_CONFIG_PATH = 'configs/conll04/example_predict.conf'
-TEMP_PREDICT_CONFIG_PATH = 'configs/conll04/example_predict.conf.tmp'
+DEFAULT_TRAIN_CONFIG_PATH = 'configs/{dataset}/example_train.conf'
+TEMP_TRAIN_CONFIG_PATH = 'configs/{dataset}/example_train.conf.{hash_key}'
+DEFAULT_EVAL_CONFIG_PATH = 'configs/{dataset}/example_eval.conf'
+TEMP_EVAL_CONFIG_PATH = 'configs/{dataset}/example_eval.conf.{hash_key}'
+DEFAULT_PREDICT_CONFIG_PATH = 'configs/{dataset}/example_predict.conf'
+TEMP_PREDICT_CONFIG_PATH = 'configs/{dataset}/example_predict.conf.{hash_key}'
 TRAIN_SCRIPT = 'python ./spert.py train --config {config_path}'
 EVAL_SCRIPT = 'python ./spert.py eval --config {config_path}'
 PREDICT_SCRIPT = 'python ./spert.py predict --config {config_path}'
 REEVAL_SCRIPT = 'python reevaluator.py --gt_path {gt_path} --pred_path {pred_path}'
-DEFAULT_TEST_PATH = 'data/datasets/conll04/conll04_test.json'
+DEFAULT_TEST_PATH = 'data/datasets/{dataset}/{dataset}_test.json'
 
 
 def add_suffix_to_path(path, suffix, split_by):
@@ -44,7 +45,8 @@ def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger):
     filter_evaluation_log(nmap_lines, logger)
 
 
-def tri_training(labeled_path,
+def tri_training(dataset,
+                 labeled_path,
                  unlabeled_path,
                  train_log_path,
                  prediction_path,
@@ -55,6 +57,17 @@ def tri_training(labeled_path,
                  logger,
                  start_iter,
                  max_iter):
+    hash_key = '{0:010x}'.format(int(time.time() * 256))
+    default_train_config_path = DEFAULT_TRAIN_CONFIG_PATH.format(dataset=dataset)
+    default_eval_config_path = DEFAULT_EVAL_CONFIG_PATH.format(dataset=dataset)
+    default_predict_config_path = DEFAULT_PREDICT_CONFIG_PATH.format(dataset=dataset)
+
+    temp_train_config_path = TEMP_TRAIN_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
+    temp_eval_config_path = TEMP_EVAL_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
+    temp_predict_config_path = TEMP_PREDICT_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
+
+    default_test_path = DEFAULT_TEST_PATH.format(dataset=dataset)
+
     # Boostrap 3 models
     labeled_paths = []
     labeled_model_paths = []
@@ -85,33 +98,33 @@ def tri_training(labeled_path,
 
         for i in range(3):
             os.makedirs(labeled_model_paths[i].format(-1), exist_ok=True)
-            modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
-                               TEMP_TRAIN_CONFIG_PATH,
+            modify_config_file(default_train_config_path,
+                               temp_train_config_path,
                                {
                                    'train_path': labeled_paths[i],
                                    'save_path': labeled_model_paths[i].format(-1),
                                    'log_path': train_log_paths[i].format(-1)
                                })
-            script = TRAIN_SCRIPT.format(config_path=TEMP_TRAIN_CONFIG_PATH)
+            script = TRAIN_SCRIPT.format(config_path=temp_train_config_path)
             subprocess.run(script, shell=True, check=True)
     else:
         logger.info('Labeled model exists, skip training ...')
 
     # Make prediction for each model on test data at round -1
     for i in range(3):
-        modify_config_file(DEFAULT_PREDICT_CONFIG_PATH,
-                           TEMP_PREDICT_CONFIG_PATH,
+        modify_config_file(default_predict_config_path,
+                           temp_predict_config_path,
                            {
                                'model_path': os.path.join(labeled_model_paths[i]
                                                           .format(-1), 'final_model'),
-                               'dataset_path': DEFAULT_TEST_PATH,
+                               'dataset_path': default_test_path,
                                'predictions_path': test_prediction_paths[i]
                            })
-        script = PREDICT_SCRIPT.format(config_path=TEMP_PREDICT_CONFIG_PATH)
+        script = PREDICT_SCRIPT.format(config_path=temp_predict_config_path)
         logger.info(f'Round #{-1}: Predict on test data on model {i}')
         subprocess.run(script, shell=True, check=True)
     logger.info(f'Round {-1}: Evaluate the aggregated model')
-    evaluate_tri_training(DEFAULT_TEST_PATH,
+    evaluate_tri_training(default_test_path,
                           test_prediction_paths[0],
                           test_prediction_paths[1],
                           test_prediction_paths[2],
@@ -125,15 +138,15 @@ def tri_training(labeled_path,
 
         # Make prediction for each model
         for i in range(3):
-            modify_config_file(DEFAULT_PREDICT_CONFIG_PATH,
-                               TEMP_PREDICT_CONFIG_PATH,
+            modify_config_file(default_predict_config_path,
+                               temp_predict_config_path,
                                {
                                    'model_path': os.path.join(labeled_model_paths[i]
                                                               .format(iteration - 1), 'final_model'),
                                    'dataset_path': unlabeled_path,
                                    'predictions_path': prediction_paths[i]
                                })
-            script = PREDICT_SCRIPT.format(config_path=TEMP_PREDICT_CONFIG_PATH)
+            script = PREDICT_SCRIPT.format(config_path=temp_predict_config_path)
             logger.info(f'Round #{iteration}: Predict on unlabeled data')
             subprocess.run(script, shell=True, check=True)
 
@@ -163,33 +176,33 @@ def tri_training(labeled_path,
 
         for i in range(3):
             logger.info(f'Round #{iteration}: Retrain on model {i}')
-            modify_config_file(DEFAULT_TRAIN_CONFIG_PATH,
-                               TEMP_TRAIN_CONFIG_PATH,
+            modify_config_file(default_train_config_path,
+                               temp_train_config_path,
                                {
                                    'train_path': selection_paths[i],
                                    'save_path': labeled_model_paths[i].format(iteration),
                                    'log_path': train_log_paths[i].format(iteration)
                                })
-            script = TRAIN_SCRIPT.format(config_path=TEMP_TRAIN_CONFIG_PATH)
+            script = TRAIN_SCRIPT.format(config_path=temp_train_config_path)
             subprocess.run(script, shell=True, check=True)
 
         # Evaluate
 
         # Make prediction for each model on test data
         for i in range(3):
-            modify_config_file(DEFAULT_PREDICT_CONFIG_PATH,
-                               TEMP_PREDICT_CONFIG_PATH,
+            modify_config_file(default_predict_config_path,
+                               temp_predict_config_path,
                                {
                                    'model_path': os.path.join(labeled_model_paths[i]
                                                               .format(iteration), 'final_model'),
-                                   'dataset_path': DEFAULT_TEST_PATH,
+                                   'dataset_path': default_test_path,
                                    'predictions_path': test_prediction_paths[i]
                                })
-            script = PREDICT_SCRIPT.format(config_path=TEMP_PREDICT_CONFIG_PATH)
+            script = PREDICT_SCRIPT.format(config_path=temp_predict_config_path)
             logger.info(f'Round #{iteration}: Predict on test data on model {i}')
             subprocess.run(script, shell=True, check=True)
         logger.info(f'Round {iteration}: Evaluate the aggregated model')
-        evaluate_tri_training(DEFAULT_TEST_PATH,
+        evaluate_tri_training(default_test_path,
                               test_prediction_paths[0],
                               test_prediction_paths[1],
                               test_prediction_paths[2],

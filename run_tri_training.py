@@ -72,7 +72,8 @@ if __name__ == '__main__':
 
     logger = Logger(path=LOG_PATH)
 
-    tri_training(labeled_path=LABELED_PATH,
+    tri_training(dataset=args.dataset,
+                 labeled_path=LABELED_PATH,
                  unlabeled_path=UNLABELED_PATH,
                  train_log_path=TRAIN_LOG_PATH,
                  prediction_path=PREDICTION_PATH,

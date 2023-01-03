@@ -40,7 +40,6 @@ def curriculum_ker(dataset,
     temp_eval_config_path = TEMP_EVAL_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
     temp_predict_config_path = TEMP_PREDICT_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
 
-
     # Create auto rules
     logger.info('Extracting auto rules')
     count = extract_auto_rules(unlabeled_path, auto_meta_path, empty=True)
@@ -67,7 +66,6 @@ def curriculum_ker(dataset,
                        {
                            'model_path': os.path.join(labeled_model_path.format(-1), 'final_model'),
                            'log_path': eval_log_path.format(-1),
-                           'tokenizer_path': os.path.join(labeled_model_path.format(-1), 'final_model')
                        })
     script = EVAL_SCRIPT.format(config_path=temp_eval_config_path)
     nmap_out = subprocess.run(script,
@@ -139,7 +137,6 @@ def curriculum_ker(dataset,
                            {
                                'model_path': os.path.join(labeled_model_path.format(iteration), 'final_model'),
                                'log_path': eval_log_path.format(iteration),
-                               'tokenizer_path': os.path.join(labeled_model_path.format(iteration), 'final_model')
                            })
         script = EVAL_SCRIPT.format(config_path=temp_eval_config_path)
         nmap_out = subprocess.run(script,

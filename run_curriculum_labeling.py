@@ -59,7 +59,8 @@ if __name__ == '__main__':
 
     logger = Logger(path=LOG_PATH)
 
-    curriculum_labeling(labeled_path=LABELED_PATH,
+    curriculum_labeling(dataset=args.dataset,
+                        labeled_path=LABELED_PATH,
                         unlabeled_path=UNLABELED_PATH,
                         train_log_path=TRAIN_LOG_PATH,
                         eval_log_path=EVAL_LOG_PATH,
