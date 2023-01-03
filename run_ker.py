@@ -20,7 +20,7 @@ if __name__ == '__main__':
                         action='store')
     parser.add_argument('--max_iter',
                         required=False,
-                        default=1,
+                        default=10,
                         type=int,
                         action='store')
     parser.add_argument('--with_curriculum',
