@@ -132,10 +132,14 @@ def calc_symbol_freq(symbols, n, threshold=0.5):
 
 
 def convert_to_tuple(doc, dct):
-    if dct['type'] in ['Loc', 'Peop', 'Org', 'Other']:
+    if 'head' in dct:
         return (dct['start'],
                 dct['end'],
                 dct['type'])
+    # if dct['type'] in ['Loc', 'Peop', 'Org', 'Other']:
+    #     return (dct['start'],
+    #             dct['end'],
+    #             dct['type'])
     return (doc['entities'][dct['head']]['start'],
             doc['entities'][dct['head']]['end'],
             doc['entities'][dct['head']]['type'],
