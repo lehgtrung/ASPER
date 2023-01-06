@@ -132,7 +132,7 @@ def calc_symbol_freq(symbols, n, threshold=0.5):
 
 
 def convert_to_tuple(doc, dct):
-    if 'head' in dct:
+    if 'start' in dct:
         return (dct['start'],
                 dct['end'],
                 dct['type'])

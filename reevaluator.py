@@ -19,7 +19,8 @@ class ReEvaluator:
             self.pred_entities, self.pred_relations = self._read_gt_and_pred(gt_path, pred_path)
 
     def _convert_to_tuple(self, doc, dct):
-        if dct['type'] in self.ent_short_types:
+        # if dct['type'] in self.ent_short_types:
+        if 'start' in dct:
             return (dct['start'],
                     dct['end'],
                     dct['type'])
