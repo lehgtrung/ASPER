@@ -181,6 +181,8 @@ class SpERTTrainer(BaseTrainer):
 
         iteration = 0
         total = dataset.document_count // self._args.train_batch_size
+        # for batch in tqdm(data_loader, total=total, desc='Train epoch %s' % epoch):
+        print(f'Epoch {epoch}')
         for batch in tqdm(data_loader, total=total, desc='Train epoch %s' % epoch):
             model.train()
             batch = util.to_device(batch, self._device)
