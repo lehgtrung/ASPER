@@ -93,8 +93,8 @@ class SpERTTrainer(BaseTrainer):
             self._train_epoch(model, compute_loss, optimizer, train_dataset, updates_epoch, epoch)
 
             # eval validation sets
-            if not args.final_eval or (epoch == args.epochs - 1):
-                self._eval(model, validation_dataset, input_reader, epoch + 1, updates_epoch)
+            # if not args.final_eval or (epoch == args.epochs - 1):
+            #     self._eval(model, validation_dataset, input_reader, epoch + 1, updates_epoch)
 
         # save final model
         extra = dict(epoch=args.epochs, updates_epoch=updates_epoch, epoch_iteration=0)
