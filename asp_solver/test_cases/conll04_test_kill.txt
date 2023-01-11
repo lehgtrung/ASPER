@@ -1,0 +1,8 @@
+
+
+atom(entity(peop,1,2),"0.9").
+atom(entity(peop,3,4),"0.9").
+atom(entity(peop,5,6),"0.9").
+
+atom(relation(kill,1,2,3,4),"0.8").
+atom(relation(kill,3,4,5,6),"0.7").

@@ -3,8 +3,8 @@
 atom(A) :- atom(A,P).
 prob(A,P) :- atom(A,P).
 
-prod(P) :- atom(A, P), ok(A).
-invprod(P) :- atom(A, P), nok(A).
+prod(P, A) :- atom(A, P), ok(A).
+invprod(P, A) :- atom(A, P), nok(A).
 
 % Type requirements -- if the body is satisfied then one of the atom in the body is incorrect
 
