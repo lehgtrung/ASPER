@@ -60,19 +60,19 @@ ok(entity(E', P', Q')) :- ok(relation(NR, P, Q, P', Q')), type_def(NR, E, E').
 
 
 %%% Relation exists
-relation_exist :- ok(relation(NR, P, Q, P', Q')).
+relation_exist :- atom(relation(NR, P, Q, P', Q')).
 :- not relation_exist.
 
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 
-rule(locatedIn(P1,P2,Q1,Q2), orgbasedIn(O1,O2,P1,P2), orgbasedIn(O1,O2,Q1,Q2)):-
-	atom(locatedIn(P1,P2,Q1,Q2)), atom(orgbasedIn(O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+rule(relation(locatedIn,P1,P2,Q1,Q2), relation(orgbasedIn,O1,O2,P1,P2), relation(orgbasedIn,O1,O2,Q1,Q2)):-
+	atom(relation(locatedIn,P1,P2,Q1,Q2)), atom(relation(orgbasedIn,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
-rule(locatedIn(P1,P2,Q1,Q2), locatedIn(Q1,Q2,R1,r2), locatedIn(P1,P2,R1,r2)):-
-	atom(locatedIn(P1,P2,Q1,Q2)), atom(locatedIn(Q1,Q2,R1,r2)), P1 != P2, P1 != Q1, Q1 != Q2, Q1 != R1.
+rule(relation(locatedIn,P1,P2,Q1,Q2), relation(locatedIn,Q1,Q2,R1,R2), relation(locatedIn,P1,P2,R1,R2)):-
+	atom(relation(locatedIn,P1,P2,Q1,Q2)), atom(relation(locatedIn,Q1,Q2,R1,R2)), P1 != P2, P1 != Q1, Q1 != Q2, Q1 != R1.
 
-rule(liveIn(X1,X2,P1,P2), locatedIn(P1,P2,Q1,Q2), liveIn(X1,X2,Q1,Q2)):-
-	atom(liveIn(X1,X2,P1,P2)), atom(locatedIn(P1,P2,Q1,Q2)), P1 != P2, P1 != Q1.
+rule(relation(liveIn,X1,X2,P1,P2), relation(locatedIn,P1,P2,Q1,Q2), relation(liveIn,X1,X2,Q1,Q2)):-
+	atom(relation(liveIn,X1,X2,P1,P2)), atom(relation(locatedIn,P1,P2,Q1,Q2)), P1 != P2, P1 != Q1.
 
 
 %%%%% ASP for working with inference rules %%%%%%%%%%%%%%%%
