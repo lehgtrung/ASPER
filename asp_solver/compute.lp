@@ -33,13 +33,13 @@ def process_model(m):
     avg_pr = 0
     no_atoms = 0
     for x in curr_as:
-         if x.match("prod", 1) :
+         if x.match("prod", 2) :
                valuePr = convert(str(x.arguments[0]))
                pr = pr * valuePr
                if min_pr > valuePr : min_pr = valuePr
                avg_pr = avg_pr+valuePr
                no_atoms = no_atoms + 1
-         if x.match("invprod", 1) :
+         if x.match("invprod", 2) :
                pr = pr * (1.0 - convert(str(x.arguments[0])))
 
     # Trung, fix console problem
@@ -54,7 +54,8 @@ def process_model(m):
 
     if max_val < pr :
          max_val = pr
-         max_as.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
+         # max_as.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
+         max_as = [[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr]
 
     listAll.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
 

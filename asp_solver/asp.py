@@ -6,10 +6,12 @@ import json
 import numpy as np
 
 
-COMMAND = 'clingo --opt-mode=optN asp_solver/p6_index.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
+COMMAND = 'clingo --opt-mode=optN asp_solver/conll04_solver.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
           '--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
-entity_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+)\)')
-relation_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+),([0-9]+),([0-9]+)\)')
+# entity_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+)\)')
+entity_pattern = re.compile(r'^entity\((\w+),([0-9]+),([0-9]+)\)')
+# relation_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+),([0-9]+),([0-9]+)\)')
+relation_pattern = re.compile(r'^relation\((\w+),([0-9]+),([0-9]+),([0-9]+),([0-9]+)\)')
 # ok_pattern = re.compile(r'^ok\((.*?)\)\.')
 ok_pattern = re.compile(r'^ok\((.*?)\)$')
 syntactic_types = ['propOwner', 'dead']
@@ -106,6 +108,7 @@ def convert_atoms_to_doc(atoms, prob, tokens):
     }
 
 
+
 def convert_doc_to_atoms(pred):
     atoms = []
     entities = pred['entities']
@@ -115,7 +118,8 @@ def convert_doc_to_atoms(pred):
         start = ent['start']
         end = ent['end']
         prob = ent['prob']
-        c = f'atom({etype}({start},{end}),"{prob}").'
+        # c = f'atom({etype}({start},{end}),"{prob}").'
+        c = f'atom(entity({etype},{start},{end}),"{prob}").'
         atoms.append(c)
     for rel in relations:
         rtype = convert_doc_type_to_asp_type(rel['type'], 'relation')
@@ -124,7 +128,8 @@ def convert_doc_to_atoms(pred):
         tail = entities[rel['tail']]
         tail_start, tail_end = tail['start'], tail['end']
         prob = rel['prob']
-        c = f'atom({rtype}({head_start},{head_end},{tail_start},{tail_end}),"{prob}").'
+        # c = f'atom({rtype}({head_start},{head_end},{tail_start},{tail_end}),"{prob}").'
+        c = f'atom(relation({rtype},{head_start},{head_end},{tail_start},{tail_end}),"{prob}").'
         atoms.append(c)
     return atoms
 
@@ -232,8 +237,8 @@ def is_modified_by_asp(atom_path, ref_atoms):
 
 
 if __name__ == '__main__':
-    file_name = '2.txt'
-    command = f'clingo --opt-mode=optN p6_index.lp compute.lp {file_name} ' \
+    file_name = 'test_cases/conll04_test_texas.txt'
+    command = f'clingo --opt-mode=optN conll04_solver.lp compute.lp {file_name} ' \
               f'--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
 
     print(solve(command))
