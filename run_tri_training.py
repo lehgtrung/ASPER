@@ -28,6 +28,10 @@ if __name__ == '__main__':
                         required=True,
                         type=int,
                         action='store')
+    parser.add_argument('--max_iter',
+                        required=True,
+                        type=int,
+                        action='store')
     args = parser.parse_args()
 
     dataset = args.dataset
@@ -83,7 +87,7 @@ if __name__ == '__main__':
                  labeled_model_path=LABELED_MODEL_PATH,
                  logger=logger,
                  start_iter=0,
-                 max_iter=15)
+                 max_iter=args.max_iter)
 
 
 
