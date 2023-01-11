@@ -96,6 +96,7 @@ def convert_atoms_to_doc(atoms, prob, tokens):
             if entity:
                 entities.append(entity)
     for atom in atoms:
+        atom = remove_ok(atom)
         if match_form(atom, 'relation'):
             relation = restore_relation(atom, entities)
             if relation:
@@ -242,6 +243,14 @@ if __name__ == '__main__':
               f'--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'.split()
 
     print(solve(command))
+
+    atoms, prob = solve(command)
+    atoms = [e.replace(' ', '') for e in atoms]
+    # Convert result to
+    doc = convert_atoms_to_doc(atoms=atoms,
+                               prob=prob,
+                               tokens=[''])
+    print(doc)
 
     # ref_atoms = solve(command)
     # print(ref_atoms)
