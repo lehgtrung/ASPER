@@ -54,8 +54,8 @@ def process_model(m):
 
     if max_val < pr :
          max_val = pr
-         # max_as.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
-         max_as = [[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr]
+         max_as.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
+         # max_as = [[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr]
 
     listAll.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
 
