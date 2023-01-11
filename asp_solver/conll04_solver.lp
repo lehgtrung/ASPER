@@ -84,6 +84,18 @@ rule(relation(liveIn,X1,X2,P1,P2), relation(locatedIn,P1,P2,Q1,Q2), relation(liv
 :- ok(Y), inf_atom(Y), dependency(X,Y), not ok(X).
 :- rule(X, Y, Z), ok(X), ok(Y), not ok(Z).
 
+%% More rules %%
+%% If someone is killed, he can't kill anyone else
+dead(Q1,Q2) :- atom(relation(kill,P1,P2,Q1,Q2)).
+{bad(relation(kill,Q1,Q2,R1,R2))} :- atom(relation(kill,Q1,Q2,R1,R2)), dead(Q1,Q2).
+:- ok(relation(kill,Q1,Q2,R1,R2)), atom(relation(kill,Q1,Q2,R1,R2)), dead(Q1,Q2).
+
+%% Reason about location's size
+%smaller(L1,L2,K1,K2) :- atom(relation(locatedIn,L1,L2,K1,K2)).
+%smaller(L1,L2,J1,J2) :- smaller(L1,L2,K1,K2), smaller(K1,K2,J1,J2).
+%{bad(relation(locatedIn,K1,K2,L1,L2))} :- smaller(L1,L2,K1,K2).
+%:- ok(relation(locatedIn,K1,K2,L1,L2)), smaller(L1,L2,K1,K2).
+
 
 %%% an atom should be kept if it does not violate any type constraint
 %%% e.g., peop(x) is okay if there is no other atom indicating that it is a location, an organization, or other entity
