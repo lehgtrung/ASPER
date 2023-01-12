@@ -6,10 +6,18 @@
 %atom(entity(org,46,49),"0.9814613461494446").
 %atom(relation(workFor,38,40,46,49),"0.9993770718574524").
 
-atom(entity(peop,0,2),"0.9971137046813965").
-atom(entity(peop,6,10),"0.9289110898971558").
-atom(entity(peop,13,16),"0.9938934445381165").
-atom(entity(loc,17,21),"0.5694289803504944").
-atom(entity(loc,19,21),"0.9776851534843445").
-atom(relation(liveIn,0,2,17,21),"0.7627199292182922").
-atom(relation(liveIn,13,16,17,21),"0.994853675365448").
+%atom(entity(peop,0,2),"0.9971137046813965").
+%atom(entity(peop,6,10),"0.9289110898971558").
+%atom(entity(peop,13,16),"0.9938934445381165").
+%atom(entity(loc,17,21),"0.5694289803504944").
+%atom(entity(loc,19,21),"0.9776851534843445").
+%atom(relation(liveIn,0,2,17,21),"0.7627199292182922").
+%atom(relation(liveIn,13,16,17,21),"0.994853675365448").
+
+%atom(entity(loc,0,1),"0.9914299845695496").
+%atom(entity(org,1,2),"0.9835277199745178").
+%atom(relation(orgbasedIn,1,2,0,1),"0.9981738328933716").
+
+atom(entity(loc,14,16),"0.9464308023452759").
+atom(entity(peop,17,19),"0.9352872371673584").
+atom(relation(workFor,17,19,14,16),"0.4684336185455322").

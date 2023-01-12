@@ -37,8 +37,8 @@ type_def(kill, peop, peop).
 
 2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
 									  atom(entity(NE', Q1, Q2)),
-									  P1 < Q1, P2 >= Q1.
-:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 >= Q1.
+									  P1 < Q1, P2 > Q1.
+:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1.
 
 %% potentially incorrect
 
