@@ -19,7 +19,7 @@ invprod(P, A) :- atom(A, P), nok(A).
 type_def(liveIn, peop, loc).
 type_def(locatedIn, loc, loc).
 type_def(orgbasedIn, org, loc).
-type_def(workFor, loc, org).
+type_def(workFor, peop, org).
 type_def(kill, peop, peop).
 
 
@@ -91,10 +91,10 @@ dead(Q1,Q2) :- atom(relation(kill,P1,P2,Q1,Q2)).
 :- ok(relation(kill,Q1,Q2,R1,R2)), atom(relation(kill,Q1,Q2,R1,R2)), dead(Q1,Q2).
 
 %% Reason about location's size
-%smaller(L1,L2,K1,K2) :- atom(relation(locatedIn,L1,L2,K1,K2)).
-%smaller(L1,L2,J1,J2) :- smaller(L1,L2,K1,K2), smaller(K1,K2,J1,J2).
-%{bad(relation(locatedIn,K1,K2,L1,L2))} :- smaller(L1,L2,K1,K2).
-%:- ok(relation(locatedIn,K1,K2,L1,L2)), smaller(L1,L2,K1,K2).
+smaller(L1,L2,K1,K2) :- atom(relation(locatedIn,L1,L2,K1,K2)).
+smaller(L1,L2,J1,J2) :- smaller(L1,L2,K1,K2), smaller(K1,K2,J1,J2).
+{bad(relation(locatedIn,K1,K2,L1,L2))} :- smaller(L1,L2,K1,K2).
+:- ok(relation(locatedIn,K1,K2,L1,L2)), smaller(L1,L2,K1,K2).
 
 
 %%% an atom should be kept if it does not violate any type constraint

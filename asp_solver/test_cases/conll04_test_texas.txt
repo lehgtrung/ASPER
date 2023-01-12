@@ -1,22 +1,10 @@
 
+atom(entity(loc,1,2),"0.9").
+atom(entity(loc,3,4),"0.9").
+atom(entity(loc,5,6),"0.9").
+atom(entity(org,7,8),"0.8").
 
-%atom(entity(loc,1,2),"0.9").
-%atom(entity(loc,3,4),"0.9").
-%atom(entity(loc,5,6),"0.9").
-%atom(entity(org,7,8),"0.8").
-
-%atom(relation(locatedIn,1,2,3,4),"0.9").
-%atom(relation(locatedIn,3,4,5,6),"0.9").
-%atom(relation(locatedIn,1,2,5,6),"0.9").
-%atom(relation(locatedIn,7,8,5,6),"0.7").
-
-
-%atom(loc(1,2),"0.9").
-%atom(loc(3,4),"0.9").
-%atom(loc(5,6),"0.9").
-%atom(org(7,8),"0.8").
-
-%atom(locatedIn(1,2,3,4),"0.9").
-%atom(locatedIn(3,4,5,6),"0.9").
-%atom(locatedIn(1,2,5,6),"0.9").
-%atom(locatedIn(7,8,5,6),"0.7").
+atom(relation(locatedIn,1,2,3,4),"0.9").
+atom(relation(locatedIn,3,4,5,6),"0.9").
+atom(relation(locatedIn,1,2,5,6),"0.9").
+atom(relation(locatedIn,7,8,5,6),"0.99").
