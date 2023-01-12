@@ -149,7 +149,7 @@ def solve(command):
         prob = answerset[2]
     else:
         atoms = []
-        prob = -1
+        prob = 0
     return atoms, prob
 
 
@@ -207,7 +207,7 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
         # threshold = np.percentile([d['prob'] for d in docs if d['prob'] > 0], current_delta * 100)
         threshold = np.percentile([d['prob'] for d in docs], current_delta * 100)
     else:
-        threshold = 0.9
+        threshold = 0
     for doc in docs:
         if doc['prob'] >= threshold:
             new_pred.append(doc)
