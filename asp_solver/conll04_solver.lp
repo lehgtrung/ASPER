@@ -33,12 +33,22 @@ type_def(kill, peop, peop).
 											type_def(NR, E1, E2),
 											E2 != NE.
 
+bad(relation(NR, P, Q, P, Q)) :- atom(relation(NR, P, Q, P, Q)).
+
+2{bad(entity(NE, P, Q)); bad(entity(NE', P, Q))} :- atom(entity(NE, P, Q)),
+									  atom(entity(NE', P, Q)),
+									  NE != NE'.
+
 %% overlapping
 
 2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
 									  atom(entity(NE', Q1, Q2)),
 									  P1 < Q1, P2 > Q1.
 :- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1.
+
+2{bad(entity(NE, P, Q)); bad(entity(NE', P, R))} :- atom(entity(NE, P, Q)),
+									  atom(entity(NE', P, R)), R != Q.
+:- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
 %% potentially incorrect
 
@@ -87,13 +97,13 @@ rule(relation(liveIn,X1,X2,P1,P2), relation(locatedIn,P1,P2,Q1,Q2), relation(liv
 %% More rules %%
 %% If someone is killed, he can't kill anyone else
 dead(Q1,Q2) :- atom(relation(kill,P1,P2,Q1,Q2)).
-{bad(relation(kill,Q1,Q2,R1,R2))} :- atom(relation(kill,Q1,Q2,R1,R2)), dead(Q1,Q2).
+%{bad(relation(kill,Q1,Q2,R1,R2))} :- atom(relation(kill,Q1,Q2,R1,R2)), dead(Q1,Q2).
 :- ok(relation(kill,Q1,Q2,R1,R2)), atom(relation(kill,Q1,Q2,R1,R2)), dead(Q1,Q2).
 
 %% Reason about location's size
 smaller(L1,L2,K1,K2) :- atom(relation(locatedIn,L1,L2,K1,K2)).
 smaller(L1,L2,J1,J2) :- smaller(L1,L2,K1,K2), smaller(K1,K2,J1,J2).
-{bad(relation(locatedIn,K1,K2,L1,L2))} :- smaller(L1,L2,K1,K2).
+%{bad(relation(locatedIn,K1,K2,L1,L2))} :- smaller(L1,L2,K1,K2).
 :- ok(relation(locatedIn,K1,K2,L1,L2)), smaller(L1,L2,K1,K2).
 
 

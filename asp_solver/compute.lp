@@ -4,6 +4,7 @@ import datetime
 import string
 import sys
 import os
+import operator
 
 global curr_as
 global max_as
@@ -60,11 +61,13 @@ def process_model(m):
         min_pr = 0
         avg_pr = 0
 
-    if max_val < pr :
-         max_val = pr
+    max_as.append([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], 0, min_pr])
+
+    #if pr > max_val:
+         # max_val = pr
          # max_as.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
          # max_as = [[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr]
-         max_as = [[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], 0, min_pr, avg_pr]
+         # max_as = [[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], 0, min_pr, avg_pr]
 
     listAll.extend([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr, avg_pr])
 
@@ -99,6 +102,8 @@ def main(prg):
     #  listAll is the list of all answer sets with corresponding probability
     #  [ [list 1, prob of list 1], [ .. ], ...]
     #  max_as is the answer set with the maximal probability (max_val)
+
+    max_as = sorted(max_as, key=lambda x: (-x[1], -len(x[0])))[0]
 
     print(max_as)
     # print(max_val)
