@@ -154,7 +154,7 @@ def solve(command):
 
 
 def solve_single_doc(unlabeled, auto_path, atom_path):
-    # print(atom_path)
+    print(atom_path)
     command = COMMAND.format(
         auto_path=auto_path,
         atom_path=atom_path
@@ -245,13 +245,13 @@ if __name__ == '__main__':
 
     print(solve(command))
 
-    atoms, prob = solve(command)
-    atoms = [e.replace(' ', '') for e in atoms]
-    # Convert result to
-    doc = convert_atoms_to_doc(atoms=atoms,
-                               prob=prob,
-                               tokens=[''])
-    print(doc)
+    # atoms, prob = solve(command)
+    # atoms = [e.replace(' ', '') for e in atoms]
+    # # Convert result to
+    # doc = convert_atoms_to_doc(atoms=atoms,
+    #                            prob=prob,
+    #                            tokens=[''])
+    # print(doc)
 
     # ref_atoms = solve(command)
     # print(ref_atoms)
