@@ -18,6 +18,6 @@
 %atom(entity(org,1,2),"0.9835277199745178").
 %atom(relation(orgbasedIn,1,2,0,1),"0.9981738328933716").
 
-atom(entity(loc,14,16),"0.9464308023452759").
+atom(entity(org,14,16),"0.9464308023452759").
 atom(entity(peop,17,19),"0.9352872371673584").
 atom(relation(workFor,17,19,14,16),"0.4684336185455322").

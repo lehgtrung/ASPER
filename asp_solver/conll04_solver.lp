@@ -61,7 +61,7 @@ ok(entity(E', P', Q')) :- ok(relation(NR, P, Q, P', Q')), type_def(NR, E, E').
 
 %%% Relation exists
 relation_exist :- ok(relation(NR, P, Q, P', Q')).
-:- not relation_exist.
+% :- not relation_exist.
 
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 
