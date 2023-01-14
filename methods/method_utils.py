@@ -29,9 +29,9 @@ def transfer_and_collect(in_path1, in_path2, out_path, threshold, current_indice
         for rel in row['relations']:
             if rel['prob'] < min_prob:
                 min_prob = rel['prob']
-        if min_prob >= threshold:
+        if min_prob >= threshold and i not in current_indices:
             idx.append(i)
-    selected = [data2[i] for i in range(len(data2)) if i in idx and i not in current_indices]
+    selected = [data2[i] for i in range(len(data2)) if i in idx]
 
     with open(out_path, 'w') as f:
         json.dump(data1 + selected, f)
