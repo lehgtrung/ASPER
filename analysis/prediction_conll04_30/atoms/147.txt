@@ -1,0 +1,5 @@
+atom(entity(peop,1,3),"0.9964081645011902").
+atom(entity(org,5,9),"0.9875400066375732").
+atom(entity(other,11,15),"0.8257062435150146").
+atom(entity(other,20,22),"0.9915192723274231").
+atom(relation(workFor,1,3,5,9),"0.9992378950119019").

@@ -1,0 +1,5 @@
+atom(entity(loc,0,2),"0.9527632594108582").
+atom(entity(loc,3,4),"0.7092581391334534").
+atom(entity(loc,3,5),"0.9766384959220886").
+atom(relation(locatedIn,0,2,3,4),"0.9988058805465698").
+atom(relation(locatedIn,0,2,3,5),"0.9988527297973633").

@@ -1,0 +1,7 @@
+atom(entity(peop,1,3),"0.9917351007461548").
+atom(entity(loc,7,9),"0.9223498702049255").
+atom(entity(loc,10,11),"0.7129701375961304").
+atom(entity(loc,13,14),"0.970494270324707").
+atom(entity(org,17,19),"0.9830877184867859").
+atom(relation(liveIn,1,3,7,9),"0.7485700845718384").
+atom(relation(orgbasedIn,10,11,7,9),"0.6181765198707581").

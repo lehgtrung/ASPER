@@ -1,0 +1,16 @@
+atom(entity(loc,4,6),"0.56978839635849").
+atom(entity(org,4,9),"0.8072274327278137").
+atom(entity(org,5,9),"0.700030505657196").
+atom(entity(org,6,9),"0.9785323143005371").
+atom(entity(other,12,14),"0.8438513278961182").
+atom(entity(other,15,17),"0.9855656027793884").
+atom(entity(other,21,23),"0.892672598361969").
+atom(entity(peop,34,36),"0.9970632195472717").
+atom(entity(org,41,44),"0.9112595319747925").
+atom(entity(org,45,46),"0.9965658783912659").
+atom(entity(peop,48,51),"0.9933346509933472").
+atom(relation(orgbasedIn,4,9,4,6),"0.45995229482650757").
+atom(relation(orgbasedIn,5,9,4,6),"0.612003743648529").
+atom(relation(orgbasedIn,6,9,4,6),"0.8371482491493225").
+atom(relation(workFor,34,36,45,46),"0.4897022247314453").
+atom(relation(workFor,34,36,41,44),"0.8990554213523865").

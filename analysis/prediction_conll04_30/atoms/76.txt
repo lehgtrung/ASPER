@@ -1,0 +1,3 @@
+atom(entity(loc,0,1),"0.9898939728736877").
+atom(entity(org,1,2),"0.9959158301353455").
+atom(relation(orgbasedIn,1,2,0,1),"0.9974209070205688").
