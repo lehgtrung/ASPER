@@ -69,7 +69,7 @@ if __name__ == '__main__':
                   selection_path=SELECTION_PATH,
                   labeled_model_path=LABELED_MODEL_PATH,
                   logger=logger,
-                  threshold=0.8,
+                  threshold=0.9,
                   max_iter=5)
 
 
