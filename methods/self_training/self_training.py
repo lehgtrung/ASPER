@@ -24,6 +24,7 @@ def self_training(dataset,
                   selection_path,
                   labeled_model_path,
                   logger,
+                  threshold,
                   max_iter):
     hash_key = '{0:010x}'.format(int(time.time() * 256))
     default_train_config_path = DEFAULT_TRAIN_CONFIG_PATH.format(dataset=dataset)
@@ -65,6 +66,7 @@ def self_training(dataset,
     nmap_lines = nmap_out.stdout.splitlines()
     filter_evaluation_log(nmap_lines, logger)
 
+    selected_indices = []
     iteration = 0
     while True:
         if iteration >= max_iter:
@@ -84,9 +86,14 @@ def self_training(dataset,
 
         # Unify labeled and selected pseudo labeled data
         logger.info(f'Round #{iteration}: Unify labels and pseudo labels')
-        transfer_data(in_path1=labeled_path,
-                      in_path2=prediction_path,
-                      out_path=selection_path)
+        # transfer_data(in_path1=labeled_path,
+        #               in_path2=prediction_path,
+        #               out_path=selection_path)
+        selected_indices = transfer_and_collect(in_path1=prediction_path,
+                                                in_path2=prediction_path,
+                                                out_path=selection_path,
+                                                threshold=threshold,
+                                                current_indices=selected_indices)
 
         # Compute F1 on selection
         logger.info(f'Round #{iteration}: F1 on selection')
