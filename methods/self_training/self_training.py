@@ -77,6 +77,7 @@ def self_training(dataset,
 
         if len(current_data) >= unlabeled_len:
             logger.info(f'Round #{iteration}: Number of selected sentences equals unlabeled length')
+            break
 
         # Predict on unlabeled data
         modify_config_file(default_predict_config_path,
