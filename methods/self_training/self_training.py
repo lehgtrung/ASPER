@@ -94,6 +94,8 @@ def self_training(dataset,
                                                 out_path=selection_path,
                                                 threshold=threshold,
                                                 current_indices=selected_indices)
+        logger.info(f'Round #{iteration}: Selected indices {selected_indices}')
+        logger.info(f'Round #{iteration}: Number of selected sentences {len(selected_indices)}')
 
         # Compute F1 on selection
         logger.info(f'Round #{iteration}: F1 on selection')
