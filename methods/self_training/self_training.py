@@ -67,6 +67,7 @@ def self_training(dataset,
     filter_evaluation_log(nmap_lines, logger)
 
     selected_indices = []
+    current_data = []
     iteration = 0
     while True:
         if iteration >= max_iter:
@@ -89,11 +90,12 @@ def self_training(dataset,
         # transfer_data(in_path1=labeled_path,
         #               in_path2=prediction_path,
         #               out_path=selection_path)
-        selected_indices = transfer_and_collect(in_path1=prediction_path,
-                                                in_path2=prediction_path,
-                                                out_path=selection_path,
-                                                threshold=threshold,
-                                                current_indices=selected_indices)
+        current_data, selected_indices = transfer_and_collect(in_path1=prediction_path,
+                                                              in_path2=prediction_path,
+                                                              out_path=selection_path,
+                                                              threshold=threshold,
+                                                              current_data=current_data,
+                                                              current_indices=selected_indices)
         logger.info(f'Round #{iteration}: Selected indices {selected_indices}')
         logger.info(f'Round #{iteration}: Number of selected sentences {len(selected_indices)}')
 
