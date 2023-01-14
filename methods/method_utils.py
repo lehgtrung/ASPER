@@ -15,10 +15,10 @@ def transfer_data(in_path1, in_path2, out_path):
         json.dump(data1 + data2, f)
 
 
-def transfer_and_collect(in_path1, in_path2, out_path, threshold,
+def transfer_and_collect(labeled_path, in_path2, out_path, threshold,
                          current_data, current_indices):
-    with open(in_path1, 'r') as f:
-        data1 = json.load(f)
+    with open(labeled_path, 'r') as f:
+        labeled = json.load(f)
     with open(in_path2, 'r') as f:
         data2 = json.load(f)
     idx = []
@@ -36,7 +36,7 @@ def transfer_and_collect(in_path1, in_path2, out_path, threshold,
     selected = [data2[i] for i in range(len(data2)) if i in idx]
 
     with open(out_path, 'w') as f:
-        json.dump(data1 + current_data + selected, f)
+        json.dump(labeled + current_data + selected, f)
 
     return current_data + selected, current_indices + idx
 

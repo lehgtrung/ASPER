@@ -66,12 +66,17 @@ def self_training(dataset,
     nmap_lines = nmap_out.stdout.splitlines()
     filter_evaluation_log(nmap_lines, logger)
 
+    with open(unlabeled_path, 'r') as f:
+        unlabeled_len = len(json.load(f))
     selected_indices = []
     current_data = []
     iteration = 0
     while True:
         if iteration >= max_iter:
             break
+
+        if len(current_data) >= unlabeled_len:
+            logger.info(f'Round #{iteration}: Number of selected sentences equals unlabeled length')
 
         # Predict on unlabeled data
         modify_config_file(default_predict_config_path,
@@ -90,7 +95,7 @@ def self_training(dataset,
         # transfer_data(in_path1=labeled_path,
         #               in_path2=prediction_path,
         #               out_path=selection_path)
-        current_data, selected_indices = transfer_and_collect(in_path1=prediction_path,
+        current_data, selected_indices = transfer_and_collect(labeled_path=labeled_path,
                                                               in_path2=prediction_path,
                                                               out_path=selection_path,
                                                               threshold=threshold,
