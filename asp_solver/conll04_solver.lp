@@ -50,9 +50,9 @@ bad(relation(NR, P, Q, P, Q)) :- atom(relation(NR, P, Q, P, Q)).
 									  atom(entity(NE', P, R)), R != Q.
 :- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
-2{bad(entity(NE, P, Q)); bad(entity(NE', R, Q))} :- atom(entity(NE, P, Q)),
-									  atom(entity(NE', R, Q)), P != R.
-:- ok(entity(NE, P, Q)), ok(entity(NE', R, Q)), P != R.
+%2{bad(entity(NE, P, Q)); bad(entity(NE', R, Q))} :- atom(entity(NE, P, Q)),
+%									  atom(entity(NE', R, Q)), P != R.
+%:- ok(entity(NE, P, Q)), ok(entity(NE', R, Q)), P != R.
 
 %% potentially incorrect
 
