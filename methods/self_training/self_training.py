@@ -66,17 +66,9 @@ def self_training(dataset,
     nmap_lines = nmap_out.stdout.splitlines()
     filter_evaluation_log(nmap_lines, logger)
 
-    with open(unlabeled_path, 'r') as f:
-        unlabeled_len = len(json.load(f))
-    selected_indices = []
-    current_data = []
     iteration = 0
     while True:
         if iteration >= max_iter:
-            break
-
-        if len(current_data) >= unlabeled_len:
-            logger.info(f'Round #{iteration}: Number of selected sentences equals unlabeled length')
             break
 
         # Predict on unlabeled data
@@ -96,14 +88,11 @@ def self_training(dataset,
         # transfer_data(in_path1=labeled_path,
         #               in_path2=prediction_path,
         #               out_path=selection_path)
-        current_data, selected_indices = transfer_and_collect(labeled_path=labeled_path,
-                                                              in_path2=prediction_path,
-                                                              out_path=selection_path,
-                                                              threshold=threshold,
-                                                              current_data=current_data,
-                                                              current_indices=selected_indices)
-        logger.info(f'Round #{iteration}: Selected indices {selected_indices}')
-        logger.info(f'Round #{iteration}: Number of selected sentences {len(selected_indices)}')
+        num_selected = transfer_with_threshold(labeled_path=labeled_path,
+                                               in_path2=prediction_path,
+                                               out_path=selection_path,
+                                               threshold=threshold)
+        logger.info(f'Round #{iteration}: Number of selected sentences {num_selected}')
 
         # Compute F1 on selection
         # logger.info(f'Round #{iteration}: F1 on selection')

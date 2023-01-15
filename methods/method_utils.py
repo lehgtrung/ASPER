@@ -15,30 +15,28 @@ def transfer_data(in_path1, in_path2, out_path):
         json.dump(data1 + data2, f)
 
 
-def transfer_and_collect(labeled_path, in_path2, out_path, threshold,
-                         current_data, current_indices):
+def transfer_with_threshold(labeled_path, in_path2, out_path, threshold):
     with open(labeled_path, 'r') as f:
         labeled = json.load(f)
     with open(in_path2, 'r') as f:
         data2 = json.load(f)
     idx = []
     for i, row in enumerate(data2):
-        if i not in current_indices:
-            min_prob = 1.1
-            for ent in row['entities']:
-                if ent['prob'] < min_prob:
-                    min_prob = ent['prob']
-            for rel in row['relations']:
-                if rel['prob'] < min_prob:
-                    min_prob = rel['prob']
-            if min_prob >= threshold:
-                idx.append(i)
+        # if i not in current_indices:
+        min_prob = 1.1
+        for ent in row['entities']:
+            if ent['prob'] < min_prob:
+                min_prob = ent['prob']
+        for rel in row['relations']:
+            if rel['prob'] < min_prob:
+                min_prob = rel['prob']
+        if min_prob >= threshold:
+            idx.append(i)
     selected = [data2[i] for i in range(len(data2)) if i in idx]
 
     with open(out_path, 'w') as f:
-        json.dump(labeled + current_data + selected, f)
-
-    return current_data + selected, current_indices + idx
+        json.dump(labeled + selected, f)
+    return len(selected)
 
 
 def model_exists(path):
