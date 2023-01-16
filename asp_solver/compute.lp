@@ -56,12 +56,13 @@ def process_model(m):
     else:
         avg_pr = avg_pr / no_atoms
 
+    local_pr = min_pr
     if not relation_exist:
         pr = 0
         min_pr = 0
         avg_pr = 0
 
-    max_as.append([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, min_pr])
+    max_as.append([[str(x) for x in m.symbols(atoms=True) if x.match("ok",1)], pr, local_pr, min_pr])
 
     #if pr > max_val:
          # max_val = pr
@@ -104,8 +105,8 @@ def main(prg):
     #  max_as is the answer set with the maximal probability (max_val)
 
     if max_as:
-        max_as = sorted(max_as, key=lambda x: (-x[1], -len(x[0])))[0]
-        max_as = [max_as[0], 0, max_as[2]]
+        max_as = sorted(max_as, key=lambda x: (-x[1], -len(x[0]), -x[2]))[0]
+        max_as = [max_as[0], 0, max_as[3]]
 
     print(max_as)
     # print(max_val)
