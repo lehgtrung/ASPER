@@ -23,6 +23,10 @@ if __name__ == '__main__':
                         default=10,
                         type=int,
                         action='store')
+    parser.add_argument('--start_iter',
+                        required=True,
+                        type=int,
+                        action='store')
     parser.add_argument('--with_curriculum',
                         action='store_true')
     args = parser.parse_args()
@@ -103,6 +107,7 @@ if __name__ == '__main__':
                    selection_path=SELECTION_PATH,
                    labeled_model_path=LABELED_MODEL_PATH,
                    logger=logger,
+                   start_iter=args.start_iter,
                    with_curriculum=WITH_CURRICULUM,
                    max_iter=args.max_iter)
 

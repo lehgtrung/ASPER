@@ -28,6 +28,7 @@ def curriculum_ker(dataset,
                    selection_path,
                    labeled_model_path,
                    logger,
+                   start_iter,
                    max_iter,
                    with_curriculum,
                    delta=0.2):
@@ -76,10 +77,10 @@ def curriculum_ker(dataset,
     nmap_lines = nmap_out.stdout.splitlines()
     filter_evaluation_log(nmap_lines, logger)
 
-    iteration = 0
+    iteration = start_iter
     current_delta = 1.0 - delta
     while iteration < max_iter:
-        if current_delta < 0:
+        if current_delta < 0 and with_curriculum:
             break
 
         logger.info(f'Round #{iteration}: Current delta: {current_delta}')
