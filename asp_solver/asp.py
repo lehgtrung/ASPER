@@ -205,6 +205,7 @@ def convert_doc_to_atoms(dataset, pred):
 
 
 def solve(command):
+    print(command)
     # Write the program to a file
     process = subprocess.Popen(command,
                                stdin=subprocess.PIPE,
