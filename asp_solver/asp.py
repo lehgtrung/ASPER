@@ -205,7 +205,7 @@ def convert_doc_to_atoms(dataset, pred):
 
 
 def solve(command):
-    print(command)
+    # print(command)
     # Write the program to a file
     process = subprocess.Popen(command,
                                stdin=subprocess.PIPE,
@@ -224,7 +224,7 @@ def solve(command):
 
 
 def solve_single_doc(dataset, unlabeled, auto_path, atom_path):
-    print(atom_path)
+    # print(atom_path)
     command = COMMAND.format(
         dataset=dataset,
         auto_path=auto_path,
