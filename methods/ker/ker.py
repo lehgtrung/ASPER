@@ -93,7 +93,7 @@ def ker(dataset,
 
         # Select labels using ASP
         logger.info(f'Round #{iteration}: Write prediction into files')
-        write_pred_to_files(prediction_path, atom_meta_path)
+        write_pred_to_files(dataset, prediction_path, atom_meta_path)
 
         logger.info(f'Round #{iteration}: Solve using ASP')
         count_changes = solve_all_docs(unlabeled_path=unlabeled_path,

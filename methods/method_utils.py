@@ -206,11 +206,11 @@ def write_down_a_list(path, lst):
         f.writelines(map(lambda x: x + '\n', lst))
 
 
-def write_pred_to_files(prediction_path, meta_path):
+def write_pred_to_files(dataset, prediction_path, meta_path):
     with open(prediction_path, 'r') as f:
         pred = json.load(f)
     for i, doc in enumerate(pred):
         path = meta_path.format(i)
-        atoms = convert_doc_to_atoms(doc)
+        atoms = convert_doc_to_atoms(dataset, doc)
         write_down_a_list(path, atoms)
 

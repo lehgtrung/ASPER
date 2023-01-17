@@ -98,7 +98,7 @@ def curriculum_ker(dataset,
 
         # Select labels using ASP
         logger.info(f'Round #{iteration}: Write prediction into files')
-        write_pred_to_files(prediction_path, atom_meta_path)
+        write_pred_to_files(dataset, prediction_path, atom_meta_path)
 
         logger.info(f'Round #{iteration}: Solve using ASP')
         solve_all_docs_with_curriculum(dataset=dataset,
