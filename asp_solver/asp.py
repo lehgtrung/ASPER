@@ -223,7 +223,7 @@ def solve(command):
 
 
 def solve_single_doc(dataset, unlabeled, auto_path, atom_path):
-    # print(atom_path)
+    print(atom_path)
     command = COMMAND.format(
         dataset=dataset,
         auto_path=auto_path,
