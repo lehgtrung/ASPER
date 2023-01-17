@@ -19,6 +19,19 @@ type_def(adverseEffect, adverseEffect, drug).
 									                    P1 < Q1, P2 > Q1, P2 < Q2.
 :- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1, P2 < Q2.
 
+2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))}: :- atom(entity(CH, C1, C2)),
+                                                        atom(entity(PA, P1, P2)),
+                                                        C1 >= P1, C2 <= P2,
+                                                        CH != drug,
+                                                        PA != adverseEffect.
+
+ok(entity(CH, C1, C2)), ok(entity(PA, P1, P2)), atom(entity(CH, C1, C2)),
+                                                atom(entity(PA, P1, P2)),
+                                                C1 >= P1, C2 <= P2,
+                                                CH != drug,
+                                                PA != adverseEffect.
+
+
 %% Type constraints
 2{bad(relation(NR, P, Q, P', Q')); bad(entity(NE, P, Q))} :- atom(relation(NR, P, Q, P', Q')),
 											atom(entity(NE, P, Q)),
