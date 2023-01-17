@@ -34,7 +34,6 @@ def process_model(m):
     avg_pr = 0
     no_atoms = 0
     relation_exist = False
-    relation_flag = False
     for x in curr_as:
          if x.match("prod", 2) :
                valuePr = convert(str(x.arguments[0]))
@@ -45,8 +44,6 @@ def process_model(m):
          if x.match("invprod", 2) :
                pr = pr * (1.0 - convert(str(x.arguments[0])))
          if x.match("relation_exist",0):
-               relation_exist = True
-         if x.match("relation_flag",0):
                relation_exist = True
 
     # Trung, fix console problem
@@ -60,7 +57,7 @@ def process_model(m):
         avg_pr = avg_pr / no_atoms
 
     local_pr = min_pr
-    if not relation_exist and relation_flag:
+    if not relation_exist:
         pr = 0
         min_pr = 0
         avg_pr = 0

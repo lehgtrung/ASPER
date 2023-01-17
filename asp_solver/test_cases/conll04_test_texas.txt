@@ -1,20 +1,15 @@
 
-atom(entity(org,0,2),"0.7"). % CDT Tuesday
-atom(entity(other,1,2),"0.6"). % Tuesday
-atom(entity(loc,6,8),"0.75"). % Port Ather
-atom(entity(loc,9,10),"0.85"). % Galveston
-atom(entity(loc,11,12),"0.9"). % Texas
 
-atom(relation(locatedIn,6,8,9,10),"0.9"). % locatedIn(Port Ather, Galveston)
-atom(relation(locatedIn,9,10,11,12),"0.85"). % locatedIn(Galveston, Texas)
-atom(relation(locatedIn,0,2,11,12),"0.8"). % locatedIn(CDT Tuesday, Texas)
+% CDT Tuesday is in the area of Port Arther and Galveston , Texas
 
+atom(entity(org,0,2),"0.888"). % CDT Tuesday
+atom(entity(other,1,2),"0.799"). % Tuesday
+atom(entity(loc,7,9),"0.998"). % Port Ather
+atom(entity(loc,10,11),"0.998"). % Galveston
+atom(entity(loc,12,13),"0.998"). % Texas
 
-% Answerset
-%ok(entity(loc,0,2)) % loc(CDT Tuesday)
-%ok(entity(loc,6,8)) % loc(Port Ather)
-%ok(entity(loc,9,10)) % loc(Galveston)
-%ok(entity(loc,11,12)) % loc(Texas)
-%ok(relation(locatedIn,6,8,9,10)) % locatedIn(Port Ather, Galveston)
-%ok(relation(locatedIn,9,10,11,12)) % locatedIn(Galveston, Texas)
-%ok(relation(locatedIn,6,8,11,12)) % locatedIn(Port Ather, Texas)
+atom(relation(locatedIn,7,9,10,11),"0.998"). % locatedIn(Port Ather, Galveston)
+atom(relation(locatedIn,10,11,12,13),"0.993"). % locatedIn(Galveston, Texas)
+atom(relation(locatedIn,0,2,12,13),"0.993"). % locatedIn(CDT Tuesday, Texas)
+atom(relation(orgbasedIn,1,2,12,13),"0.777"). % locatedIn(Tuesday, Texas)
+

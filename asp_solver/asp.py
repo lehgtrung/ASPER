@@ -6,40 +6,110 @@ import json
 import numpy as np
 
 
-COMMAND = 'clingo --opt-mode=optN asp_solver/conll04_solver.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
+COMMAND = 'clingo --opt-mode=optN asp_solver/{dataset}_solver.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
           '--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
-# entity_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+)\)')
 entity_pattern = re.compile(r'^entity\((\w+),([0-9]+),([0-9]+)\)')
-# relation_pattern = re.compile(r'(\w+)\(([0-9]+),([0-9]+),([0-9]+),([0-9]+)\)')
 relation_pattern = re.compile(r'^relation\((\w+),([0-9]+),([0-9]+),([0-9]+),([0-9]+)\)')
-# ok_pattern = re.compile(r'^ok\((.*?)\)\.')
 ok_pattern = re.compile(r'^ok\((.*?)\)$')
 syntactic_types = ['propOwner', 'dead']
 
 
-def convert_doc_type_to_asp_type(atype, form):
-    if form == 'entity':
-        return atype.lower()
-    else:
-        split = atype.split('_')
-        if len(split) > 1:
-            return atype.split('_')[0].lower() + atype.split('_')[1]
-        else:
-            return atype.split('_')[0].lower()
-
-
-def convert_asp_type_to_doc_type(atype, form):
+def convert_doc_type_to_asp_type(dataset, atype, form):
     dct = {
-        'workFor': 'Work_For',
-        'orgbasedIn': 'OrgBased_In',
-        'liveIn': 'Live_In',
-        'locatedIn': 'Located_In',
-        'kill': 'Kill'
+        'conll04': {
+            'entity': {
+                'Peop': 'peop',
+                'Other': 'other',
+                'Loc': 'loc',
+                'Org': 'org'
+            },
+            'relation': {
+                'Work_For': 'workFor',
+                'OrgBased_In': 'orgbasedIn',
+                'Live_In': 'liveIn',
+                'Located_In': 'locatedIn',
+                'Kill': 'kill'
+            }
+        },
+        'ade': {
+            'entity': {
+                'Adverse-Effect': 'adverseEffect',
+                'Drug': 'drug'
+            },
+            'relation': {
+                'Adverse-Effect': 'adverseEffect'
+            }
+        },
+        'scierc': {
+            'entity': {
+                'Task': 'task',
+                'Method': 'method',
+                'Material': 'material',
+                'OtherScientificTerm': 'otherScientificTerm',
+                'Metric': 'metric',
+                'Generic': 'generic'
+            },
+            'relation': {
+                'Used-for': 'useFor',
+                'Feature-of': 'featureOf',
+                'Hyponym-of': 'hyponymOf',
+                'Evaluate-for': 'evaluateFor',
+                'Part-of': 'partOf',
+                'Compare': 'compare',
+                'Conjunction': 'conjunction'
+            }
+        }
     }
-    if form == 'entity':
-        return atype.capitalize()
-    else:
-        return dct[atype]
+    return dct[dataset][form][atype]
+
+
+def convert_asp_type_to_doc_type(dataset, atype, form):
+    dct = {
+        'conll04': {
+            'entity': {
+                'peop': 'Peop',
+                'other': 'Other',
+                'loc': 'Loc',
+                'org': 'Org'
+            },
+            'relation': {
+                'workFor': 'Work_For',
+                'orgbasedIn': 'OrgBased_In',
+                'liveIn': 'Live_In',
+                'locatedIn': 'Located_In',
+                'kill': 'Kill'
+            }
+        },
+        'ade': {
+            'entity': {
+                'adverseEffect': 'Adverse-Effect',
+                'drug': 'Drug'
+            },
+            'relation': {
+                'adverseEffect': 'Adverse-Effect'
+            }
+        },
+        'scierc': {
+            'entity': {
+                'task': 'Task',
+                'method': 'Method',
+                'material': 'Material',
+                'otherScientificTerm': 'OtherScientificTerm',
+                'metric': 'Metric',
+                'generic': 'Generic'
+            },
+            'relation': {
+                'useFor': 'Used-for',
+                'featureOf': 'Feature-of',
+                'hyponymOf': 'Hyponym-of',
+                'evaluateFor': 'Evaluate-for',
+                'partOf': 'Part-of',
+                'compare': 'Compare',
+                'conjunction': 'Conjunction'
+            }
+        }
+    }
+    return dct[dataset][form][atype]
 
 
 def match_form(atom, form):
@@ -49,19 +119,19 @@ def match_form(atom, form):
         return bool(re.search(relation_pattern, atom))
 
 
-def restore_entity(atom):
+def restore_entity(dataset, atom):
     match = re.findall(entity_pattern, atom)
     match = match[0]
     if match[0] in syntactic_types:
         return None
     return {
-        'type': convert_asp_type_to_doc_type(match[0], 'entity'),
+        'type': convert_asp_type_to_doc_type(dataset, match[0], 'entity'),
         'start': int(match[1]),
         'end': int(match[2]),
     }
 
 
-def restore_relation(atom, entities):
+def restore_relation(dataset, atom, entities):
     match = re.findall(relation_pattern, atom)
     match = match[0]
     if match[0] in syntactic_types:
@@ -76,7 +146,7 @@ def restore_relation(atom, entities):
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
     return {
-        'type': convert_asp_type_to_doc_type(match[0], 'relation'),
+        'type': convert_asp_type_to_doc_type(dataset, match[0], 'relation'),
         'head': entities_wo_type.index(head_ent),
         'tail': entities_wo_type.index(tail_ent)
     }
@@ -86,19 +156,19 @@ def remove_ok(atom):
     return re.findall(ok_pattern, atom)[0]
 
 
-def convert_atoms_to_doc(atoms, prob, tokens):
+def convert_atoms_to_doc(dataset, atoms, prob, tokens):
     entities = []
     relations = []
     for atom in atoms:
         atom = remove_ok(atom)
         if match_form(atom, 'entity'):
-            entity = restore_entity(atom)
+            entity = restore_entity(dataset, atom)
             if entity:
                 entities.append(entity)
     for atom in atoms:
         atom = remove_ok(atom)
         if match_form(atom, 'relation'):
-            relation = restore_relation(atom, entities)
+            relation = restore_relation(dataset, atom, entities)
             if relation:
                 relations.append(relation)
     return {
@@ -109,13 +179,12 @@ def convert_atoms_to_doc(atoms, prob, tokens):
     }
 
 
-
-def convert_doc_to_atoms(pred):
+def convert_doc_to_atoms(dataset, pred):
     atoms = []
     entities = pred['entities']
     relations = pred['relations']
     for ent in entities:
-        etype = convert_doc_type_to_asp_type(ent['type'], 'entity')
+        etype = convert_doc_type_to_asp_type(dataset, ent['type'], 'entity')
         start = ent['start']
         end = ent['end']
         prob = ent['prob']
@@ -123,7 +192,7 @@ def convert_doc_to_atoms(pred):
         c = f'atom(entity({etype},{start},{end}),"{prob}").'
         atoms.append(c)
     for rel in relations:
-        rtype = convert_doc_type_to_asp_type(rel['type'], 'relation')
+        rtype = convert_doc_type_to_asp_type(dataset, rel['type'], 'relation')
         head = entities[rel['head']]
         head_start, head_end = head['start'], head['end']
         tail = entities[rel['tail']]
@@ -153,9 +222,10 @@ def solve(command):
     return atoms, prob
 
 
-def solve_single_doc(unlabeled, auto_path, atom_path):
+def solve_single_doc(dataset, unlabeled, auto_path, atom_path):
     # print(atom_path)
     command = COMMAND.format(
+        dataset=dataset,
         auto_path=auto_path,
         atom_path=atom_path
     ).split()
@@ -165,13 +235,14 @@ def solve_single_doc(unlabeled, auto_path, atom_path):
     atoms, prob = solve(command)
     atoms = [e.replace(' ', '') for e in atoms]
     # Convert result to
-    doc = convert_atoms_to_doc(atoms=atoms,
+    doc = convert_atoms_to_doc(dataset=dataset,
+                               atoms=atoms,
                                prob=prob,
                                tokens=unlabeled[i]['tokens'])
     return doc, atoms
 
 
-def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_path):
+def solve_all_docs(dataset, unlabeled_path, atom_meta_path, auto_meta_path, selection_path):
     with open(unlabeled_path, 'r') as f:
         unlabeled = json.load(f)
     new_pred = []
@@ -179,7 +250,7 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
     for i, doc in enumerate(unlabeled):
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
-        doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
+        doc, atoms = solve_single_doc(dataset, unlabeled, auto_path, atom_path)
         if len(atoms) == 0:
             # raise ValueError(f'Empty atoms at #{i}')
             print(f'Empty atoms at #{i}')
@@ -191,7 +262,7 @@ def solve_all_docs(unlabeled_path, atom_meta_path, auto_meta_path, selection_pat
     return count_changes
 
 
-def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
+def solve_all_docs_with_curriculum(dataset, unlabeled_path, atom_meta_path,
                                    auto_meta_path, selection_path,
                                    with_curriculum, current_delta, logger):
     with open(unlabeled_path, 'r') as f:
@@ -201,7 +272,7 @@ def solve_all_docs_with_curriculum(unlabeled_path, atom_meta_path,
     for i, doc in enumerate(unlabeled):
         auto_path = auto_meta_path.format(i)
         atom_path = atom_meta_path.format(i)
-        doc, atoms = solve_single_doc(unlabeled, auto_path, atom_path)
+        doc, atoms = solve_single_doc(dataset, unlabeled, auto_path, atom_path)
         docs.append(doc)
 
     if with_curriculum:

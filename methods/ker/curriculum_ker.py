@@ -101,7 +101,8 @@ def curriculum_ker(dataset,
         write_pred_to_files(prediction_path, atom_meta_path)
 
         logger.info(f'Round #{iteration}: Solve using ASP')
-        solve_all_docs_with_curriculum(unlabeled_path=unlabeled_path,
+        solve_all_docs_with_curriculum(dataset=dataset,
+                                       unlabeled_path=unlabeled_path,
                                        atom_meta_path=atom_meta_path,
                                        auto_meta_path=auto_meta_path,
                                        selection_path=prediction_path + '.tmp',
