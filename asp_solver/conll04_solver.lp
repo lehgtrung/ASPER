@@ -37,14 +37,14 @@ type_def(kill, peop, peop).
 
 
 %% overlapping
-%2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
-%									  atom(entity(NE', Q1, Q2)),
-%									  P1 < Q1, P2 > Q1.
-%:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1.
+2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
+									  atom(entity(NE', Q1, Q2)),
+									  P1 < Q1, P2 > Q1.
+:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1.
 
-%2{bad(entity(NE, P, Q)); bad(entity(NE', P, R))} :- atom(entity(NE, P, Q)),
-%									  atom(entity(NE', P, R)), R != Q.
-%:- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
+2{bad(entity(NE, P, Q)); bad(entity(NE', P, R))} :- atom(entity(NE, P, Q)),
+									  atom(entity(NE', P, R)), R != Q.
+:- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
 %% Bad entity -> bad relation
 bad(relation(NR, P, Q, P', Q')) :- atom(relation(NR, P, Q, P', Q')),
