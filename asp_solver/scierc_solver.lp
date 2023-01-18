@@ -21,8 +21,8 @@ invprod(P, A) :- atom(A, P), nok(A).
 :- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
 %% Eliminate relation with missing head or tail
-:- ok(relation(NR,P,Q,P',Q')) , not ok(entity(_,P,Q)).
-:- ok(relation(NR,P,Q,P',Q')) , not ok(entity(_,P',Q')).
+%:- ok(relation(NR,P,Q,P',Q')) , not ok(entity(_,P,Q)).
+%:- ok(relation(NR,P,Q,P',Q')) , not ok(entity(_,P',Q')).
 
 
 %% Eliminate reciprocal relations
