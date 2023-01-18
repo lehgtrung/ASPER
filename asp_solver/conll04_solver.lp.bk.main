@@ -33,20 +33,14 @@ type_def(kill, peop, peop).
 											type_def(NR, E1, E2),
 											E2 != NE.
 
-:- ok(relation(NR, P, Q, P', Q')), ok(entity(NE, P, Q)), type_def(NR, NE', _), NE != NE'.
-:- ok(relation(NR, P, Q, P', Q')), ok(entity(NE, P', Q')), type_def(NR, _, NE'), NE != NE'.
-
-
 bad(relation(NR, P, Q, P, Q)) :- atom(relation(NR, P, Q, P, Q)).
-:- ok(relation(_, P, Q, P, Q)).
 
 2{bad(entity(NE, P, Q)); bad(entity(NE', P, Q))} :- atom(entity(NE, P, Q)),
 									  atom(entity(NE', P, Q)),
 									  NE != NE'.
-:- ok(entity(NE,P,Q)), ok(entity(NE',P,Q)), NE != NE'.
-
 
 %% overlapping
+
 2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
 									  atom(entity(NE', Q1, Q2)),
 									  P1 < Q1, P2 > Q1.
@@ -56,7 +50,12 @@ bad(relation(NR, P, Q, P, Q)) :- atom(relation(NR, P, Q, P, Q)).
 									  atom(entity(NE', P, R)), R != Q.
 :- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
+%2{bad(entity(NE, P, Q)); bad(entity(NE', R, Q))} :- atom(entity(NE, P, Q)),
+%									  atom(entity(NE', R, Q)), P != R.
+%:- ok(entity(NE, P, Q)), ok(entity(NE', R, Q)), P != R.
+
 %% potentially incorrect
+
 bad(relation(NR, P, Q, P', Q')) :- atom(relation(NR, P, Q, P', Q')),
 					 	 type_def(NR, E, E'),
 						 bad(entity(E, P, Q)).
@@ -64,6 +63,12 @@ bad(relation(NR, P, Q, P', Q')) :- atom(relation(NR, P, Q, P', Q')),
 bad(relation(NR, P, Q, P', Q')) :- atom(relation(NR, P, Q, P', Q')),
 					 	 type_def(NR, E, E'),
 						 bad(entity(E', P', Q')).
+
+:- ok(relation(NR, P, Q, P', Q')), ok(entity(NE, P, Q)), type_def(NR, NE', _), NE != NE'.
+:- ok(relation(NR, P, Q, P', Q')), ok(entity(NE, P', Q')), type_def(NR, _, NE'), NE != NE'.
+
+:- ok(relation(_, P, Q, P, Q)).
+:- ok(entity(NE,P,Q)), ok(entity(NE',P,Q)), NE != NE'.
 
 ok(entity(E, P, Q)) :- ok(relation(NR, P, Q, P', Q')), type_def(NR, E, E').
 ok(entity(E', P', Q')) :- ok(relation(NR, P, Q, P', Q')), type_def(NR, E, E').
