@@ -40,7 +40,7 @@ nok(X) :- inf_atom(X), not ok(X).
 %% A sub-word pair (parent,child) should have identical types or one of the type is generic/otherScientificTerm
 %% or parent's type is task.
 %% (CH,C1,C2) is a sub-word of (PA,P1,P2)
-2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))}: :- atom(entity(CH, C1, C2)),
+2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))}:- atom(entity(CH, C1, C2)),
                                                         atom(entity(PA, P1, P2)),
                                                         C1 >= P1, C2 <= P2,
                                                         1 {C1!=P1; C2!=P2},
@@ -51,7 +51,7 @@ nok(X) :- inf_atom(X), not ok(X).
                                                         CH != otherScientificTerm,
                                                         CH != generic.
 
-ok(entity(CH, C1, C2)); ok(entity(PA, P1, P2)), atom(entity(CH, C1, C2)),
+:- ok(entity(CH, C1, C2)); ok(entity(PA, P1, P2)), atom(entity(CH, C1, C2)),
                                                 atom(entity(PA, P1, P2)),
                                                 C1 >= P1, C2 <= P2,
                                                 1 {C1!=P1; C2!=P2},
