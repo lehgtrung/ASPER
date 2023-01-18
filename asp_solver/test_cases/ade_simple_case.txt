@@ -4,6 +4,8 @@ atom(entity(drug,1,10),"0.999").
 
 atom(entity(drug,5,10),"0.998").
 
+atom(entity(drug,20,25),"0.998").
+
 atom(entity(adverseEffect,11,18),"0.998").
 
 atom(relation(adverseEffect,11,18,5,10),"0.997").

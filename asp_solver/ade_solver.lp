@@ -21,18 +21,25 @@ overlap_typedef(drug, adverseEffect).
 									                    P1 < Q1, P2 > Q1, P2 < Q2.
 :- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1, P2 < Q2.
 
-2{bad(entity(NE, P, Q)); bad(entity(NE', R, Q))} :- atom(entity(NE, P, Q)),
-									  atom(entity(NE', R, Q)), P != R.
-:- ok(entity(NE, P, Q)), ok(entity(NE', R, Q)), P != R.
+%2{bad(entity(NE, P, Q)); bad(entity(NE', R, Q))} :- atom(entity(NE, P, Q)),
+%									  atom(entity(NE', R, Q)), P != R.
+%:- ok(entity(NE, P, Q)), ok(entity(NE', R, Q)), P != R.
 
 
 2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))} :- atom(entity(CH, C1, C2)),
                                                        atom(entity(PA, P1, P2)),
-                                                       C1 >= P1, C2 < P2,
+                                                       C1 >= P1, C2 <= P2,
+                                                       1 {C1!=P1; C2!=P2},
                                                        not overlap_typedef(CH,PA).
 
-:- ok(entity(CH, C1, C2)), ok(entity(PA, P1, P2)), C1 >= P1, C2 < P2,
-                                                not overlap_typedef(CH,PA).
+:- ok(entity(CH, C1, C2)), ok(entity(PA, P1, P2)), C1 >= P1, C2 <= P2,
+                                                   1 {C1!=P1; C2!=P2},
+                                                   not overlap_typedef(CH,PA).
+
+%% Cartesian product
+atom(relation(NR, P, Q, P', Q')):- type_def(NR, NE, NE'),
+                                   atom(entity(NE, P, Q)),
+                                   atom(entity(NE', P', Q')).
 
 
 %% Type constraints
