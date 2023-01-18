@@ -116,9 +116,30 @@ rule(relation(hyponymOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relatio
 :- rule(X, Y, Z), ok(X), ok(Y), not ok(Z).
 
 
+%%% an atom should be kept if it does not violate any type constraint
+%%% e.g., peop(x) is okay if there is no other atom indicating that it is a location, an organization, or other entity
+%%%                      and x is not in any relation such as workfor(P,x) ...
+
+ok(X)  :- atom(X), not bad(X).
+
+%%% an atom could be kept if it contributes to the violation of some constraint
+%%% or it is an inferred atom
+
+{ ok(X) } :- atom(X), bad(X).
+
+{ ok(X) } :- inf_atom(X), bad(X).
+
+%%% when an atom is not kept then it is not okay
+
+nok(X) :- atom(X), not ok(X).
+nok(X) :- inf_atom(X), not ok(X).
+
+#show ok/1.
+
+
 %For Compare and Conjunction: compare abbreviation with original concept, usually abbreviation is written first (cond1),
 % sometimes written latter but in generic form (those, that,...)
 % and the head (abbreviation) is shorter than the tail (original concept)
 
-:- ok(relation(conjunction,P,Q,P',Q')), ok(entity(E,P,Q)), ok(entity(E',P',Q')),
-    P > P', (Q-P) < (Q'-P'), E != generic, E != otherScientificTerm, E != E'.
+%:- ok(relation(conjunction,P,Q,P',Q')), ok(entity(E,P,Q)), ok(entity(E',P',Q')),
+%    P > P', (Q-P) < (Q'-P'), E != generic, E != otherScientificTerm, E != E'.
