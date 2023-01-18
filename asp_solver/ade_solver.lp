@@ -13,23 +13,26 @@ invprod(P, A) :- atom(A, P), nok(A).
 %% Type def for CoNLL04
 type_def(adverseEffect, adverseEffect, drug).
 
+overlap_typedef(drug, adverseEffect).
+
 %% Overlapping
 2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
 									                    atom(entity(NE', Q1, Q2)),
 									                    P1 < Q1, P2 > Q1, P2 < Q2.
 :- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1, P2 < Q2.
 
-2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))} :- atom(entity(CH, C1, C2)),
-                                                        atom(entity(PA, P1, P2)),
-                                                        C1 >= P1, C2 <= P2,
-                                                        CH != drug,
-                                                        PA != adverseEffect.
+2{bad(entity(NE, P, Q)); bad(entity(NE', R, Q))} :- atom(entity(NE, P, Q)),
+									  atom(entity(NE', R, Q)), P != R.
+:- ok(entity(NE, P, Q)), ok(entity(NE', R, Q)), P != R.
 
-ok(entity(CH, C1, C2)), ok(entity(PA, P1, P2)), atom(entity(CH, C1, C2)),
-                                                atom(entity(PA, P1, P2)),
-                                                C1 >= P1, C2 <= P2,
-                                                CH != drug,
-                                                PA != adverseEffect.
+
+2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))} :- atom(entity(CH, C1, C2)),
+                                                       atom(entity(PA, P1, P2)),
+                                                       C1 >= P1, C2 < P2,
+                                                       not overlap_typedef(CH,PA).
+
+:- ok(entity(CH, C1, C2)), ok(entity(PA, P1, P2)), C1 >= P1, C2 < P2,
+                                                not overlap_typedef(CH,PA).
 
 
 %% Type constraints

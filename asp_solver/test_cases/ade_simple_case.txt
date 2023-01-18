@@ -1,6 +1,6 @@
 
 
-atom(entity(drug,1,7),"0.999").
+atom(entity(drug,1,10),"0.999").
 
 atom(entity(drug,5,10),"0.998").
 
