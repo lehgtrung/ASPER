@@ -50,7 +50,7 @@ def convert_doc_type_to_asp_type(dataset, atype, form):
                 'Generic': 'generic'
             },
             'relation': {
-                'Used-for': 'useFor',
+                'Used-for': 'usedFor',
                 'Feature-of': 'featureOf',
                 'Hyponym-of': 'hyponymOf',
                 'Evaluate-for': 'evaluateFor',
@@ -99,7 +99,7 @@ def convert_asp_type_to_doc_type(dataset, atype, form):
                 'generic': 'Generic'
             },
             'relation': {
-                'useFor': 'Used-for',
+                'usedFor': 'Used-for',
                 'featureOf': 'Feature-of',
                 'hyponymOf': 'Hyponym-of',
                 'evaluateFor': 'Evaluate-for',
