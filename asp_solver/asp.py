@@ -145,13 +145,13 @@ def restore_relation(dataset, atom, entities):
         'end': int(match[4]),
     }
     entities_wo_type = [{key: val for key, val in ent.items() if key != 'type'} for ent in entities]
-    # if head_ent in entities_wo_type and tail_ent in entities_wo_type:
-    return {
-        'type': convert_asp_type_to_doc_type(dataset, match[0], 'relation'),
-        'head': entities_wo_type.index(head_ent),
-        'tail': entities_wo_type.index(tail_ent)
-    }
-    # return None
+    if head_ent in entities_wo_type and tail_ent in entities_wo_type:
+        return {
+            'type': convert_asp_type_to_doc_type(dataset, match[0], 'relation'),
+            'head': entities_wo_type.index(head_ent),
+            'tail': entities_wo_type.index(tail_ent)
+        }
+    return None
 
 
 def remove_ok(atom):
