@@ -30,6 +30,12 @@ invprod(P, A) :- atom(A, P), nok(A).
 :- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)).
 
 
+%%% Relation exists
+relation_flag.
+relation_exist :- ok(relation(NR, P, Q, P', Q')).
+% :- not relation_exist.
+
+
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 %% - Relations: Used-for, Feature-of, Hyponym-of, Evaluate-for, Part-of, Compare(symmetric), Conjunction(symmetric)
 
