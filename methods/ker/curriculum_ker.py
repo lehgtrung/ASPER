@@ -17,6 +17,22 @@ PREDICT_SCRIPT = 'python ./spert.py predict --config {config_path}'
 REEVAL_SCRIPT = 'python reevaluator.py --gt_path {gt_path} --pred_path {pred_path}'
 
 
+def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger):
+    aggregated_pred = aggregate_on_symbols([pred_path1, pred_path2, pred_path3])
+    tmp_path = pred_path1 + '.tmp'
+    with open(tmp_path, 'w') as f:
+        json.dump(aggregated_pred, f)
+    script = REEVAL_SCRIPT.format(gt_path=gt_path, pred_path=tmp_path)
+    print(script)
+    nmap_out = subprocess.run(script,
+                              shell=True,
+                              check=True,
+                              universal_newlines=True,
+                              stdout=subprocess.PIPE)
+    nmap_lines = nmap_out.stdout.splitlines()
+    filter_evaluation_log(nmap_lines, logger)
+
+
 def curriculum_ker(dataset,
                    labeled_path,
                    unlabeled_path,
@@ -134,15 +150,11 @@ def curriculum_ker(dataset,
 
         # Evaluate on prediction_path + '.tmp.all'
         logger.info(f'Round #{iteration}: F1 on ReVISED selection')
-        script = REEVAL_SCRIPT.format(gt_path=unlabeled_with_labels_path, pred_path=prediction_path + '.tmp.all')
-        print(script)
-        nmap_out = subprocess.run(script,
-                                  shell=True,
-                                  check=True,
-                                  universal_newlines=True,
-                                  stdout=subprocess.PIPE)
-        nmap_lines = nmap_out.stdout.splitlines()
-        filter_evaluation_log(nmap_lines, logger)
+        evaluate_tri_training(unlabeled_with_labels_path,
+                              prediction_path + '.tmp.all',
+                              prediction_path + '.tmp.all',
+                              prediction_path + '.tmp.all',
+                              logger)
         ###############################################################################
 
         logger.info(f'Round #{iteration}: Solve using ASP')
