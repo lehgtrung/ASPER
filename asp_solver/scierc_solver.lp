@@ -20,13 +20,12 @@ invprod(P, A) :- atom(A, P), nok(A).
 									  atom(entity(NE', P, R)), R != Q.
 :- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
+
 %% Eliminate relation with missing head or tail
-exists(P,Q) :- atom(entity(_,P,Q)).
+exists(P,Q) :- ok(entity(_,P,Q)).
 bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P,Q).
 bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q').
-
-:- ok(relation(NR,P,Q,P',Q')) , not exists(P,Q).
-:- ok(relation(NR,P,Q,P',Q')) , not exists(P',Q').
+:- ok(relation(NR,P,Q,P',Q')) , {ok(entity(_,P,Q)); ok(entity(_,P',Q'))} 1.
 
 
 %% Eliminate reciprocal relations
@@ -43,46 +42,46 @@ relation_exist :- ok(relation(NR, P, Q, P', Q')).
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 %% - Relations: Used-for, Feature-of, Hyponym-of, Evaluate-for, Part-of, Compare(symmetric), Conjunction(symmetric)
 
-rule(relation(usedFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(usedFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(usedFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
+%	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(usedFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
+%	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
-rule(relation(featureOf,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(featureOf,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(featureOf,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
+%	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(featureOf,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
+%	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
-rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
+%	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
+%	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-rule(relation(usedFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(usedFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(usedFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
+%	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(usedFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
+%	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
-rule(relation(featureOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(featureOf,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(featureOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
+%	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(featureOf,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
+%	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
-rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
+%	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
+%	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 
 %%%%% ASP for working with inference rules %%%%%%%%%%%%%%%%
 
-6 {bad(X); bad(Y); bad(Z); inf_atom(Z);
-    dependency(X, Z); dependency(Y, Z) } :-
-       	rule(X, Y, Z), atom(X), atom(Y), not atom(Z).
+%6 {bad(X); bad(Y); bad(Z); inf_atom(Z);
+%    dependency(X, Z); dependency(Y, Z) } :-
+%       	rule(X, Y, Z), atom(X), atom(Y), not atom(Z).
 
-:- ok(Y), inf_atom(Y), dependency(X,Y), not ok(X).
-:- rule(X, Y, Z), ok(X), ok(Y), not ok(Z).
+%:- ok(Y), inf_atom(Y), dependency(X,Y), not ok(X).
+%:- rule(X, Y, Z), ok(X), ok(Y), not ok(Z).
 
 
 %%% an atom should be kept if it does not violate any type constraint
