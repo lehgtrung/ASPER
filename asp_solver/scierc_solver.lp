@@ -21,12 +21,12 @@ invprod(P, A) :- atom(A, P), nok(A).
 :- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
 %% Eliminate relation with missing head or tail
-%exists(P,Q) :- atom(entity(_,P,Q)).
-%bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P,Q).
-%bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q').
+exists(P,Q) :- atom(entity(_,P,Q)).
+bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P,Q).
+bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q').
 
-%:- ok(relation(NR,P,Q,P',Q')) , not exists(P,Q).
-%:- ok(relation(NR,P,Q,P',Q')) , not exists(P',Q').
+:- ok(relation(NR,P,Q,P',Q')) , not exists(P,Q).
+:- ok(relation(NR,P,Q,P',Q')) , not exists(P',Q').
 
 
 %% Eliminate reciprocal relations
