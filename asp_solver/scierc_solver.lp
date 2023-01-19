@@ -44,65 +44,35 @@ relation_exist :- ok(relation(NR, P, Q, P', Q')).
 %% - Relations: Used-for, Feature-of, Hyponym-of, Evaluate-for, Part-of, Compare(symmetric), Conjunction(symmetric)
 
 rule(relation(usedFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
+	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 rule(relation(usedFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
-rule(relation(usedFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-rule(relation(usedFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-
+	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 rule(relation(featureOf,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
+	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 rule(relation(featureOf,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
-rule(relation(featureOf,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-rule(relation(featureOf,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
+	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
+	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
-rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
+	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 rule(relation(usedFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
+	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 rule(relation(usedFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
-rule(relation(usedFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-rule(relation(usedFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
+	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 rule(relation(featureOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
+	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 rule(relation(featureOf,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
-rule(relation(featureOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-rule(relation(featureOf,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
+	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
+	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
-rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
-
-rule(relation(hyponymOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(hyponymOf,O1,O2,Q1,Q2)):-
-	atom(relation(hyponymOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,O1,O2)).
-rule(relation(hyponymOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(hyponymOf,O1,O2,Q1,Q2)):-
-	atom(relation(hyponymOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), not bad(entity(_,P1,P2)).
+	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
 
 
 %%%%% ASP for working with inference rules %%%%%%%%%%%%%%%%
