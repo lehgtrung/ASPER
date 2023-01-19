@@ -47,7 +47,7 @@ def process_model(m):
          if x.match("relation_exist",0):
                relation_exist = True
          if x.match("relation_flag",0):
-               relation_exist = True
+               relation_flag = True
 
     # Trung, fix console problem
     #if pr <= 1e-7:
