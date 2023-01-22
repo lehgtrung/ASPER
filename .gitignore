@@ -111,6 +111,7 @@ data/
 tmp/
 .idea/
 runs/
+configs/
 #configs/
 *.state
 checkpoint
