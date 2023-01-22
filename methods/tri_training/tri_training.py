@@ -87,6 +87,7 @@ def tri_training(dataset,
 
     # Train 3 models
     if not model_exists(os.path.join(labeled_model_paths[0].format(-1), 'final_model')):
+        start_time = time.time()
         for i in range(3):
             with open(labeled_path, 'r') as f:
                 data = json.load(f)
@@ -107,10 +108,13 @@ def tri_training(dataset,
                                })
             script = TRAIN_SCRIPT.format(config_path=temp_train_config_path)
             subprocess.run(script, shell=True, check=True)
+        end_time = time.time() - start_time
+        logger.info(f'Time Taken training iter -1: {time.strftime("%H:%M:%S", time.gmtime(end_time))}')
     else:
         logger.info('Labeled model exists, skip training ...')
 
     # Make prediction for each model on test data at round -1
+    start_time = time.time()
     for i in range(3):
         modify_config_file(default_predict_config_path,
                            temp_predict_config_path,
@@ -208,6 +212,8 @@ def tri_training(dataset,
                               test_prediction_paths[2],
                               logger)
         iteration += 1
+    end_time = time.time() - start_time
+    logger.info(f'Time Taken training 5 iters: {time.strftime("%H:%M:%S", time.gmtime(end_time))}')
 
 
 
