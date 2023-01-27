@@ -41,7 +41,7 @@ bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q')
 
 
 %%% Relation exists
-% relation_flag.
+relation_flag.
 relation_exist :- ok(relation(NR, P, Q, P', Q')).
 % :- not relation_exist.
 
