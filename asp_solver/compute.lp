@@ -101,7 +101,7 @@ def main(prg):
 
     prg.solve(on_model=process_model)
 
-    #print("\n\n All optimal answer sets:",  listAll, len(listAll))
+    # print("\n\n All optimal answer sets:",  listAll, len(listAll))
 
     #  listAll is the list of all answer sets with corresponding probability
     #  [ [list 1, prob of list 1], [ .. ], ...]
