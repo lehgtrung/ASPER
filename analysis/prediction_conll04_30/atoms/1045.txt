@@ -1,0 +1,4 @@
+atom(entity(material,2,4),"0.9939544796943665").
+atom(entity(metric,8,9),"0.9931173324584961").
+atom(entity(material,10,12),"0.949182391166687").
+atom(relation(evaluateFor,8,9,2,4),"0.40256768465042114").

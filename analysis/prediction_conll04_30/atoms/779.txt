@@ -1,0 +1,5 @@
+atom(entity(material,3,5),"0.9743162989616394").
+atom(entity(material,6,9),"0.9186132550239563").
+atom(entity(material,10,14),"0.5402832627296448").
+atom(relation(conjunction,3,5,6,9),"0.9935757517814636").
+atom(relation(featureOf,10,14,6,9),"0.9494930505752563").

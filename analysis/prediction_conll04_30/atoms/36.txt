@@ -1,13 +1,4 @@
-atom(entity(peop,0,1),"0.9987714886665344").
-atom(entity(loc,5,7),"0.9748757481575012").
-atom(entity(loc,5,9),"0.5049293041229248").
-atom(entity(loc,8,9),"0.9840953946113586").
-atom(entity(loc,19,20),"0.5200781226158142").
-atom(entity(loc,40,41),"0.9970301389694214").
-atom(entity(peop,43,45),"0.9977754950523376").
-atom(relation(liveIn,0,1,5,7),"0.8879547715187073").
-atom(relation(liveIn,0,1,5,9),"0.9721643924713135").
-atom(relation(locatedIn,5,7,8,9),"0.9988941550254822").
-atom(relation(locatedIn,5,9,8,9),"0.5140396952629089").
-atom(relation(liveIn,43,45,40,41),"0.8478992581367493").
-atom(relation(liveIn,43,45,5,9),"0.653693675994873").
+atom(entity(method,0,1),"0.5834121704101562").
+atom(entity(task,4,7),"0.9965086579322815").
+atom(entity(task,15,17),"0.9981689453125").
+atom(relation(usedFor,0,1,4,7),"0.9068517088890076").

@@ -1,0 +1,3 @@
+atom(entity(otherScientificTerm,9,10),"0.9602425694465637").
+atom(entity(otherScientificTerm,12,15),"0.7963005304336548").
+atom(relation(featureOf,12,15,9,10),"0.5875756144523621").

@@ -1,5 +1,5 @@
-atom(entity(loc,1,2),"0.9982150793075562").
-atom(entity(other,3,5),"0.853171706199646").
-atom(entity(loc,8,9),"0.8674200177192688").
-atom(entity(org,14,16),"0.4689202904701233").
-atom(relation(locatedIn,8,9,1,2),"0.6885680556297302").
+atom(entity(material,7,9),"0.9485300183296204").
+atom(entity(task,27,29),"0.7190510630607605").
+atom(entity(generic,43,44),"0.5778926610946655").
+atom(entity(method,46,50),"0.9847245216369629").
+atom(relation(usedFor,46,50,43,44),"0.9619299173355103").

@@ -1,0 +1,15 @@
+atom(entity(generic,9,10),"0.992919385433197").
+atom(entity(task,14,17),"0.984727144241333").
+atom(entity(task,18,19),"0.9568337202072144").
+atom(entity(task,20,21),"0.993613064289093").
+atom(entity(task,23,25),"0.9919196367263794").
+atom(entity(method,28,30),"0.9922429919242859").
+atom(relation(compare,9,10,28,30),"0.6606987714767456").
+atom(relation(usedFor,9,10,14,17),"0.999002993106842").
+atom(relation(conjunction,18,19,20,21),"0.9855607151985168").
+atom(relation(conjunction,18,19,23,25),"0.6906781792640686").
+atom(relation(hyponymOf,18,19,14,17),"0.9963854551315308").
+atom(relation(conjunction,20,21,23,25),"0.9966740608215332").
+atom(relation(hyponymOf,20,21,14,17),"0.965924859046936").
+atom(relation(hyponymOf,23,25,14,17),"0.7846649885177612").
+atom(relation(usedFor,28,30,14,17),"0.425525963306427").

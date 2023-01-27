@@ -1,2 +1,5 @@
-atom(entity(peop,15,17),"0.7821763157844543").
-atom(entity(peop,15,18),"0.9914702773094177").
+atom(entity(generic,4,5),"0.9976121187210083").
+atom(entity(method,9,10),"0.9405536651611328").
+atom(entity(material,11,13),"0.991874635219574").
+atom(relation(usedFor,4,5,9,10),"0.9834527373313904").
+atom(relation(usedFor,11,13,9,10),"0.9979038238525391").

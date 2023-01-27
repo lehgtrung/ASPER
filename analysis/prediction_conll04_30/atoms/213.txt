@@ -1,7 +1,3 @@
-atom(entity(loc,1,3),"0.9145622253417969").
-atom(entity(loc,11,13),"0.9914401769638062").
-atom(entity(loc,11,14),"0.723302960395813").
-atom(entity(loc,16,17),"0.994350016117096").
-atom(entity(loc,20,22),"0.9950063228607178").
-atom(relation(locatedIn,11,13,16,17),"0.7746714949607849").
-atom(relation(locatedIn,11,14,16,17),"0.7950202226638794").
+atom(entity(otherScientificTerm,3,4),"0.6629487872123718").
+atom(entity(otherScientificTerm,9,11),"0.8408011794090271").
+atom(entity(otherScientificTerm,14,15),"0.9991349577903748").

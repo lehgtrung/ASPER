@@ -1,3 +1,2 @@
-atom(entity(org,6,7),"0.9075822830200195").
-atom(entity(peop,26,28),"0.923945963382721").
-atom(relation(workFor,26,28,6,7),"0.5291430354118347").
+atom(entity(generic,1,2),"0.9997668862342834").
+atom(entity(task,9,11),"0.6293919086456299").

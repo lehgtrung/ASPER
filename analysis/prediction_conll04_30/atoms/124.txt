@@ -1,2 +1,8 @@
-atom(entity(loc,8,10),"0.9909356236457825").
-atom(entity(peop,11,13),"0.996961772441864").
+atom(entity(task,1,3),"0.9976479411125183").
+atom(entity(otherScientificTerm,4,7),"0.996322512626648").
+atom(entity(otherScientificTerm,8,11),"0.9965601563453674").
+atom(entity(otherScientificTerm,16,20),"0.6171936392784119").
+atom(relation(usedFor,4,7,1,3),"0.9267430901527405").
+atom(relation(conjunction,4,7,8,11),"0.9907738566398621").
+atom(relation(usedFor,4,7,16,20),"0.6665016412734985").
+atom(relation(usedFor,8,11,16,20),"0.8330634832382202").

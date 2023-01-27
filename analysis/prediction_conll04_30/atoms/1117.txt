@@ -1,0 +1,11 @@
+atom(entity(task,1,3),"0.31398287415504456").
+atom(entity(method,9,13),"0.9428697228431702").
+atom(entity(method,17,18),"0.9980681538581848").
+atom(entity(method,20,22),"0.9932835102081299").
+atom(entity(method,24,25),"0.9960517287254333").
+atom(entity(metric,28,31),"0.9918036460876465").
+atom(relation(compare,9,13,20,22),"0.4602813422679901").
+atom(relation(compare,20,22,24,25),"0.9982196688652039").
+atom(relation(evaluateFor,28,31,17,18),"0.5705162286758423").
+atom(relation(evaluateFor,28,31,24,25),"0.9620872139930725").
+atom(relation(evaluateFor,28,31,20,22),"0.8390471339225769").

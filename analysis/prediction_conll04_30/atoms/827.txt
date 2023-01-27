@@ -1,0 +1,1 @@
+atom(entity(otherScientificTerm,14,18),"0.9939371347427368").

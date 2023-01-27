@@ -1,1 +1,6 @@
-atom(entity(loc,0,2),"0.998206377029419").
+atom(entity(metric,5,8),"0.9507240653038025").
+atom(entity(otherScientificTerm,10,12),"0.9821736812591553").
+atom(entity(otherScientificTerm,13,15),"0.9845376014709473").
+atom(relation(conjunction,10,12,13,15),"0.9946381449699402").
+atom(relation(usedFor,10,12,5,8),"0.9442239999771118").
+atom(relation(usedFor,13,15,5,8),"0.8902537226676941").

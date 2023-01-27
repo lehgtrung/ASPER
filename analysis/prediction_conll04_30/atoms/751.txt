@@ -1,0 +1,4 @@
+atom(entity(method,4,8),"0.9944279193878174").
+atom(entity(method,9,12),"0.8927152752876282").
+atom(entity(task,16,19),"0.8514731526374817").
+atom(relation(hyponymOf,9,12,4,8),"0.9406750202178955").

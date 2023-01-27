@@ -1,1 +1,3 @@
-atom(entity(loc,9,10),"0.9986534118652344").
+atom(entity(otherScientificTerm,9,11),"0.9605163335800171").
+atom(entity(task,12,15),"0.9937547445297241").
+atom(relation(partOf,9,11,12,15),"0.49882733821868896").

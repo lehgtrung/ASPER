@@ -1,0 +1,5 @@
+atom(entity(generic,4,5),"0.9989684820175171").
+atom(entity(metric,9,11),"0.9512224197387695").
+atom(entity(task,12,13),"0.9880907535552979").
+atom(entity(task,20,22),"0.8133504986763").
+atom(relation(evaluateFor,9,11,4,5),"0.9969062209129333").

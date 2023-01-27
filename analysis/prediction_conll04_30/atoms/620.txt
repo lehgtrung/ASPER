@@ -1,3 +1,10 @@
-atom(entity(loc,0,1),"0.6197245717048645").
-atom(entity(loc,2,3),"0.8892822861671448").
-atom(entity(loc,24,25),"0.9059863090515137").
+atom(entity(metric,5,7),"0.9390496015548706").
+atom(entity(method,8,9),"0.9945456981658936").
+atom(entity(material,12,15),"0.9952487349510193").
+atom(entity(material,19,22),"0.9925699830055237").
+atom(entity(method,28,30),"0.9826756715774536").
+atom(relation(evaluateFor,5,7,8,9),"0.8529143333435059").
+atom(relation(usedFor,12,15,8,9),"0.9960846900939941").
+atom(relation(usedFor,19,22,8,9),"0.7460991144180298").
+atom(relation(conjunction,19,22,28,30),"0.9475919604301453").
+atom(relation(usedFor,28,30,8,9),"0.44021785259246826").

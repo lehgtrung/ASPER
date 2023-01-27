@@ -1,8 +1,3 @@
-atom(entity(org,1,2),"0.9973661303520203").
-atom(entity(other,6,8),"0.9937748908996582").
-atom(entity(peop,10,11),"0.9833002090454102").
-atom(entity(org,15,16),"0.9964777827262878").
-atom(entity(org,17,22),"0.9661348462104797").
-atom(entity(other,25,27),"0.9927615523338318").
-atom(relation(workFor,10,11,15,16),"0.9998282194137573").
-atom(relation(workFor,10,11,17,22),"0.932893693447113").
+atom(entity(otherScientificTerm,4,6),"0.9931135773658752").
+atom(entity(method,13,16),"0.9974804520606995").
+atom(relation(usedFor,13,16,4,6),"0.9329522848129272").

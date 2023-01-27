@@ -1,0 +1,5 @@
+atom(entity(method,7,10),"0.9979473948478699").
+atom(entity(task,15,18),"0.9973692893981934").
+atom(entity(method,22,24),"0.9935224652290344").
+atom(entity(task,30,33),"0.7930588126182556").
+atom(relation(usedFor,22,24,30,33),"0.99564528465271").

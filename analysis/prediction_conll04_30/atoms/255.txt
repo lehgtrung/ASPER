@@ -1,2 +1,6 @@
-atom(entity(peop,2,6),"0.9882062077522278").
-atom(entity(other,20,22),"0.9309998154640198").
+atom(entity(generic,2,3),"0.9928944706916809").
+atom(entity(otherScientificTerm,12,14),"0.9741355180740356").
+atom(entity(otherScientificTerm,19,20),"0.9415713548660278").
+atom(entity(otherScientificTerm,23,26),"0.9878925085067749").
+atom(relation(usedFor,12,14,19,20),"0.40918397903442383").
+atom(relation(featureOf,23,26,19,20),"0.5212312936782837").

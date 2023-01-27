@@ -1,8 +1,3 @@
-atom(entity(peop,15,17),"0.9832102060317993").
-atom(entity(org,19,24),"0.7731016278266907").
-atom(entity(loc,26,27),"0.9964733719825745").
-atom(entity(org,28,30),"0.9641132950782776").
-atom(relation(liveIn,15,17,26,27),"0.4706380367279053").
-atom(relation(workFor,15,17,19,24),"0.9928427934646606").
-atom(relation(orgbasedIn,19,24,26,27),"0.5055283308029175").
-atom(relation(orgbasedIn,28,30,26,27),"0.8982813954353333").
+atom(entity(task,10,13),"0.9910020232200623").
+atom(entity(task,16,19),"0.9954407215118408").
+atom(relation(hyponymOf,10,13,16,19),"0.9573981761932373").

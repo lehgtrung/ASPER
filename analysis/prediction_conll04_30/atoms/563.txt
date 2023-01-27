@@ -1,1 +1,9 @@
-atom(entity(org,0,5),"0.9764488935470581").
+atom(entity(generic,6,8),"0.594825804233551").
+atom(entity(material,9,10),"0.888225793838501").
+atom(entity(material,11,12),"0.4399477243423462").
+atom(entity(generic,20,21),"0.9977532029151917").
+atom(relation(evaluateFor,6,8,20,21),"0.9501879811286926").
+atom(relation(conjunction,9,10,11,12),"0.9994895458221436").
+atom(relation(hyponymOf,9,10,6,8),"0.9888683557510376").
+atom(relation(evaluateFor,11,12,20,21),"0.9178122282028198").
+atom(relation(hyponymOf,11,12,6,8),"0.953927218914032").

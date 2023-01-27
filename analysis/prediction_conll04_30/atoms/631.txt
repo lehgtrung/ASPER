@@ -1,3 +1,6 @@
-atom(entity(peop,27,29),"0.9878866672515869").
-atom(entity(org,30,33),"0.9725990891456604").
-atom(relation(workFor,27,29,30,33),"0.9937884211540222").
+atom(entity(metric,0,3),"0.4900767207145691").
+atom(entity(task,4,10),"0.9541927576065063").
+atom(entity(method,13,16),"0.8999596238136292").
+atom(relation(usedFor,0,3,4,10),"0.9978821873664856").
+atom(relation(hyponymOf,13,16,0,3),"0.4222702383995056").
+atom(relation(hyponymOf,13,16,4,10),"0.9435211420059204").

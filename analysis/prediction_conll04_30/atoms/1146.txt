@@ -1,0 +1,6 @@
+atom(entity(generic,6,7),"0.9942253232002258").
+atom(entity(generic,10,11),"0.9690126776695251").
+atom(entity(task,12,14),"0.7294226288795471").
+atom(relation(compare,6,7,10,11),"0.9985322952270508").
+atom(relation(evaluateFor,12,14,6,7),"0.518589973449707").
+atom(relation(evaluateFor,12,14,10,11),"0.9301814436912537").

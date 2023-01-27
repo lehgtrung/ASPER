@@ -1,4 +1,6 @@
-atom(entity(loc,8,10),"0.9918837547302246").
-atom(entity(peop,11,14),"0.9945263266563416").
-atom(entity(loc,18,21),"0.9899262189865112").
-atom(relation(liveIn,11,14,18,21),"0.9989250302314758").
+atom(entity(method,3,4),"0.9751088619232178").
+atom(entity(task,7,13),"0.9666112065315247").
+atom(entity(task,14,22),"0.8047124147415161").
+atom(entity(generic,24,25),"0.9986666440963745").
+atom(relation(evaluateFor,7,13,3,4),"0.9588508009910583").
+atom(relation(conjunction,7,13,14,22),"0.9985975623130798").

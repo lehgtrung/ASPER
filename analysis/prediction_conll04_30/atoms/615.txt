@@ -1,4 +1,2 @@
-atom(entity(peop,0,3),"0.9960842132568359").
-atom(entity(other,6,8),"0.7305351495742798").
-atom(entity(peop,15,18),"0.937600314617157").
-atom(relation(kill,0,3,15,18),"0.4822404384613037").
+atom(entity(task,0,2),"0.9963124394416809").
+atom(entity(generic,28,29),"0.6321658492088318").

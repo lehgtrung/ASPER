@@ -1,3 +1,8 @@
-atom(entity(peop,6,8),"0.9982898831367493").
-atom(entity(loc,13,15),"0.8291693329811096").
-atom(entity(peop,19,21),"0.9976311922073364").
+atom(entity(otherScientificTerm,13,15),"0.99604332447052").
+atom(entity(generic,19,20),"0.9985496401786804").
+atom(entity(metric,21,22),"0.9943301677703857").
+atom(entity(generic,25,26),"0.9996999502182007").
+atom(entity(otherScientificTerm,37,39),"0.9961522221565247").
+atom(relation(compare,19,20,25,26),"0.9832662343978882").
+atom(relation(evaluateFor,21,22,19,20),"0.9994630217552185").
+atom(relation(evaluateFor,21,22,25,26),"0.5808257460594177").

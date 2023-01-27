@@ -1,0 +1,5 @@
+atom(entity(method,3,7),"0.9986237287521362").
+atom(entity(otherScientificTerm,9,11),"0.997697651386261").
+atom(entity(otherScientificTerm,12,14),"0.6493037343025208").
+atom(relation(partOf,9,11,12,14),"0.7346695065498352").
+atom(relation(usedFor,9,11,3,7),"0.8957245349884033").

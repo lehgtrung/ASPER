@@ -1,0 +1,4 @@
+atom(entity(task,0,3),"0.9747473001480103").
+atom(entity(material,10,11),"0.8380295038223267").
+atom(entity(material,13,15),"0.45038220286369324").
+atom(relation(hyponymOf,10,11,13,15),"0.5919331312179565").

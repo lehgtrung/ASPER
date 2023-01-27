@@ -1,0 +1,3 @@
+atom(entity(method,8,10),"0.74651700258255").
+atom(entity(method,12,14),"0.9961944818496704").
+atom(relation(partOf,8,10,12,14),"0.7410756945610046").

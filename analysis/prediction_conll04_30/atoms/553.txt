@@ -1,3 +1,2 @@
-atom(entity(loc,1,2),"0.9926869869232178").
-atom(entity(other,5,7),"0.8401064276695251").
-atom(entity(other,7,10),"0.9389210343360901").
+atom(entity(method,5,11),"0.874897837638855").
+atom(entity(method,18,23),"0.7844502329826355").

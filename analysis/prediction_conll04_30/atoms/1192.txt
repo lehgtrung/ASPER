@@ -1,0 +1,5 @@
+atom(entity(task,0,2),"0.978425920009613").
+atom(entity(generic,5,6),"0.9901891350746155").
+atom(entity(otherScientificTerm,12,13),"0.9951156377792358").
+atom(entity(otherScientificTerm,15,16),"0.728305459022522").
+atom(entity(otherScientificTerm,24,25),"0.8110102415084839").

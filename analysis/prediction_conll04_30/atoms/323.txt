@@ -1,3 +1,2 @@
-atom(entity(peop,3,4),"0.9989989399909973").
-atom(entity(loc,8,9),"0.9986295700073242").
-atom(entity(org,13,16),"0.9852741360664368").
+atom(entity(otherScientificTerm,1,3),"0.4772930145263672").
+atom(entity(method,7,9),"0.9299885034561157").

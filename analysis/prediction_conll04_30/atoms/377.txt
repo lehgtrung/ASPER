@@ -1,1 +1,9 @@
-atom(entity(peop,4,6),"0.9972545504570007").
+atom(entity(generic,0,1),"0.9970681071281433").
+atom(entity(method,5,7),"0.946631908416748").
+atom(entity(otherScientificTerm,12,14),"0.9758666157722473").
+atom(entity(method,15,17),"0.9963828325271606").
+atom(relation(usedFor,0,1,5,7),"0.9996874332427979").
+atom(relation(usedFor,12,14,5,7),"0.9970515966415405").
+atom(relation(conjunction,12,14,15,17),"0.9958351850509644").
+atom(relation(usedFor,15,17,0,1),"0.7719942927360535").
+atom(relation(usedFor,15,17,5,7),"0.9972026348114014").

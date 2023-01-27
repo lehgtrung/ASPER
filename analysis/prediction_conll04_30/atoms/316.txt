@@ -1,5 +1,3 @@
-atom(entity(loc,14,16),"0.8438313603401184").
-atom(entity(loc,20,21),"0.9858577251434326").
-atom(entity(other,24,28),"0.7803394198417664").
-atom(entity(other,36,40),"0.8366134762763977").
-atom(relation(locatedIn,14,16,20,21),"0.9543840289115906").
+atom(entity(method,21,22),"0.6984446048736572").
+atom(entity(method,26,29),"0.6780391931533813").
+atom(relation(compare,21,22,26,29),"0.7135996222496033").

@@ -1,4 +1,3 @@
-atom(entity(peop,0,1),"0.9974199533462524").
-atom(entity(peop,11,12),"0.996316134929657").
-atom(entity(loc,21,22),"0.9990870952606201").
-atom(relation(kill,0,1,11,12),"0.9472963809967041").
+atom(entity(method,4,6),"0.7546930313110352").
+atom(entity(otherScientificTerm,10,12),"0.9105185866355896").
+atom(relation(compare,4,6,10,12),"0.80229252576828").

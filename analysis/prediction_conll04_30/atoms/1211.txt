@@ -1,0 +1,4 @@
+atom(entity(generic,1,2),"0.9994669556617737").
+atom(entity(otherScientificTerm,6,8),"0.9661790728569031").
+atom(entity(material,12,14),"0.7083823084831238").
+atom(entity(method,16,18),"0.9972001314163208").

@@ -1,4 +1,5 @@
-atom(entity(loc,7,8),"0.9937998652458191").
-atom(entity(org,8,10),"0.9840396046638489").
-atom(entity(other,12,15),"0.9815779328346252").
-atom(relation(orgbasedIn,8,10,7,8),"0.9967188239097595").
+atom(entity(generic,4,5),"0.9993316531181335").
+atom(entity(material,12,14),"0.9812105298042297").
+atom(entity(otherScientificTerm,16,18),"0.5492119193077087").
+atom(entity(otherScientificTerm,26,28),"0.9159162640571594").
+atom(relation(conjunction,12,14,16,18),"0.5298778414726257").

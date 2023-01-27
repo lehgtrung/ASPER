@@ -1,4 +1,6 @@
-atom(entity(peop,0,3),"0.9920542240142822").
-atom(entity(peop,8,9),"0.9914758205413818").
-atom(entity(peop,10,13),"0.9935126900672913").
-atom(relation(kill,10,13,8,9),"0.6968767642974854").
+atom(entity(metric,3,5),"0.9587175846099854").
+atom(entity(material,6,7),"0.5150343179702759").
+atom(entity(material,8,10),"0.8268968462944031").
+atom(entity(otherScientificTerm,14,15),"0.9898861646652222").
+atom(relation(evaluateFor,3,5,6,7),"0.8643487095832825").
+atom(relation(conjunction,6,7,8,10),"0.9993294477462769").

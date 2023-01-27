@@ -1,2 +1,4 @@
-atom(entity(org,4,6),"0.9930849075317383").
-atom(entity(loc,41,42),"0.7489456534385681").
+atom(entity(method,7,9),"0.9859530925750732").
+atom(entity(method,13,14),"0.8410223722457886").
+atom(entity(method,20,22),"0.9971312284469604").
+atom(relation(compare,13,14,20,22),"0.9983534812927246").

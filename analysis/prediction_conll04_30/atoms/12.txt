@@ -1,6 +1,5 @@
-atom(entity(peop,9,11),"0.9973891377449036").
-atom(entity(org,14,18),"0.9782935380935669").
-atom(entity(org,25,26),"0.5400036573410034").
-atom(entity(org,25,29),"0.9163812398910522").
-atom(entity(peop,32,35),"0.9876989126205444").
-atom(relation(workFor,9,11,14,18),"0.9715178608894348").
+atom(entity(method,0,1),"0.9988662004470825").
+atom(entity(generic,16,17),"0.9944639801979065").
+atom(entity(generic,22,23),"0.9660046100616455").
+atom(entity(material,25,27),"0.648440957069397").
+atom(relation(featureOf,25,27,22,23),"0.8752772212028503").

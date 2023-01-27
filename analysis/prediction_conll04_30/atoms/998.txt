@@ -1,0 +1,7 @@
+atom(entity(otherScientificTerm,0,2),"0.9863919019699097").
+atom(entity(otherScientificTerm,4,7),"0.9802559614181519").
+atom(entity(otherScientificTerm,8,10),"0.9944496154785156").
+atom(entity(otherScientificTerm,17,19),"0.9031158685684204").
+atom(entity(otherScientificTerm,23,25),"0.9822279810905457").
+atom(relation(featureOf,4,7,0,2),"0.708113968372345").
+atom(relation(conjunction,4,7,8,10),"0.5289843082427979").

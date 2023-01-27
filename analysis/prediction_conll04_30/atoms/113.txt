@@ -1,4 +1,1 @@
-atom(entity(peop,0,2),"0.9961599111557007").
-atom(entity(other,3,4),"0.9848321080207825").
-atom(entity(loc,12,14),"0.996174156665802").
-atom(relation(liveIn,0,2,12,14),"0.9403924345970154").
+atom(entity(method,11,15),"0.9446423053741455").

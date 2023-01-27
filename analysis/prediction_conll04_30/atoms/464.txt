@@ -1,4 +1,2 @@
-atom(entity(loc,0,1),"0.9969947338104248").
-atom(entity(loc,2,3),"0.9808980822563171").
-atom(entity(loc,7,8),"0.6375128626823425").
-atom(relation(locatedIn,0,1,2,3),"0.9988943934440613").
+atom(entity(otherScientificTerm,2,5),"0.9620757699012756").
+atom(entity(method,15,17),"0.9979327917098999").

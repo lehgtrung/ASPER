@@ -1,0 +1,3 @@
+atom(entity(material,3,5),"0.5384411811828613").
+atom(entity(generic,10,11),"0.9993830919265747").
+atom(relation(evaluateFor,3,5,10,11),"0.984159529209137").

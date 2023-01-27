@@ -1,6 +1,3 @@
-atom(entity(other,2,3),"0.998019814491272").
-atom(entity(other,12,13),"0.9907169938087463").
-atom(entity(peop,17,20),"0.9918878674507141").
-atom(entity(loc,26,28),"0.9872783422470093").
-atom(entity(loc,32,35),"0.9891096353530884").
-atom(relation(liveIn,17,20,32,35),"0.9146422147750854").
+atom(entity(generic,6,7),"0.6829620599746704").
+atom(entity(generic,10,11),"0.995915949344635").
+atom(relation(evaluateFor,10,11,6,7),"0.9028275609016418").

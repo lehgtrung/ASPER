@@ -1,3 +1,10 @@
-atom(entity(peop,6,8),"0.9973959922790527").
-atom(entity(loc,10,11),"0.9989138841629028").
-atom(relation(liveIn,6,8,10,11),"0.9998438358306885").
+atom(entity(otherScientificTerm,3,8),"0.7577998638153076").
+atom(entity(otherScientificTerm,6,8),"0.5888730883598328").
+atom(entity(otherScientificTerm,11,12),"0.9991210103034973").
+atom(entity(otherScientificTerm,16,17),"0.9677626490592957").
+atom(entity(method,21,25),"0.5496566295623779").
+atom(entity(method,27,29),"0.9987335801124573").
+atom(entity(task,30,32),"0.9964358806610107").
+atom(relation(usedFor,3,8,11,12),"0.9173603057861328").
+atom(relation(usedFor,6,8,11,12),"0.7111974358558655").
+atom(relation(usedFor,27,29,30,32),"0.9313899278640747").

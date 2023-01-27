@@ -1,0 +1,3 @@
+atom(entity(generic,11,12),"0.9942839741706848").
+atom(entity(otherScientificTerm,18,22),"0.9369723796844482").
+atom(entity(metric,23,25),"0.8675861358642578").

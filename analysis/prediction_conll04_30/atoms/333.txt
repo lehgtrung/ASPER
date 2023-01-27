@@ -1,3 +1,1 @@
-atom(entity(loc,0,1),"0.9947474598884583").
-atom(entity(loc,2,3),"0.9926077127456665").
-atom(relation(locatedIn,0,1,2,3),"0.999500036239624").
+atom(entity(otherScientificTerm,8,11),"0.8508654832839966").

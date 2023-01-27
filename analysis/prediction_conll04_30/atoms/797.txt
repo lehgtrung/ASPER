@@ -1,0 +1,6 @@
+atom(entity(task,4,6),"0.8665047883987427").
+atom(entity(method,18,19),"0.9991734623908997").
+atom(entity(method,21,25),"0.9639617204666138").
+atom(entity(material,26,29),"0.9922594428062439").
+atom(relation(hyponymOf,18,19,21,25),"0.9303182363510132").
+atom(relation(usedFor,21,25,26,29),"0.9216972589492798").

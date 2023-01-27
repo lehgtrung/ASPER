@@ -1,0 +1,11 @@
+atom(entity(task,2,4),"0.9947097301483154").
+atom(entity(method,8,11),"0.9703336358070374").
+atom(entity(otherScientificTerm,12,18),"0.6802395582199097").
+atom(entity(otherScientificTerm,14,18),"0.6625436544418335").
+atom(entity(task,19,21),"0.9945574998855591").
+atom(entity(method,25,28),"0.9656996726989746").
+atom(relation(usedFor,8,11,2,4),"0.981446385383606").
+atom(relation(usedFor,8,11,19,21),"0.7731858491897583").
+atom(relation(usedFor,8,11,12,18),"0.8748266696929932").
+atom(relation(usedFor,12,18,8,11),"0.7100549340248108").
+atom(relation(usedFor,25,28,19,21),"0.9600108861923218").

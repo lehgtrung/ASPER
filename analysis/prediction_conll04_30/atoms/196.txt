@@ -1,9 +1,4 @@
-atom(entity(peop,0,3),"0.9906705617904663").
-atom(entity(peop,11,12),"0.9961597919464111").
-atom(entity(other,13,14),"0.9880270957946777").
-atom(entity(loc,27,28),"0.9795469641685486").
-atom(entity(loc,30,31),"0.9992989301681519").
-atom(entity(other,34,38),"0.5997849702835083").
-atom(entity(loc,40,43),"0.9763516187667847").
-atom(relation(kill,0,3,11,12),"0.8533934354782104").
-atom(relation(locatedIn,27,28,30,31),"0.47546279430389404").
+atom(entity(task,7,10),"0.9824367761611938").
+atom(entity(material,16,18),"0.9728922843933105").
+atom(entity(material,20,22),"0.7818068265914917").
+atom(relation(hyponymOf,16,18,20,22),"0.9231124520301819").

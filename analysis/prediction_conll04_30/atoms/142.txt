@@ -1,4 +1,9 @@
-atom(entity(loc,5,6),"0.9890186786651611").
-atom(entity(org,6,8),"0.9690513014793396").
-atom(entity(other,10,13),"0.9773530960083008").
-atom(relation(orgbasedIn,6,8,5,6),"0.9976332187652588").
+atom(entity(generic,3,4),"0.711310863494873").
+atom(entity(method,6,8),"0.9530496001243591").
+atom(entity(method,10,11),"0.9869884252548218").
+atom(entity(method,22,27),"0.9985827207565308").
+atom(entity(task,29,32),"0.7994387149810791").
+atom(entity(otherScientificTerm,35,38),"0.5418986678123474").
+atom(relation(usedFor,6,8,3,4),"0.9931465983390808").
+atom(relation(hyponymOf,10,11,6,8),"0.9575760960578918").
+atom(relation(conjunction,29,32,35,38),"0.9914994835853577").

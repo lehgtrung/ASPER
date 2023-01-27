@@ -1,3 +1,4 @@
-atom(entity(peop,0,1),"0.9501644968986511").
-atom(entity(loc,17,18),"0.9990043044090271").
-atom(entity(org,31,33),"0.9765856266021729").
+atom(entity(task,2,4),"0.9737085103988647").
+atom(entity(task,6,9),"0.9959163069725037").
+atom(entity(method,14,16),"0.9983624815940857").
+atom(relation(hyponymOf,2,4,6,9),"0.5056782960891724").

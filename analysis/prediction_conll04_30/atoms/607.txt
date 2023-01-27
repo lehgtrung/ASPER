@@ -1,6 +1,5 @@
-atom(entity(peop,3,6),"0.9907922744750977").
-atom(entity(loc,9,10),"0.9976468682289124").
-atom(entity(loc,11,12),"0.9976297616958618").
-atom(entity(peop,20,24),"0.989425778388977").
-atom(relation(kill,3,6,20,24),"0.984127938747406").
-atom(relation(locatedIn,9,10,11,12),"0.9974647760391235").
+atom(entity(method,6,8),"0.9941177368164062").
+atom(entity(method,10,12),"0.9929781556129456").
+atom(entity(task,14,19),"0.970630943775177").
+atom(relation(compare,6,8,10,12),"0.9907101988792419").
+atom(relation(evaluateFor,14,19,10,12),"0.629421055316925").

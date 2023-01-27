@@ -1,8 +1,2 @@
-atom(entity(loc,0,1),"0.9988577365875244").
-atom(entity(org,2,3),"0.9504531025886536").
-atom(entity(peop,4,6),"0.9975355863571167").
-atom(entity(loc,10,11),"0.999302864074707").
-atom(entity(peop,17,18),"0.7138512134552002").
-atom(relation(orgbasedIn,2,3,0,1),"0.6112173795700073").
-atom(relation(liveIn,4,6,0,1),"0.8370581269264221").
-atom(relation(liveIn,4,6,10,11),"0.9904295206069946").
+atom(entity(task,0,6),"0.988124430179596").
+atom(entity(task,14,17),"0.9958226680755615").

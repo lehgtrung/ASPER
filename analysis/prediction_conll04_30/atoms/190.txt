@@ -1,4 +1,3 @@
-atom(entity(peop,19,20),"0.9964069724082947").
-atom(entity(org,23,25),"0.9817583560943604").
-atom(entity(loc,27,30),"0.7573557496070862").
-atom(relation(workFor,19,20,23,25),"0.9981942772865295").
+atom(entity(generic,1,2),"0.9997976422309875").
+atom(entity(method,12,13),"0.7803282737731934").
+atom(entity(method,16,21),"0.9896566867828369").

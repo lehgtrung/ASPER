@@ -1,3 +1,6 @@
-atom(entity(peop,3,5),"0.9931375980377197").
-atom(entity(peop,8,10),"0.9947783946990967").
-atom(relation(kill,8,10,3,5),"0.9987478256225586").
+atom(entity(generic,7,8),"0.980038583278656").
+atom(entity(task,9,11),"0.9964060187339783").
+atom(entity(task,12,16),"0.9870917797088623").
+atom(entity(material,18,19),"0.746821403503418").
+atom(relation(usedFor,7,8,9,11),"0.9674940705299377").
+atom(relation(usedFor,18,19,12,16),"0.7608901262283325").

@@ -1,3 +1,6 @@
-atom(entity(peop,1,3),"0.9973750114440918").
-atom(entity(loc,4,5),"0.9992256164550781").
-atom(relation(liveIn,1,3,4,5),"0.9995604157447815").
+atom(entity(generic,2,3),"0.9988370537757874").
+atom(entity(otherScientificTerm,10,12),"0.8453851342201233").
+atom(entity(material,13,16),"0.5254868268966675").
+atom(entity(task,20,23),"0.8903130888938904").
+atom(relation(usedFor,2,3,10,12),"0.993601381778717").
+atom(relation(hyponymOf,13,16,10,12),"0.9761301875114441").

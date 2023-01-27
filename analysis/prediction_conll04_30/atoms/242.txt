@@ -1,4 +1,10 @@
-atom(entity(loc,0,1),"0.9973927736282349").
-atom(entity(loc,2,3),"0.9986822009086609").
-atom(entity(org,4,5),"0.997511625289917").
-atom(relation(locatedIn,0,1,2,3),"0.9979606866836548").
+atom(entity(generic,5,6),"0.9971370697021484").
+atom(entity(generic,8,10),"0.9516193270683289").
+atom(entity(method,13,15),"0.9988352656364441").
+atom(entity(metric,17,19),"0.9921127557754517").
+atom(entity(metric,20,21),"0.9917985200881958").
+atom(relation(compare,5,6,8,10),"0.9994170665740967").
+atom(relation(conjunction,17,19,20,21),"0.7075236439704895").
+atom(relation(evaluateFor,17,19,13,15),"0.9036334156990051").
+atom(relation(evaluateFor,20,21,5,6),"0.4610244929790497").
+atom(relation(evaluateFor,20,21,13,15),"0.584043562412262").

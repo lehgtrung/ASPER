@@ -1,0 +1,4 @@
+atom(entity(generic,9,10),"0.5941227078437805").
+atom(entity(otherScientificTerm,14,16),"0.9976233839988708").
+atom(entity(otherScientificTerm,37,39),"0.8171974420547485").
+atom(relation(usedFor,14,16,9,10),"0.8431284427642822").

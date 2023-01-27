@@ -1,4 +1,8 @@
-atom(entity(loc,1,4),"0.5837877988815308").
-atom(entity(org,4,6),"0.7171786427497864").
-atom(entity(other,8,11),"0.9758113622665405").
-atom(relation(orgbasedIn,4,6,1,4),"0.8911657333374023").
+atom(entity(otherScientificTerm,1,3),"0.9937633872032166").
+atom(entity(otherScientificTerm,4,7),"0.9914092421531677").
+atom(entity(method,10,12),"0.9831367135047913").
+atom(entity(otherScientificTerm,14,17),"0.9860631823539734").
+atom(entity(method,20,22),"0.9929087162017822").
+atom(relation(conjunction,1,3,4,7),"0.9893333315849304").
+atom(relation(usedFor,10,12,4,7),"0.9315630793571472").
+atom(relation(usedFor,20,22,14,17),"0.994507372379303").

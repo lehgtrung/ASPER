@@ -1,0 +1,3 @@
+atom(entity(material,5,9),"0.7972314953804016").
+atom(entity(method,12,14),"0.6954993605613708").
+atom(relation(usedFor,5,9,12,14),"0.9173944592475891").

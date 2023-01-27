@@ -1,4 +1,2 @@
-atom(entity(peop,5,6),"0.9990744590759277").
-atom(entity(peop,19,20),"0.9937636256217957").
-atom(entity(peop,26,27),"0.9992538094520569").
-atom(entity(peop,30,31),"0.9993481040000916").
+atom(entity(otherScientificTerm,5,7),"0.9974824786186218").
+atom(entity(otherScientificTerm,9,11),"0.9108346700668335").

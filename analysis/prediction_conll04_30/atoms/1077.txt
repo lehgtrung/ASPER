@@ -1,0 +1,3 @@
+atom(entity(metric,10,12),"0.8557755351066589").
+atom(entity(metric,13,15),"0.9202237725257874").
+atom(relation(conjunction,10,12,13,15),"0.9847959280014038").

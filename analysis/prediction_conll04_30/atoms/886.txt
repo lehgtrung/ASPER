@@ -1,0 +1,11 @@
+atom(entity(generic,4,5),"0.9994755387306213").
+atom(entity(otherScientificTerm,8,9),"0.9786394834518433").
+atom(entity(material,10,12),"0.9965729713439941").
+atom(entity(otherScientificTerm,16,19),"0.9987758994102478").
+atom(entity(otherScientificTerm,23,26),"0.9413666725158691").
+atom(entity(method,33,36),"0.9933390021324158").
+atom(relation(usedFor,4,5,8,9),"0.999431312084198").
+atom(relation(usedFor,10,12,4,5),"0.8770548105239868").
+atom(relation(usedFor,10,12,8,9),"0.8997856378555298").
+atom(relation(usedFor,33,36,4,5),"0.7854335904121399").
+atom(relation(usedFor,33,36,8,9),"0.5362939834594727").

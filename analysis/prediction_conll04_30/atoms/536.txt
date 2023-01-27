@@ -1,3 +1,6 @@
-atom(entity(peop,0,1),"0.9967896342277527").
-atom(entity(peop,4,7),"0.9934995174407959").
-atom(relation(kill,4,7,0,1),"0.9985049962997437").
+atom(entity(generic,5,6),"0.9917433857917786").
+atom(entity(method,9,12),"0.9890273809432983").
+atom(entity(metric,18,19),"0.967187225818634").
+atom(relation(compare,5,6,9,12),"0.9998691082000732").
+atom(relation(evaluateFor,18,19,5,6),"0.8974984288215637").
+atom(relation(evaluateFor,18,19,9,12),"0.992154061794281").

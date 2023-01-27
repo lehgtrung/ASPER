@@ -1,0 +1,5 @@
+atom(entity(generic,1,2),"0.9990704655647278").
+atom(entity(method,5,7),"0.9967520236968994").
+atom(entity(method,9,11),"0.9978532195091248").
+atom(relation(partOf,5,7,1,2),"0.9510377049446106").
+atom(relation(conjunction,5,7,9,11),"0.9842156767845154").

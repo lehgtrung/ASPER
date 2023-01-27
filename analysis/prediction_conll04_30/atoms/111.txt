@@ -1,4 +1,7 @@
-atom(entity(other,1,2),"0.30249109864234924").
-atom(entity(loc,6,8),"0.9821449518203735").
-atom(entity(loc,14,15),"0.9992762207984924").
-atom(relation(locatedIn,6,8,14,15),"0.7891807556152344").
+atom(entity(method,4,6),"0.9902656674385071").
+atom(entity(method,8,12),"0.9776935577392578").
+atom(entity(method,9,12),"0.511674702167511").
+atom(entity(method,10,12),"0.9066896438598633").
+atom(relation(hyponymOf,8,12,4,6),"0.9885268211364746").
+atom(relation(hyponymOf,9,12,4,6),"0.9772348999977112").
+atom(relation(hyponymOf,10,12,4,6),"0.9730334281921387").

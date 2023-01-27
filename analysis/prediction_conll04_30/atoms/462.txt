@@ -1,3 +1,6 @@
-atom(entity(loc,0,1),"0.9954679012298584").
-atom(entity(loc,2,4),"0.9859960675239563").
-atom(relation(locatedIn,0,1,2,4),"0.9993066787719727").
+atom(entity(generic,7,8),"0.9968889355659485").
+atom(entity(generic,12,13),"0.9991890788078308").
+atom(entity(otherScientificTerm,15,17),"0.9943802952766418").
+atom(entity(otherScientificTerm,19,21),"0.9967309236526489").
+atom(relation(usedFor,12,13,15,17),"0.9993535876274109").
+atom(relation(hyponymOf,19,21,15,17),"0.9406174421310425").

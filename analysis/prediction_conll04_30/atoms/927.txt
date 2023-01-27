@@ -1,0 +1,11 @@
+atom(entity(generic,2,3),"0.999268114566803").
+atom(entity(method,6,8),"0.7333377599716187").
+atom(entity(otherScientificTerm,16,18),"0.9325982928276062").
+atom(entity(material,19,22),"0.988565981388092").
+atom(entity(material,23,24),"0.548987627029419").
+atom(entity(material,25,26),"0.6132587790489197").
+atom(relation(usedFor,2,3,6,8),"0.9996981620788574").
+atom(relation(usedFor,2,3,16,18),"0.9971079230308533").
+atom(relation(conjunction,23,24,25,26),"0.9992089867591858").
+atom(relation(hyponymOf,23,24,19,22),"0.781959056854248").
+atom(relation(hyponymOf,25,26,19,22),"0.4280039072036743").

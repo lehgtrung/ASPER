@@ -1,6 +1,9 @@
-atom(entity(loc,0,2),"0.9897677302360535").
-atom(entity(loc,3,4),"0.9916248917579651").
-atom(entity(loc,5,6),"0.9898163080215454").
-atom(relation(locatedIn,0,2,3,4),"0.7448881268501282").
-atom(relation(locatedIn,0,2,5,6),"0.9886309504508972").
-atom(relation(locatedIn,3,4,5,6),"0.998816967010498").
+atom(entity(task,4,10),"0.9311019778251648").
+atom(entity(otherScientificTerm,12,14),"0.9130822420120239").
+atom(entity(material,16,18),"0.9804168343544006").
+atom(entity(metric,24,26),"0.9792035818099976").
+atom(entity(method,28,29),"0.9259087443351746").
+atom(entity(method,28,32),"0.5546733736991882").
+atom(entity(method,30,32),"0.972176194190979").
+atom(relation(usedFor,16,18,4,10),"0.4870470464229584").
+atom(relation(conjunction,28,29,30,32),"0.9921745657920837").

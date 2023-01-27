@@ -1,0 +1,3 @@
+atom(entity(method,4,6),"0.9969149827957153").
+atom(entity(method,8,11),"0.9973127245903015").
+atom(relation(compare,4,6,8,11),"0.9839285612106323").

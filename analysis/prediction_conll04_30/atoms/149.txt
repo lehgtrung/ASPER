@@ -1,4 +1,3 @@
-atom(entity(peop,0,1),"0.9972610473632812").
-atom(entity(peop,9,10),"0.9958207607269287").
-atom(entity(other,15,16),"0.8904721140861511").
-atom(entity(loc,20,21),"0.9976636171340942").
+atom(entity(generic,13,14),"0.9943435192108154").
+atom(entity(generic,28,29),"0.9950207471847534").
+atom(entity(method,38,41),"0.8193796277046204").

@@ -1,0 +1,17 @@
+atom(entity(material,3,5),"0.9774770140647888").
+atom(entity(material,7,12),"0.9595661759376526").
+atom(entity(method,17,19),"0.9989401698112488").
+atom(entity(otherScientificTerm,21,22),"0.9984787106513977").
+atom(entity(metric,24,25),"0.9934083223342896").
+atom(entity(material,33,34),"0.8517858982086182").
+atom(entity(material,35,36),"0.9809087514877319").
+atom(entity(otherScientificTerm,39,41),"0.9959756731987").
+atom(entity(material,44,46),"0.9918851852416992").
+atom(entity(otherScientificTerm,52,53),"0.9986513257026672").
+atom(entity(metric,57,59),"0.9330792427062988").
+atom(relation(usedFor,17,19,21,22),"0.9950653910636902").
+atom(relation(evaluateFor,24,25,21,22),"0.9304318428039551").
+atom(relation(evaluateFor,24,25,17,19),"0.4223022758960724").
+atom(relation(conjunction,33,34,35,36),"0.9932339787483215").
+atom(relation(partOf,39,41,44,46),"0.7081087827682495").
+atom(relation(evaluateFor,57,59,52,53),"0.4339672029018402").

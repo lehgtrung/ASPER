@@ -1,0 +1,8 @@
+atom(entity(metric,1,2),"0.9687027931213379").
+atom(entity(method,4,6),"0.998279333114624").
+atom(entity(material,9,11),"0.9924749732017517").
+atom(entity(material,13,16),"0.994141161441803").
+atom(relation(evaluateFor,1,2,4,6),"0.9868484735488892").
+atom(relation(evaluateFor,9,11,4,6),"0.9954515099525452").
+atom(relation(conjunction,9,11,13,16),"0.9945803284645081").
+atom(relation(evaluateFor,13,16,4,6),"0.40847691893577576").
