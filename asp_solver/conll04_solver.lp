@@ -44,14 +44,14 @@ bad(relation(NR, P, Q, P, Q)) :- atom(relation(NR, P, Q, P, Q)).
 :- ok(entity(NE,P,Q)), ok(entity(NE',P,Q)), NE != NE'.
 
 %% Overlapping
-%2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
-%									  atom(entity(NE', Q1, Q2)),
-%									  P1 < Q1, P2 > Q1.
-%:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1.
+2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
+									  atom(entity(NE', Q1, Q2)),
+									  P1 < Q1, P2 > Q1.
+:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1.
 
-%2{bad(entity(NE, P, Q)); bad(entity(NE', P, R))} :- atom(entity(NE, P, Q)),
-%									  atom(entity(NE', P, R)), R != Q.
-%:- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
+2{bad(entity(NE, P, Q)); bad(entity(NE', P, R))} :- atom(entity(NE, P, Q)),
+									  atom(entity(NE', P, R)), R != Q.
+:- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
 %2{bad(entity(NE, P, Q)); bad(entity(NE', R, Q))} :- atom(entity(NE, P, Q)),
 %									  atom(entity(NE', R, Q)), P != R.
@@ -73,7 +73,7 @@ ok(entity(E', P', Q')) :- ok(relation(NR, P, Q, P', Q')), type_def(NR, E, E').
 
 
 %%% Relation exists
-relation_flag.
+%relation_flag.
 relation_exist :- ok(relation(NR, P, Q, P', Q')).
 % :- not relation_exist.
 
