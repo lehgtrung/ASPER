@@ -39,64 +39,6 @@ bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q')
                                                            P != P',
                                                            P != Q.
 
-%% Generic entities's length < 3
-bad(entity(generic,P,P')) :- atom(entity(generic,P,P')), P'-P > 2.
-:- ok(entity(generic,P,P')), P'-P > 2.
-
-
-%% Type inference
-% For conjunction/hyponymOf/compare/partOf, 85% of the time the two entities have the same type
-rule(relation(conjunction,P,P',R,R'), entity(NR,P,P'), entity(NR,R,R')):- atom(relation(conjunction,P,P',R,R')),
-                                                                       atom(entity(NR,P,P')),
-                                                                       atom(entity(generic,R,R')), R'-R > 2.
-
-rule(relation(conjunction,P,P',R,R'), entity(NR,P,P'), entity(NR,R,R')):- atom(relation(conjunction,P,P',R,R')),
-                                                                          atom(entity(NR,R,R')),
-                                                                          atom(entity(generic,P,P')), P'-P > 2.
-
-rule(relation(compare,P,P',R,R'), entity(NR,P,P'), entity(NR,R,R')):- atom(relation(compare,P,P',R,R')),
-                                                                       atom(entity(NR,P,P')),
-                                                                       atom(entity(generic,R,R')), R'-R > 2.
-
-rule(relation(compare,P,P',R,R'), entity(NR,P,P'), entity(NR,R,R')):- atom(relation(compare,P,P',R,R')),
-                                                                          atom(entity(NR,R,R')),
-                                                                          atom(entity(generic,P,P')), P'-P > 2.
-
-rule(relation(partOf,P,P',R,R'), entity(NR,P,P'), entity(NR,R,R')):- atom(relation(partOf,P,P',R,R')),
-                                                                       atom(entity(NR,P,P')),
-                                                                       atom(entity(generic,R,R')), R'-R > 2.
-
-rule(relation(partOf,P,P',R,R'), entity(NR,P,P'), entity(NR,R,R')):- atom(relation(partOf,P,P',R,R')),
-                                                                          atom(entity(NR,R,R')),
-                                                                          atom(entity(generic,P,P')), P'-P > 2.
-
-
-% For featureOf, 75% at least 1 entity are OST
-rule(relation(featureOf,P,P',R,R'), entity(NR,P,P'), entity(otherScientificTerm,R,R')):- atom(relation(featureOf,P,P',R,R')),
-                                                                                         atom(entity(NR,P,P')),
-                                                                                         atom(entity(generic,R,R')), R'-R > 2.
-
-rule(relation(featureOf,P,P',R,R'), entity(otherScientificTerm,P,P'), entity(NR,R,R')):- atom(relation(featureOf,P,P',R,R')),
-                                                                        atom(entity(NR,R,R')),
-                                                                        atom(entity(generic,P,P')), P'-P > 2.
-
-% For evaluateFor: head should be metric and tail should be generic
-
-rule(relation(evaluateFor,P,P',R,R'), entity(metric,P,P'), entity(NR,R,R')):- atom(relation(evaluateFor,P,P',R,R')),
-                                                                              atom(entity(NR,R,R')),
-                                                                              atom(entity(generic,P,P')), P'-P > 2.
-
-% For usedFor: head should be method and tail should be task
-rule(relation(usedFor,P,P',R,R'), entity(NR,P,P'), entity(task,R,R')):- atom(relation(usedFor,P,P',R,R')),
-                                                                        atom(entity(NR,P,P')),
-                                                                        atom(entity(generic,R,R')), R'-R > 2.
-
-rule(relation(usedFor,P,P',R,R'), entity(method,P,P'), entity(NR,R,R')):- atom(relation(usedFor,P,P',R,R')),
-                                                                          atom(entity(NR,R,R')),
-                                                                          atom(entity(generic,P,P')), P'-P > 2.
-
-
-
 %%% Relation exists
 relation_flag.
 relation_exist :- ok(relation(NR, P, Q, P', Q')).
