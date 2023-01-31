@@ -115,22 +115,22 @@ def curriculum_ker(dataset,
 
         # Compute F1 on selection
         ###############################################################################
-        logger.info(f'Round #{iteration}: F1 on selection')
-        modify_config_file(default_eval_config_path,
-                           temp_eval_config_path,
-                           {
-                               'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
-                               'log_path': eval_log_path.format(iteration + 0.5),
-                               'dataset_path': unlabeled_with_labels_path
-                           })
-        script = EVAL_SCRIPT.format(config_path=temp_eval_config_path)
-        nmap_out = subprocess.run(script,
-                                  shell=True,
-                                  check=True,
-                                  universal_newlines=True,
-                                  stdout=subprocess.PIPE)
-        nmap_lines = nmap_out.stdout.splitlines()
-        filter_evaluation_log(nmap_lines, logger)
+        # logger.info(f'Round #{iteration}: F1 on selection')
+        # modify_config_file(default_eval_config_path,
+        #                    temp_eval_config_path,
+        #                    {
+        #                        'model_path': os.path.join(labeled_model_path.format(iteration-1), 'final_model'),
+        #                        'log_path': eval_log_path.format(iteration + 0.5),
+        #                        'dataset_path': unlabeled_with_labels_path
+        #                    })
+        # script = EVAL_SCRIPT.format(config_path=temp_eval_config_path)
+        # nmap_out = subprocess.run(script,
+        #                           shell=True,
+        #                           check=True,
+        #                           universal_newlines=True,
+        #                           stdout=subprocess.PIPE)
+        # nmap_lines = nmap_out.stdout.splitlines()
+        # filter_evaluation_log(nmap_lines, logger)
         ###############################################################################
 
         # Select labels using ASP (KEEP THIS PART)
@@ -139,22 +139,22 @@ def curriculum_ker(dataset,
 
         ##############################################################################
         # Compute F1 after ASP
-        solve_all_docs_with_curriculum(dataset=dataset,
-                                       unlabeled_path=unlabeled_path,
-                                       atom_meta_path=atom_meta_path,
-                                       auto_meta_path=auto_meta_path,
-                                       selection_path=prediction_path + '.tmp.all',
-                                       current_delta=0,
-                                       with_curriculum=with_curriculum,
-                                       logger=logger)
-
-        # Evaluate on prediction_path + '.tmp.all'
-        logger.info(f'Round #{iteration}: F1 on ReVISED selection')
-        evaluate_tri_training(unlabeled_with_labels_path,
-                              prediction_path + '.tmp.all',
-                              prediction_path + '.tmp.all',
-                              prediction_path + '.tmp.all',
-                              logger)
+        # solve_all_docs_with_curriculum(dataset=dataset,
+        #                                unlabeled_path=unlabeled_path,
+        #                                atom_meta_path=atom_meta_path,
+        #                                auto_meta_path=auto_meta_path,
+        #                                selection_path=prediction_path + '.tmp.all',
+        #                                current_delta=0,
+        #                                with_curriculum=with_curriculum,
+        #                                logger=logger)
+        #
+        # # Evaluate on prediction_path + '.tmp.all'
+        # logger.info(f'Round #{iteration}: F1 on ReVISED selection')
+        # evaluate_tri_training(unlabeled_with_labels_path,
+        #                       prediction_path + '.tmp.all',
+        #                       prediction_path + '.tmp.all',
+        #                       prediction_path + '.tmp.all',
+        #                       logger)
         ##############################################################################
 
         logger.info(f'Round #{iteration}: Solve using ASP')
