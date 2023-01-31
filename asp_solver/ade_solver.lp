@@ -41,6 +41,8 @@ atom(relation(NR, P, Q, P', Q')):- type_def(NR, NE, NE'),
                                    atom(entity(NE, P, Q)),
                                    atom(entity(NE', P', Q')).
 
+%% Length
+
 
 %% Type constraints
 2{bad(relation(NR, P, Q, P', Q')); bad(entity(NE, P, Q))} :- atom(relation(NR, P, Q, P', Q')),

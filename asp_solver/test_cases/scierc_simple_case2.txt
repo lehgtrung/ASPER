@@ -1,7 +1,15 @@
 
-atom(entity(generic,4,5),"0.9986431002616882").
-atom(entity(generic,6,8),"0.5896682739257812").
-atom(entity(otherScientificTerm,11,13),"0.8259738683700562").
-atom(relation(conjunction,4,5,6,8),"0.9449558854103088").
-atom(relation(usedFor,4,5,11,13),"0.5559950470924377").
+%atom(entity(generic,4,5),"0.9986431002616882").
+%atom(entity(generic,6,8),"0.5896682739257812").
+%atom(entity(otherScientificTerm,11,13),"0.8259738683700562").
+%atom(relation(conjunction,4,5,6,8),"0.9449558854103088").
+%atom(relation(usedFor,4,5,11,13),"0.5559950470924377").
 %%atom(relation(usedFor,6,8,11,13),"0.5559950470924377").
+
+atom(entity(generic,6,16),"0.5896682739257812").
+atom(entity(method,4,5),"0.9986431002616882").
+atom(relation(conjunction,4,5,6,16),"0.9449558854103088").
+
+%atom(entity(method,6,16),"0.5896682739257812").
+%atom(entity(method,6,13),"0.6096682739257812").
+%atom(entity(method,6,10),"0.6296682739257812").
