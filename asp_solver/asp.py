@@ -6,7 +6,7 @@ import json
 import numpy as np
 
 
-COMMAND = 'clingo --opt-mode=optN asp_solver/{dataset}_solver.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
+COMMAND = 'clingo --opt-mode=optN asp_solver/{dataset}_solver.no_rules.lp asp_solver/compute.lp {auto_path} {atom_path} ' \
           '--outf=0 -V0 --out-atomf=%s. --quiet=1,2,2'
 entity_pattern = re.compile(r'^entity\((\w+),([0-9]+),([0-9]+)\)')
 relation_pattern = re.compile(r'^relation\((\w+),([0-9]+),([0-9]+),([0-9]+),([0-9]+)\)')
