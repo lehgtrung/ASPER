@@ -7,7 +7,7 @@ prod(P, A) :- atom(A, P), ok(A).
 invprod(P, A) :- atom(A, P), nok(A).
 
 %%% Relation exists
-relation_flag.
+%relation_flag.
 relation_exist :- ok(relation(NR, P, Q, P', Q')).
 
 %%% an atom should be kept if it does not violate any type constraint
