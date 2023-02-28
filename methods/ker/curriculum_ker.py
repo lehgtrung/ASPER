@@ -96,6 +96,9 @@ def curriculum_ker(dataset,
 
     iteration = start_iter
     current_delta = 1.0 - delta
+
+    # Make prediction for each model on test data at round -1
+    start_time = time.time()
     while iteration < max_iter:
         if current_delta < 0 and with_curriculum:
             break
@@ -208,6 +211,8 @@ def curriculum_ker(dataset,
 
         iteration += 1
         current_delta = current_delta - delta
+    end_time = time.time() - start_time
+    logger.info(f'Time Taken training 5 iters: {time.strftime("%H:%M:%S", time.gmtime(end_time))}')
 
 
 

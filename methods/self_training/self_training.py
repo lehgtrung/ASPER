@@ -67,6 +67,8 @@ def self_training(dataset,
     filter_evaluation_log(nmap_lines, logger)
 
     iteration = 0
+    # Make prediction for each model on test data at round -1
+    start_time = time.time()
     while True:
         if iteration >= max_iter:
             break
@@ -144,6 +146,8 @@ def self_training(dataset,
         nmap_lines = nmap_out.stdout.splitlines()
         filter_evaluation_log(nmap_lines, logger)
         iteration += 1
+    end_time = time.time() - start_time
+    logger.info(f'Time Taken training 5 iters: {time.strftime("%H:%M:%S", time.gmtime(end_time))}')
 
 
 

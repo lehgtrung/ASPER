@@ -67,6 +67,9 @@ def curriculum_labeling(dataset,
 
     iteration = 0
     current_delta = 1.0 - delta
+
+    # Make prediction for each model on test data at round -1
+    start_time = time.time()
     while current_delta >= 0:
         logger.info(f'Round #{iteration}: Current delta: {current_delta}')
         # Predict on unlabeled data
@@ -130,6 +133,8 @@ def curriculum_labeling(dataset,
 
         iteration += 1
         current_delta = current_delta - delta
+    end_time = time.time() - start_time
+    logger.info(f'Time Taken training 5 iters: {time.strftime("%H:%M:%S", time.gmtime(end_time))}')
 
 
 
