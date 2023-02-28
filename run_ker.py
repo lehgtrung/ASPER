@@ -20,7 +20,7 @@ if __name__ == '__main__':
                         action='store')
     parser.add_argument('--max_iter',
                         required=False,
-                        default=10,
+                        default=5,
                         type=int,
                         action='store')
     parser.add_argument('--start_iter',
