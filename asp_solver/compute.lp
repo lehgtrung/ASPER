@@ -38,7 +38,7 @@ def process_model(m):
     for x in curr_as:
          if x.match("prod", 2) :
                valuePr = convert(str(x.arguments[0]))
-               pr = pr * valuePr
+               # pr = pr * valuePr # Do not compute pr for ok atoms
                if min_pr > valuePr : min_pr = valuePr
                avg_pr = avg_pr+valuePr
                no_atoms = no_atoms + 1
