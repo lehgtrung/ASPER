@@ -29,8 +29,9 @@ if __name__ == '__main__':
                         type=int,
                         action='store')
     parser.add_argument('--max_iter',
-                        required=True,
+                        required=False,
                         type=int,
+                        default=5,
                         action='store')
     args = parser.parse_args()
 

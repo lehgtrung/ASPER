@@ -1,4 +1,5 @@
 
 
-atom(entity(loc,1,2),"0.8").
-atom(entity(loc,1,3),"0.9").
+atom(entity(loc,1,2),"0.3").
+atom(entity(loc,10,15),"0.9").
+atom(entity(loc,10,13),"0.8").
