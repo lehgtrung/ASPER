@@ -226,7 +226,7 @@ def curriculum_ker(dataset,
         subprocess.run(script, shell=True, check=True)
         write_pred_to_files(dataset, prediction_path, atom_meta_path)
         solve_all_docs_with_curriculum(dataset=dataset,
-                                       unlabeled_path=unlabeled_path,
+                                       unlabeled_path=default_test_path,
                                        atom_meta_path=atom_meta_path,
                                        auto_meta_path=auto_meta_path,
                                        selection_path=prediction_path + '.tmp',
