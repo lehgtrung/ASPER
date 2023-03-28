@@ -15,6 +15,7 @@ TRAIN_SCRIPT = 'python ./spert.py train --config {config_path}'
 EVAL_SCRIPT = 'python ./spert.py eval --config {config_path}'
 PREDICT_SCRIPT = 'python ./spert.py predict --config {config_path}'
 REEVAL_SCRIPT = 'python reevaluator.py --gt_path {gt_path} --pred_path {pred_path}'
+DEFAULT_TEST_PATH = 'data/datasets/{dataset}/{dataset}_test.json'
 
 
 def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger):
@@ -57,6 +58,8 @@ def curriculum_ker(dataset,
     temp_train_config_path = TEMP_TRAIN_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
     temp_eval_config_path = TEMP_EVAL_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
     temp_predict_config_path = TEMP_PREDICT_CONFIG_PATH.format(dataset=dataset, hash_key=hash_key)
+
+    default_test_path = DEFAULT_TEST_PATH.format(dataset=dataset)
 
     # Create auto rules
     logger.info('Extracting auto rules')
@@ -192,22 +195,50 @@ def curriculum_ker(dataset,
         script = TRAIN_SCRIPT.format(config_path=temp_train_config_path)
         subprocess.run(script, shell=True, check=True)
 
-        # Step 6: Evaluate on test data
-        logger.info(f'Round #{iteration}: Evaluate on test data')
-        modify_config_file(default_eval_config_path,
-                           temp_eval_config_path,
+        # Step 6: Evaluate on test data (revert to this step if prediction do not work)
+        # logger.info(f'Round #{iteration}: Evaluate on test data')
+        # modify_config_file(default_eval_config_path,
+        #                    temp_eval_config_path,
+        #                    {
+        #                        'model_path': os.path.join(labeled_model_path.format(iteration), 'final_model'),
+        #                        'log_path': eval_log_path.format(iteration),
+        #                    })
+        # script = EVAL_SCRIPT.format(config_path=temp_eval_config_path)
+        # nmap_out = subprocess.run(script,
+        #                           shell=True,
+        #                           check=True,
+        #                           universal_newlines=True,
+        #                           stdout=subprocess.PIPE)
+        # nmap_lines = nmap_out.stdout.splitlines()
+        # filter_evaluation_log(nmap_lines, logger)
+
+        # Step 6.1: apply ASPER then on prediction
+        ##################################################################
+        logger.info(f'Round #{iteration}: Evaluate on test data by applying ASPER')
+        modify_config_file(default_predict_config_path,
+                           temp_predict_config_path,
                            {
                                'model_path': os.path.join(labeled_model_path.format(iteration), 'final_model'),
-                               'log_path': eval_log_path.format(iteration),
+                               'dataset_path': default_test_path,
+                               'predictions_path': prediction_path
                            })
-        script = EVAL_SCRIPT.format(config_path=temp_eval_config_path)
-        nmap_out = subprocess.run(script,
-                                  shell=True,
-                                  check=True,
-                                  universal_newlines=True,
-                                  stdout=subprocess.PIPE)
-        nmap_lines = nmap_out.stdout.splitlines()
-        filter_evaluation_log(nmap_lines, logger)
+        script = PREDICT_SCRIPT.format(config_path=temp_predict_config_path)
+        subprocess.run(script, shell=True, check=True)
+        write_pred_to_files(dataset, prediction_path, atom_meta_path)
+        solve_all_docs_with_curriculum(dataset=dataset,
+                                       unlabeled_path=unlabeled_path,
+                                       atom_meta_path=atom_meta_path,
+                                       auto_meta_path=auto_meta_path,
+                                       selection_path=prediction_path + '.tmp',
+                                       current_delta=0.0,
+                                       with_curriculum=with_curriculum,
+                                       logger=logger)
+        evaluate_tri_training(default_test_path,
+                              prediction_path + '.tmp',
+                              prediction_path + '.tmp',
+                              prediction_path + '.tmp',
+                              logger)
+        ##################################################################
 
         iteration += 1
         current_delta = current_delta - delta
