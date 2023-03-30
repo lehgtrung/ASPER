@@ -45,9 +45,9 @@ def gen_data_folds(in_path, out_path, percent, num_folds):
 
 
 if __name__ == '__main__':
-    num_folds = 5
     dataset = sys.argv[1]
     percent = int(sys.argv[2])
+    num_folds = int(sys.argv[3])
     out_path = './data/core_{dataset}/{dataset}_{percent}/fold_{fold}'
     out_path = out_path.format(
         dataset=dataset,
