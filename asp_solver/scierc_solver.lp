@@ -23,10 +23,10 @@ invprod(P, A) :- atom(A, P), nok(A).
 
 %% Eliminate relation with missing head or tail
 %% Solution: use model's prediction to infer head/tail type
-exists(P,Q) :- ok(entity(_,P,Q)).
-bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P,Q).
-bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q').
-:- ok(relation(NR,P,Q,P',Q')) , {ok(entity(_,P,Q)); ok(entity(_,P',Q'))} 1.
+%exists(P,Q) :- ok(entity(_,P,Q)).
+%bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P,Q).
+%bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q').
+%:- ok(relation(NR,P,Q,P',Q')) , {ok(entity(_,P,Q)); ok(entity(_,P',Q'))} 1.
 
 
 %% Eliminate reciprocal relations
