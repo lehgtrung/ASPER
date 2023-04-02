@@ -30,19 +30,18 @@ bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q')
 
 
 %% Eliminate reciprocal relations
-2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')),
-                                                               atom(relation(NT,P',Q',P,Q)),
-                                                               NT != NR,
-                                                               P != P',
-                                                               P != Q.
-:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)), NT != NR,
-                                                           P != P',
-                                                           P != Q.
+%2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')),
+%                                                               atom(relation(NT,P',Q',P,Q)),
+%                                                               NT != NR,
+%                                                               P != P',
+%                                                               P != Q.
+%:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)), NT != NR,
+%                                                           P != P',
+%                                                           P != Q.
 
 %%% Relation exists
 relation_flag.
-% relation_exist :- ok(relation(NR, P, Q, P', Q')).
-relation_exist :- ok(entity(NE, P, Q)).
+relation_exist :- ok(relation(NR, P, Q, P', Q')).
 % :- not relation_exist.
 
 
