@@ -10,142 +10,96 @@ invprod(P, A) :- atom(A, P), nok(A).
 %% - Entities: Task, Method, Material, OtherScientificTerm, Metric, Generic
 %% - Relations: Used-for, Feature-of, Hyponym-of, Evaluate-for, Part-of, Compare(symmetric), Conjunction(symmetric)
 
-%% A sub-word must be completely inside a word or completely outside of it
-%2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
-%									                    atom(entity(NE', Q1, Q2)),
-%									                    P1 < Q1, P2 > Q1, P2 < Q2.
-%:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1, P2 < Q2.
-
 %% overlapping
-2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
-									  atom(entity(NE', Q1, Q2)),
-									  P1 < Q1, P2 > Q1.
-:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1.
+%2{bad(entity(NE, P1, P2)); bad(entity(NE', Q1, Q2))} :- atom(entity(NE, P1, P2)),
+%									  atom(entity(NE', Q1, Q2)),
+%									  P1 < Q1, P2 > Q1, P2 != Q2.
+%:- ok(entity(NE,P1,P2)), ok(entity(NE',Q1,Q2)), P1 < Q1, P2 > Q1, P2 != Q2.
 
-2{bad(entity(NE, P, Q)); bad(entity(NE', P, R))} :- atom(entity(NE, P, Q)),
-									  atom(entity(NE', P, R)), R != Q.
-:- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
-
-%%% an atom should be kept if it does not violate any type constraint
-%%% e.g., peop(x) is okay if there is no other atom indicating that it is a location, an organization, or other entity
-%%%                      and x is not in any relation such as workfor(P,x) ...
-
-ok(X)  :- atom(X), not bad(X).
-
-%%% an atom could be kept if it contributes to the violation of some constraint
-%%% or it is an inferred atom
-
-{ ok(X) } :- atom(X), bad(X).
-
-{ ok(X) } :- inf_atom(X), bad(X).
-
-%%% when an atom is not kept then it is not okay
-
-nok(X) :- atom(X), not ok(X).
-nok(X) :- inf_atom(X), not ok(X).
-
-#show ok/1.
-
-
-%% A sub-word pair (parent,child) should have identical types or one of the type is generic/otherScientificTerm
-%% or parent's type is task.
-%% (CH,C1,C2) is a sub-word of (PA,P1,P2)
-%2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))}:- atom(entity(CH, C1, C2)),
-%                                                        atom(entity(PA, P1, P2)),
-%                                                        C1 >= P1, C2 <= P2,
-%                                                        1 {C1!=P1; C2!=P2},
-%                                                        PA != CH,
-%                                                        PA != task,
-%                                                        PA != otherScientificTerm,
-%                                                        PA != generic,
-%                                                        CH != otherScientificTerm,
-%                                                        CH != generic.
-
-%:- ok(entity(CH, C1, C2)); ok(entity(PA, P1, P2)), atom(entity(CH, C1, C2)),
-%                                                atom(entity(PA, P1, P2)),
-%                                                C1 >= P1, C2 <= P2,
-%                                                1 {C1!=P1; C2!=P2},
-%                                                PA != CH,
-%                                                PA != task,
-%                                                PA != otherScientificTerm,
-%                                                PA != generic,
-%                                                CH != otherScientificTerm,
-%                                                CH != generic.
+%2{bad(entity(NE, P, Q)); bad(entity(NE', P, R))} :- atom(entity(NE, P, Q)),
+%									  atom(entity(NE', P, R)), R != Q.
+%:- ok(entity(NE, P, Q)), ok(entity(NE', P, R)), R != Q.
 
 
 %% Eliminate relation with missing head or tail
-:- ok(relation(NR,P,Q,P',Q')) , not ok(entity(_,P,Q)).
-:- ok(relation(NR,P,Q,P',Q')) , not ok(entity(_,P',Q')).
+%% Solution: use model's prediction to infer head/tail type
+%exists(P,Q) :- ok(entity(_,P,Q)).
+%bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P,Q).
+%bad(relation(NR,P,Q,P',Q')) :- atom(relation(NR,P,Q,P',Q')) ,  not exists(P',Q').
+%:- ok(relation(NR,P,Q,P',Q')) , {ok(entity(_,P,Q)); ok(entity(_,P',Q'))} 1.
 
 
 %% Eliminate reciprocal relations
-2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')), atom(relation(NT,P',Q',P,Q)).
-:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)).
+%2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')),
+%                                                               atom(relation(NT,P',Q',P,Q)),
+%                                                               NT != NR,
+%                                                               P != P',
+%                                                               P != Q.
+%:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)), NT != NR,
+%                                                           P != P',
+%                                                           P != Q.
 
-%% Eliminate relations between subwords
-%2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))} :- atom(entity(CH, C1, C2)),
-%                                                       atom(entity(PA, P1, P2)),
-%                                                       C1 >= P1, C2 <= P2,
-%                                                       1 {C1!=P1; C2!=P2},
-%                                                       atom(relation(_, P1,P2,C1,C2)).
-
-%:- ok(entity(CH, C1, C2)), ok(entity(PA, P1, P2)), atom(entity(CH, C1, C2)),
-%                                                   atom(entity(PA, P1, P2)),
-%                                                   C1 >= P1, C2 <= P2,
-%                                                   1 {C1!=P1; C2!=P2},
-%                                                   atom(relation(_, P1,P2,C1,C2)).
-
-
-%2{bad(entity(CH, C1, C2)); bad(entity(PA, P1, P2))} :- atom(entity(CH, C1, C2)),
-%                                                       atom(entity(PA, P1, P2)),
-%                                                       C1 >= P1, C2 <= P2,
-%                                                       1 {C1!=P1; C2!=P2},
-%                                                       atom(relation(_, C1,C2,P1,P2)).
-
-%:- ok(entity(CH, C1, C2)), ok(entity(PA, P1, P2)), atom(entity(CH, C1, C2)),
-%                                                   atom(entity(PA, P1, P2)),
-%                                                   C1 >= P1, C2 <= P2,
-%                                                   1 {C1!=P1; C2!=P2},
-%                                                   atom(relation(_, C1,C2,P1,P2))
+%%% Relation exists
+relation_flag.
+relation_exist :- ok(relation(NR, P, Q, P', Q')).
+% :- not relation_exist.
 
 
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
-%% - Relations: Used-for, Feature-of, Hyponym-of, Evaluate-for, Part-of, Compare(symmetric), Conjunction(symmetric)
+% usedFor
+%rule(relation(usedFor,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(usedFor,Q,Q',R,R')):-
+%	atom(relation(usedFor,P,P',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(usedFor,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(usedFor,P,P',R,R')):-
+%	atom(relation(usedFor,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(usedFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(usedFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(usedFor,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(usedFor,R,R',Q,Q')):-
+%	atom(relation(usedFor,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(usedFor,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(usedFor,R,R',P,P')):-
+%	atom(relation(usedFor,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(featureOf,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(featureOf,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+% featureOf
+%rule(relation(featureOf,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(featureOf,Q,Q',R,R')):-
+%	atom(relation(featureOf,P,P',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(featureOf,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(featureOf,P,P',R,R')):-
+%	atom(relation(featureOf,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(compare,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(compare,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(featureOf,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(featureOf,R,R',Q,Q')):-
+%	atom(relation(featureOf,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(featureOf,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(featureOf,R,R',P,P')):-
+%	atom(relation(featureOf,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-rule(relation(usedFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,O1,O2,Q1,Q2)):-
-	atom(relation(usedFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(usedFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(usedFor,Q1,Q2,O1,O2)):-
-	atom(relation(usedFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+% hyponymOf
+%rule(relation(hyponymOf,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,Q,Q',R,R')):-
+%	atom(relation(hyponymOf,P,P',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(hyponymOf,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,P,P',R,R')):-
+%	atom(relation(hyponymOf,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(featureOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,O1,O2,Q1,Q2)):-
-	atom(relation(featureOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(featureOf,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(featureOf,Q1,Q2,O1,O2)):-
-	atom(relation(featureOf,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(hyponymOf,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,R,R',Q,Q')):-
+%	atom(relation(hyponymOf,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(hyponymOf,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,R,R',P,P')):-
+%	atom(relation(hyponymOf,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(evaluateFor,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,O1,O2,Q1,Q2)):-
-	atom(relation(evaluateFor,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
-rule(relation(evaluateFor,Q1,Q2,P1,P2), relation(conjunction,O1,O2,P1,P2), relation(evaluateFor,Q1,Q2,O1,O2)):-
-	atom(relation(evaluateFor,Q1,Q2,P1,P2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+% evaluateFor
+%rule(relation(evaluateFor,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(evaluateFor,Q,Q',R,R')):-
+%	atom(relation(evaluateFor,P,P',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(evaluateFor,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(evaluateFor,P,P',R,R')):-
+%	atom(relation(evaluateFor,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(hyponymOf,P1,P2,Q1,Q2), relation(conjunction,O1,O2,P1,P2), relation(hyponymOf,O1,O2,Q1,Q2)):-
-	atom(relation(hyponymOf,P1,P2,Q1,Q2)), atom(relation(conjunction,O1,O2,P1,P2)), P1 != P2, P1 != Q1.
+%rule(relation(evaluateFor,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(evaluateFor,R,R',Q,Q')):-
+%	atom(relation(evaluateFor,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(evaluateFor,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(evaluateFor,R,R',P,P')):-
+%	atom(relation(evaluateFor,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
+% partOf
+%rule(relation(partOf,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(partOf,Q,Q',R,R')):-
+%	atom(relation(partOf,P,P',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(partOf,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(partOf,P,P',R,R')):-
+%	atom(relation(partOf,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+
+%rule(relation(partOf,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(partOf,R,R',Q,Q')):-
+%	atom(relation(partOf,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(partOf,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(partOf,R,R',P,P')):-
+%	atom(relation(partOf,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
 %%%%% ASP for working with inference rules %%%%%%%%%%%%%%%%
 
@@ -177,10 +131,3 @@ nok(X) :- inf_atom(X), not ok(X).
 
 #show ok/1.
 
-
-%For Compare and Conjunction: compare abbreviation with original concept, usually abbreviation is written first (cond1),
-% sometimes written latter but in generic form (those, that,...)
-% and the head (abbreviation) is shorter than the tail (original concept)
-
-:- ok(relation(conjunction,P,Q,P',Q')), ok(entity(E,P,Q)), ok(entity(E',P',Q')),
-    P > P', (Q-P) < (Q'-P'), E != generic, E != otherScientificTerm, E != E'.
