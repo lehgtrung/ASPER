@@ -30,14 +30,14 @@ invprod(P, A) :- atom(A, P), nok(A).
 
 
 %% Eliminate reciprocal relations
-%2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')),
-%                                                               atom(relation(NT,P',Q',P,Q)),
-%                                                               NT != NR,
-%                                                               P != P',
-%                                                               P != Q.
-%:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)), NT != NR,
-%                                                           P != P',
-%                                                           P != Q.
+2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')),
+                                                               atom(relation(NT,P',Q',P,Q)),
+                                                               NT != NR,
+                                                               P != P',
+                                                               P != Q.
+:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)), NT != NR,
+                                                           P != P',
+                                                           P != Q.
 
 %%% Relation exists
 relation_flag.
@@ -47,15 +47,15 @@ relation_exist :- ok(relation(NR, P, Q, P', Q')).
 
 %%%%%%%%%%% inference rules %%%%%%%%%%%%%%%%%%%%
 % usedFor
-rule(relation(usedFor,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(usedFor,Q,Q',R,R')):-
-	atom(relation(usedFor,P,P',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
-rule(relation(usedFor,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(usedFor,P,P',R,R')):-
-	atom(relation(usedFor,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(usedFor,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(usedFor,Q,Q',R,R')):-
+%	atom(relation(usedFor,P,P',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(usedFor,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(usedFor,P,P',R,R')):-
+%	atom(relation(usedFor,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(usedFor,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(usedFor,R,R',Q,Q')):-
-	atom(relation(usedFor,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
-rule(relation(usedFor,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(usedFor,R,R',P,P')):-
-	atom(relation(usedFor,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(usedFor,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(usedFor,R,R',Q,Q')):-
+%	atom(relation(usedFor,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(usedFor,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(usedFor,R,R',P,P')):-
+%	atom(relation(usedFor,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
 % featureOf
 rule(relation(featureOf,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(featureOf,Q,Q',R,R')):-
