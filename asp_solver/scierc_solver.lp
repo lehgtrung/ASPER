@@ -74,10 +74,10 @@ rule(relation(hyponymOf,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(hy
 rule(relation(hyponymOf,Q,Q',R,R'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,P,P',R,R')):-
 	atom(relation(hyponymOf,Q,Q',R,R')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
-rule(relation(hyponymOf,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,R,R',Q,Q')):-
-	atom(relation(hyponymOf,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
-rule(relation(hyponymOf,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,R,R',P,P')):-
-	atom(relation(hyponymOf,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(hyponymOf,R,R',P,P'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,R,R',Q,Q')):-
+%	atom(relation(hyponymOf,R,R',P,P')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
+%rule(relation(hyponymOf,R,R',Q,Q'), relation(conjunction,P,P',Q,Q'), relation(hyponymOf,R,R',P,P')):-
+%	atom(relation(hyponymOf,R,R',Q,Q')), atom(relation(conjunction,P,P',Q,Q')), P != P', P != Q.
 
 % evaluateFor
 rule(relation(evaluateFor,P,P',R,R'), relation(conjunction,P,P',Q,Q'), relation(evaluateFor,Q,Q',R,R')):-
