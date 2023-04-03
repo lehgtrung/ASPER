@@ -1,14 +1,11 @@
 
 
-atom(entity(generic,6,7),"0.9866303205490112").
-atom(entity(task,14,16),"0.9634974598884583").
-atom(entity(task,14,17),"0.563048243522644").
-atom(entity(material,18,20),"0.9940688610076904").
-atom(entity(material,22,24),"0.9756953120231628").
-atom(relation(evaluateFor,14,16,6,7),"0.7317807078361511").
-atom(relation(usedFor,14,16,14,17),"0.47137048840522766").
-atom(relation(evaluateFor,14,17,6,7),"0.7533431053161621").
-atom(relation(usedFor,18,20,14,16),"0.778486967086792").
-atom(relation(usedFor,18,20,14,17),"0.9900383949279785").
-atom(relation(usedFor,22,24,14,16),"0.8218855857849121").
-atom(relation(usedFor,22,24,14,17),"0.9472593665122986").
+atom(entity(method,7,12),"0.9459787011146545").
+atom(entity(task,13,16),"0.7786945700645447").
+atom(entity(otherScientificTerm,17,19),"0.89142906665802").
+atom(entity(otherScientificTerm,22,24),"0.9668529629707336").
+atom(entity(task,31,34),"0.8487983345985413").
+atom(entity(task,35,37),"0.9408969283103943").
+atom(relation(usedFor,7,12,13,16),"0.9526813626289368").
+atom(relation(featureOf,17,19,13,16),"0.9024811387062073").
+atom(relation(conjunction,31,34,35,37),"0.9026904702186584").
