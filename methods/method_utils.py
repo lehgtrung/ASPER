@@ -193,6 +193,8 @@ def aggregate_on_symbols(model_paths):
         entities = calc_symbol_freq(symbols, n)
         symbols = collect_symbols(preds, i, 'relations')
         relations = calc_symbol_freq(symbols, n)
+        print(relations)
+        exit()
         outputs.append({
             'tokens': tokens,
             'entities': [tuple(e) for e in entities],

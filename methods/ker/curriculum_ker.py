@@ -160,9 +160,9 @@ def curriculum_ker(dataset,
         # Evaluate on prediction_path + '.tmp.all'
         logger.info(f'Round #{iteration}: F1 on ReVISED selection')
         evaluate_tri_training(unlabeled_with_labels_path,
-                              unlabeled_with_labels_path,# + '.tmp.all',
-                              unlabeled_with_labels_path,# + '.tmp.all',
-                              unlabeled_with_labels_path,# + '.tmp.all',
+                              prediction_path,# + '.tmp.all',
+                              prediction_path,# + '.tmp.all',
+                              prediction_path,# + '.tmp.all',
                               logger)
         exit()
         ##############################################################################
