@@ -172,7 +172,6 @@ def curriculum_ker(dataset,
                               prediction_path + '.tmp.all',
                               prediction_path + '.tmp.all',
                               logger)
-        exit()
         ##############################################################################
 
         logger.info(f'Round #{iteration}: Solve using ASP')
