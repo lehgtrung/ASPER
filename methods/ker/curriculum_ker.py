@@ -18,14 +18,11 @@ REEVAL_SCRIPT = 'python reevaluator.py --gt_path {gt_path} --pred_path {pred_pat
 DEFAULT_TEST_PATH = 'data/datasets/{dataset}/{dataset}_test.json'
 
 
-def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger, same=True):
-    if not same:
-        aggregated_pred = aggregate_on_symbols([pred_path1, pred_path2, pred_path3])
-        tmp_path = pred_path1 + '.tri'
-        with open(tmp_path, 'w') as f:
-            json.dump(aggregated_pred, f)
-    else:
-        tmp_path = pred_path1
+def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger):
+    aggregated_pred = aggregate_on_symbols([pred_path1, pred_path2, pred_path3])
+    tmp_path = pred_path1 + '.tri'
+    with open(tmp_path, 'w') as f:
+        json.dump(aggregated_pred, f)
     script = REEVAL_SCRIPT.format(gt_path=gt_path, pred_path=tmp_path)
     print(script)
     nmap_out = subprocess.run(script,
