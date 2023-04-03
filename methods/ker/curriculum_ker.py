@@ -18,11 +18,14 @@ REEVAL_SCRIPT = 'python reevaluator.py --gt_path {gt_path} --pred_path {pred_pat
 DEFAULT_TEST_PATH = 'data/datasets/{dataset}/{dataset}_test.json'
 
 
-def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger):
-    aggregated_pred = aggregate_on_symbols([pred_path1, pred_path2, pred_path3])
-    tmp_path = pred_path1 + '.tmp'
-    with open(tmp_path, 'w') as f:
-        json.dump(aggregated_pred, f)
+def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger, same=True):
+    if not same:
+        aggregated_pred = aggregate_on_symbols([pred_path1, pred_path2, pred_path3])
+        tmp_path = pred_path1 + '.tri'
+        with open(tmp_path, 'w') as f:
+            json.dump(aggregated_pred, f)
+    else:
+        tmp_path = pred_path1
     script = REEVAL_SCRIPT.format(gt_path=gt_path, pred_path=tmp_path)
     print(script)
     nmap_out = subprocess.run(script,
@@ -145,14 +148,14 @@ def curriculum_ker(dataset,
 
         ##############################################################################
         # Compute F1 after ASP
-        solve_all_docs_with_curriculum(dataset=dataset,
-                                       unlabeled_path=unlabeled_path,
-                                       atom_meta_path=atom_meta_path,
-                                       auto_meta_path=auto_meta_path,
-                                       selection_path=prediction_path + '.tmp.all',
-                                       current_delta=0,
-                                       with_curriculum=with_curriculum,
-                                       logger=logger)
+        # solve_all_docs_with_curriculum(dataset=dataset,
+        #                                unlabeled_path=unlabeled_path,
+        #                                atom_meta_path=atom_meta_path,
+        #                                auto_meta_path=auto_meta_path,
+        #                                selection_path=prediction_path + '.tmp.all',
+        #                                current_delta=0,
+        #                                with_curriculum=with_curriculum,
+        #                                logger=logger)
 
         # Evaluate on prediction_path + '.tmp.all'
         logger.info(f'Round #{iteration}: F1 on ReVISED selection')
@@ -161,6 +164,7 @@ def curriculum_ker(dataset,
                               prediction_path,# + '.tmp.all',
                               prediction_path,# + '.tmp.all',
                               logger)
+        exit()
         ##############################################################################
 
         logger.info(f'Round #{iteration}: Solve using ASP')
