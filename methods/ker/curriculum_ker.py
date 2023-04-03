@@ -19,7 +19,7 @@ DEFAULT_TEST_PATH = 'data/datasets/{dataset}/{dataset}_test.json'
 
 
 def evaluate_tri_training(gt_path, pred_path1, pred_path2, pred_path3, logger, same=True):
-    if same:
+    if not same:
         aggregated_pred = aggregate_on_symbols([pred_path1, pred_path2, pred_path3])
     else:
         aggregated_pred = aggregate_on_symbols([pred_path1])
