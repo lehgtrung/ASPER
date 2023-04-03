@@ -30,14 +30,14 @@ invprod(P, A) :- atom(A, P), nok(A).
 
 
 %% Eliminate reciprocal relations
-%2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')),
-%                                                               atom(relation(NT,P',Q',P,Q)),
-%                                                               NT != NR,
-%                                                               P != P',
-%                                                               P != Q.
-%:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)), NT != NR,
-%                                                           P != P',
-%                                                           P != Q.
+2{bad(relation(NR,P,Q,P',Q')); bad(relation(NT,P',Q',P,Q))} :- atom(relation(NR,P,Q,P',Q')),
+                                                               atom(relation(NT,P',Q',P,Q)),
+                                                               NT != NR,
+                                                               P != P',
+                                                               P != Q.
+:- ok(relation(NR,P,Q,P',Q')), ok(relation(NT,P',Q',P,Q)), NT != NR,
+                                                           P != P',
+                                                           P != Q.
 
 %%% Relation exists
 relation_flag.
