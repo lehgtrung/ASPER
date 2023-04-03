@@ -144,7 +144,7 @@ def curriculum_ker(dataset,
 
         # Select labels using ASP (KEEP THIS PART)
         logger.info(f'Round #{iteration}: Write prediction into files')
-        write_pred_to_files(dataset, prediction_path, atom_meta_path)
+        # write_pred_to_files(dataset, prediction_path, atom_meta_path)
 
         ##############################################################################
         # Compute F1 after ASP
