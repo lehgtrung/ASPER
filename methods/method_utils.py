@@ -148,11 +148,11 @@ def select_pseudo_labels_by_confidence(input_path, output_path, z):
 
 def calc_symbol_freq(symbols, n, threshold=0.5):
     counter = Counter(map(tuple, symbols))
-    final_symbols = []
+    final_symbols = set()
     for symbol in symbols:
         if counter[tuple(symbol)]/n >= threshold:
-            final_symbols.append(symbol)
-    return final_symbols
+            final_symbols.add(symbol)
+    return list(final_symbols)
 
 
 def convert_to_tuple(doc, dct):
@@ -191,8 +191,6 @@ def aggregate_on_symbols(model_paths):
         tokens = preds[0][i]['tokens']
         symbols = collect_symbols(preds, i, 'entities')
         entities = calc_symbol_freq(symbols, n)
-        print(entities)
-        exit()
         symbols = collect_symbols(preds, i, 'relations')
         relations = calc_symbol_freq(symbols, n)
         outputs.append({
