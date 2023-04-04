@@ -225,30 +225,30 @@ def curriculum_ker(dataset,
 
         # Step 6.1: apply ASPER then on prediction
         ##################################################################
-        logger.info(f'Round #{iteration}: Evaluate on test data by applying ASPER')
-        modify_config_file(default_predict_config_path,
-                           temp_predict_config_path,
-                           {
-                               'model_path': os.path.join(labeled_model_path.format(iteration), 'final_model'),
-                               'dataset_path': default_test_path,
-                               'predictions_path': prediction_path
-                           })
-        script = PREDICT_SCRIPT.format(config_path=temp_predict_config_path)
-        subprocess.run(script, shell=True, check=True)
-        write_pred_to_files(dataset, prediction_path, atom_meta_path)
-        solve_all_docs_with_curriculum(dataset=dataset,
-                                       unlabeled_path=default_test_path,
-                                       atom_meta_path=atom_meta_path,
-                                       auto_meta_path=auto_meta_path,
-                                       selection_path=prediction_path + '.tmp',
-                                       current_delta=0.0,
-                                       with_curriculum=False,
-                                       logger=logger)
-        evaluate_tri_training(default_test_path,
-                              prediction_path + '.tmp',
-                              prediction_path + '.tmp',
-                              prediction_path + '.tmp',
-                              logger)
+        # logger.info(f'Round #{iteration}: Evaluate on test data by applying ASPER')
+        # modify_config_file(default_predict_config_path,
+        #                    temp_predict_config_path,
+        #                    {
+        #                        'model_path': os.path.join(labeled_model_path.format(iteration), 'final_model'),
+        #                        'dataset_path': default_test_path,
+        #                        'predictions_path': prediction_path
+        #                    })
+        # script = PREDICT_SCRIPT.format(config_path=temp_predict_config_path)
+        # subprocess.run(script, shell=True, check=True)
+        # write_pred_to_files(dataset, prediction_path, atom_meta_path)
+        # solve_all_docs_with_curriculum(dataset=dataset,
+        #                                unlabeled_path=default_test_path,
+        #                                atom_meta_path=atom_meta_path,
+        #                                auto_meta_path=auto_meta_path,
+        #                                selection_path=prediction_path + '.tmp',
+        #                                current_delta=0.0,
+        #                                with_curriculum=False,
+        #                                logger=logger)
+        # evaluate_tri_training(default_test_path,
+        #                       prediction_path + '.tmp',
+        #                       prediction_path + '.tmp',
+        #                       prediction_path + '.tmp',
+        #                       logger)
         ##################################################################
 
         iteration += 1
