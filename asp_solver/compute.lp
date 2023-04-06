@@ -60,11 +60,11 @@ def process_model(m):
         avg_pr = avg_pr / no_atoms
 
     local_pr = min_pr
-    %if relation_flag:
-    %    if not relation_exist:
-    %        pr = 0
-    %        min_pr = 0
-    %        avg_pr = 0
+    #if relation_flag:
+    #    if not relation_exist:
+    #        pr = 0
+    #        min_pr = 0
+    #        avg_pr = 0
 
     if not relation_exist and relation_flag:
         pr = 0
