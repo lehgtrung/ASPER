@@ -1,5 +1,5 @@
 
-## This is the code for the paper
+## This is the official code for the paper
 **ASPER: Answer Set Programming Enhanced Neural Network Models 
 for Joint Entity-Relation Extraction** [pdf](https://arxiv.org/abs/2305.15374)
 
