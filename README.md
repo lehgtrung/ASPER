@@ -54,3 +54,16 @@ For example: for comparison, we want to run tri-training with fold #1, with 20% 
 ```bash
 python run_tri_training.py --dataset conll04 --fold 1 --percent 20 --max_iter 5
 ```
+
+
+## Citation
+Please cite our paper as:
+```
+@article{le_cao_cao son_2023,
+title={ASPER: Answer Set Programming Enhanced Neural Network Models for Joint Entity-Relation Extraction},
+volume={23},
+DOI={10.1017/S1471068423000297},
+number={4},
+journal={Theory and Practice of Logic Programming},
+author={LE, TRUNG HOANG and CAO, HUIPING and CAO SON, TRAN}, year={2023}, pages={765–781}}
+```
